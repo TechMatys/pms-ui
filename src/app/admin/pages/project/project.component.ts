@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { faEdit, faTrash, faEye
- } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+
 
 
 interface Project
@@ -17,14 +17,8 @@ interface Project
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnInit {
-  project= new FormGroup ({
-    Name: new FormControl(''),
-    starting: new FormControl(''),
-    status: new FormControl(''),
-   
-    });
-  
+export class  ProjectComponent implements OnInit {
+
  faEdit=faEdit
  faDelete= faTrash
   projectlist: Project []

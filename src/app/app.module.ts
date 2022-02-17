@@ -15,6 +15,8 @@ import { LoginComponent } from './home/login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
+import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SideNavComponent,
     LoginComponent,
     AdminComponent,
+
+
+  
+
   ],
   imports: [
     BrowserModule,

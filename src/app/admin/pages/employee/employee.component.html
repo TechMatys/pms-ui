@@ -1,1 +1,132 @@
-<p>employee works!</p>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        Employee
+    </h1>
+</div>
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <div *ngIf="isShown">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Employer List</h6>
+
+        </div>
+
+        <div class="col-xl-12 col-md-12 mb-12">
+            <div class="card-body">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary btn-sm" (click)="addEmployer()" style="float:right">Add
+                            New</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered dataTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">StartDate</th>
+                                    <th scope="col">Designation</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let emp of employer">
+                                    <td>{{emp.name}}</td>
+                                    <td>{{emp.startDate}}</td>
+                                    <td>{{emp.designation}}</td>
+                                    <td><a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">
+                                        <fa-icon [icon]="faEdit"></fa-icon>
+                                      </a>
+                                      <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">
+                                        <fa-icon [icon]="faDelete"></fa-icon>
+                                      </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isShown">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header ">
+            <h6 class="m-0 font-weight-bold text-primary">Add Employer</h6>
+
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="txtTitle">First Name</label>
+                        <input class="form-control" type="text" id="txtFname" placeholder="FirstName"
+                            Name="firstname">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="txtDescription">Last Name</label>
+                        <input class="form-control" type="text"  id="txtLname" placeholder="LastName"
+                            Name="lastname">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="txtDescription">Designation</label>
+                        <input class="form-control" type="text"  id="txtDescription" placeholder="Designation"
+                            Name="designation">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="gender">Gender</label>
+                        <select class="form-select col-lg-12">
+                            <option value="none" selected>--Select Gender--</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="ngbDatepicker">Start Date :</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="MM/DD/YYYY" name="dp" ngbDatepicker
+                                #d="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="ngbDatepicker">End Date :</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="MM/DD/YYYY" name="dp" ngbDatepicker
+                                #p="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
+                            style="margin-right: 10px; width:100px;" />
+                        <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update"
+                            style="margin-right: 10px; width:100px;" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
+                            (click)="isShown = true" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

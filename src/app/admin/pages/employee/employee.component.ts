@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import {faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Employer {
@@ -18,11 +17,7 @@ export class EmployeeComponent implements OnInit {
   faEdit= faEdit
   faDelete= faTrash
 
-  employerForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    description: new FormControl('')
-  });
+  
  
    employer: Employer[] = [
     {
@@ -50,10 +45,8 @@ export class EmployeeComponent implements OnInit {
   isShown: boolean = false;
   isAddNew: boolean = true;
   employerData: any;
-  fB: any;
-  http: any;
-  isValidDate: boolean | undefined;
-  error: { isError: boolean; errorMessage: string; } | undefined;
+  
+  employerForm: any;
 
 
   constructor() { 
@@ -68,38 +61,11 @@ export class EmployeeComponent implements OnInit {
       description: '',
       htmlContent: ''
     }
-  this.createEmployerForm(data);
-}
-
-saveEmployer() {
-  this.employerData = this.employerForm.value;
-
-  const data = Object.assign({}, this.employerData);
-
- 
-}
-
-createEmployerForm(data: any) {
-  this.employerForm = this.fB.group({
-    title: [data.title],
-    description: [data.description],
-    htmlContent: [data.htmlContent]
-  });
-}
-
-
-updateEmployer() {
-  this.employerData = this.employerForm.value;
-
-  const data = Object.assign({}, this.employerData);
-  
 }
 
 
 
   ngOnInit(): void {
     this.isShown = !this.isShown;
-  }
-  
-
+  }  
 }

@@ -65,12 +65,12 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="txtTitle">First Name</label>
-                        <input type="text" id="txtFname" placeholder="FirstName"
+                        <input class="form-control" type="text" id="txtFname" placeholder="FirstName"
                             Name="firstname">
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="txtDescription">Last Name</label>
-                        <input type="text"  id="txtLname" placeholder="LastName"
+                        <input class="form-control" type="text"  id="txtLname" placeholder="LastName"
                             Name="lastname">
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="txtDescription">Designation</label>
-                        <input type="text"  id="txtDescription" placeholder="Designation"
+                        <input class="form-control" type="text"  id="txtDescription" placeholder="Designation"
                             Name="designation">
                     </div>
                     <div class="form-group col-lg-6">
@@ -97,7 +97,7 @@
                     <div class="form-group col-lg-6">
                         <label for="ngbDatepicker">Start Date :</label>
                         <div class="input-group">
-                            <input  placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                            <input class="form-control" placeholder="MM/DD/YYYY" name="dp" ngbDatepicker
                                 #d="ngbDatepicker">
                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                 type="button"></button>
@@ -106,7 +106,7 @@
                     <div class="form-group col-lg-6">
                         <label for="ngbDatepicker">End Date :</label>
                         <div class="input-group">
-                            <input  placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                            <input class="form-control" placeholder="MM/DD/YYYY" name="dp" ngbDatepicker
                                 #p="ngbDatepicker">
                             <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
                                 type="button"></button>
@@ -118,9 +118,9 @@
                 <div class="row">
                     <div class="form-group col-lg-12">
                         <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
-                            style="margin-right: 10px; width:100px;" (click)="saveEmployer()" />
+                            style="margin-right: 10px; width:100px;" />
                         <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update"
-                            style="margin-right: 10px; width:100px;" (click)="updateEmployer()" />
+                            style="margin-right: 10px; width:100px;" />
                         <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
                             (click)="isShown = true" />
                     </div>

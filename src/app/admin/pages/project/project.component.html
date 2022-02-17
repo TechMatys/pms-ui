@@ -1,1 +1,137 @@
-<p>project works!</p>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        Projects
+    </h1>
+</div>
+
+
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <div *ngIf="isShown">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary"> Project List </h4>
+        </div>
+        <div class="card-body">
+            <div class="row" style="margin-bottom: 10px;">
+                <input type="button" class="btn btn-success" value="Add" style="margin-left: 1070px; width:100px;"
+                    (click)="addbutton()" />
+            </div>
+
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Project Name</th>
+                        <th scope="col">Starting Date</th>
+                        <th scope="col">Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let project of projectlist">
+
+                        <td>
+                            {{project.name}}
+                        </td>
+                        <td>
+                            {{project.starting}}
+                        </td>
+                        <td>
+                            {{ project.status}}
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" 
+                            style="margin-right: 10px;" ngbTooltip="Edit">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                          </a>
+                          <a href="javascript:void(0)"
+                            style="margin-right: 10px;" ngbTooltip="Delete">
+                            <fa-icon [icon]="faDelete"></fa-icon>
+                          </a>
+                        </td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div *ngIf="!isShown">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Add Project </h4>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    <label for="txtDescription">Project Name :</label>
+                    <input type="text" class="form-control" id="txtDescription" placeholder="Project Name"
+                        formControlName="projectname">
+                </div>
+
+                <div class="form-group col-lg-4">
+                    <label for="Duration">Duration :</label>
+                    <select class="form-select " aria-label="aria-label">
+                        <option selected> Select Duration</option>
+                        <option value="1">One Time</option>
+                        <option value="2">Monthly</option>
+
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="ngbDatepicker">Start Date :</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker
+                                #d="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label for="ngbDatepicker1">End Date :</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker
+                                #p="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="Cost">Cost :</label>
+                            <input type="text" class="form-control" id="txtDescription" placeholder="Cost"
+                                formControlName="Cost">
+                        </div>
+
+                        <div class="form-group col-lg-4">
+                            <label for="status">Status :</label>
+                            <select class="form-select " aria-label="aria-label">
+                                <option selected> Select Status</option>
+                                <option value="1">Completed</option>
+                                <option value="2">In Progress</option>
+                                <option value="3">Starting</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
+                                    style="margin-right: 10px; width:100px;" (click)="save()" />
+
+                                <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
+                                    (click)="isShown = true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

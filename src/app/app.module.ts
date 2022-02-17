@@ -14,6 +14,7 @@ import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { LoginComponent } from './home/login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     SideNavComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

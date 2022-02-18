@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-
-
-interface Project
- {
-  
+interface Project {
   name: string;
-  starting: string;
+  startDate: string;
   status: string;
 }
 
@@ -17,80 +12,61 @@ interface Project
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class  ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit {
 
- faEdit=faEdit
- faDelete= faTrash
-  projectlist: Project []
-  
-  = [
-    {
-      name: 'Vikas Rawat',
-     starting : '10-05-2020',
-      status: 'In Progress',
-     
-    },
-    {
-      name: 'Rudra Pratap Singh Bartwal',
-     starting : '19-05-2021',
-      status: 'In Progress',
-     
-    },
-    {
-      name: 'Prakash Rawat',
-     starting : '10-04-2020',
-      status: 'In Progress',
-     
-    },
-    {
-      name: 'Sumit Rawat',
-     starting : '20-04- 2020',
-      status: 'In Progress',
-     
-    },
-    {
-      name: 'Ganesh Rawat',
-     starting : '10-06-2020',
-     status: 'In Progress',
-     
-    },
-  ]
-
+  faEdit = faEdit;
+  faDelete = faTrash;
   isShown: boolean = false;
   isAddNew: boolean = true;
   projectList: any;
-  createProjectForm: any;
-  projectData: any;
-  projectForm: any;
 
-  
+  projectlist: Project[] = [
+    {
+      name: 'Vikas Rawat',
+      startDate: '10-05-2020',
+      status: 'In Progress',
+
+    },
+    {
+      name: 'Rudra Pratap Singh Bartwal',
+      startDate: '19-05-2021',
+      status: 'In Progress',
+
+    },
+    {
+      name: 'Prakash Rawat',
+      startDate: '10-04-2020',
+      status: 'In Progress',
+
+    },
+    {
+      name: 'Sumit Rawat',
+      startDate: '20-04- 2020',
+      status: 'In Progress',
+
+    },
+    {
+      name: 'Ganesh Rawat',
+      startDate: '10-06-2020',
+      status: 'In Progress',
+    },
+  ]
+
 
   constructor() { }
 
 
   // Function to add new button
-addbutton(){
-  this.isShown = false;
-  this.isAddNew = true;
-  this.projectList = [];
-  const data = {
-    projectName: '',
-    starting: '',
-    status: ''
+  addProject() {
+    this.isShown = false;
+    this.isAddNew = true;
+    this.projectList = [];
   }
-  
-  
-    }
-  
-    save() {
-      this.projectData = this.projectForm.value;
-  
-      const data = Object.assign({}, this.projectData);
-    }
-    
 
-  ngOnInit(): void {{this.isShown = !this.isShown;
-  }
+  ngOnInit(): void {
+    {
+      this.isShown = !this.isShown;
+    }
   }
 
 }

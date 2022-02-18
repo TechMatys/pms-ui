@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Employer {
   name: string,
@@ -13,13 +13,13 @@ interface Employer {
   styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
-  
-  faEdit= faEdit
-  faDelete= faTrash
 
-  
- 
-   employer: Employer[] = [
+  faEdit = faEdit;
+  faDelete = faTrash;
+  isShown: boolean = false;
+  isAddNew: boolean = true;
+
+  employer: Employer[] = [
     {
       name: 'Earl of Lemongrab',
       startDate: '12/11/2000',
@@ -42,30 +42,15 @@ export class EmployeeComponent implements OnInit {
     },
   ]
 
-  isShown: boolean = false;
-  isAddNew: boolean = true;
-  employerData: any;
-  
-  employerForm: any;
-
-
-  constructor() { 
-
+  constructor() {
   }
 
   addEmployer() {
     this.isShown = false;
     this.isAddNew = true;
-    const data = {
-      title: '',
-      description: '',
-      htmlContent: ''
-    }
-}
-
-
+  }
 
   ngOnInit(): void {
     this.isShown = !this.isShown;
-  }  
+  }
 }

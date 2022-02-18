@@ -29,6 +29,7 @@
                                 <th scope="col">Project Name</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Cost</th>
                                 <th style="text-align: center;">Action</th>
                             </tr>
                         </thead>
@@ -43,6 +44,9 @@
                                 </td>
                                 <td>
                                     {{ project.status}}
+                                </td>
+                                <td>
+                                    {{ project.cost}}
                                 </td>
                                 <td style="text-align: center;">
                                     <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">

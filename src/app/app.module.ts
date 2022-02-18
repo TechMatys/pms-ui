@@ -18,7 +18,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { OnlyNumberDirective } from './only-number.directive'
 
 
 @NgModule({
@@ -35,8 +34,7 @@ import { OnlyNumberDirective } from './only-number.directive'
     LoginComponent,
     AdminComponent,
     ProjectPaymentComponent,
-    EmployeePaymentComponent,
-    OnlyNumberDirective
+    EmployeePaymentComponent
   ],
   imports: [
     BrowserModule,

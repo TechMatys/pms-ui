@@ -11287,3 +11287,8 @@ button.calendar, button.calendar:active {
   background-size: 23px;
   background-position: center;
 }
+
+thead {
+  background-color: #fcaeae;
+  color: white;
+}

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Employer {
-  employeename: string,
+  employeeName: string,
   amount: string;
   month: string;
-  paymentdate: string;
+  paymentDate: string;
 }
 
 @Component({
@@ -26,39 +26,39 @@ export class EmployeePaymentComponent implements OnInit {
 
   employer: Employer[] = [
     {
-      employeename: 'Subhash Rawat',
+      employeeName: 'Subhash Rawat',
       amount: '70000',
       month: '02/2022',
-      paymentdate: '28/2/2022',
+      paymentDate: '28/2/2022',
 
     },
     {
-      employeename: 'Tajwar Rawat',
+      employeeName: 'Tajwar Rawat',
       amount: '90000',
       month: '02/2022',
-      paymentdate: '28/2/2022',
+      paymentDate: '28/2/2022',
 
     },
     {
-      employeename: 'Prakash Rawat',
+      employeeName: 'Prakash Rawat',
       amount: '50000',
       month: '02/2022',
-      paymentdate: '28/2/2022',
+      paymentDate: '28/2/2022',
 
     },
     {
-      employeename: 'Vikash Rawat',
+      employeeName: 'Vikash Rawat',
       amount: '40000',
       month: '02/2022',
-      paymentdate: '28/2/2022',
+      paymentDate: '28/2/2022',
 
     },
 
     {
-      employeename: 'Deepak Dhiman',
+      employeeName: 'Deepak Dhiman',
       amount: '100000',
       month: '02/2022',
-      paymentdate: '28/2/2022',
+      paymentDate: '28/2/2022',
 
     },
   ]

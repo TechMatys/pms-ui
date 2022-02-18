@@ -8,7 +8,7 @@ interface Project {
 }
 
 @Component({
-  selector: 'app-project',
+  selector: 'app-project' ,
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
@@ -23,35 +23,54 @@ export class ProjectComponent implements OnInit {
   projectlist: Project[] = [
     {
       name: 'Vikas Rawat',
-      startDate: '10-05-2020',
+      startDate: '10/05/2020',
       status: 'In Progress',
 
     },
     {
       name: 'Rudra Pratap Singh Bartwal',
-      startDate: '19-05-2021',
+      startDate: '19/05/2021',
       status: 'In Progress',
 
     },
     {
       name: 'Prakash Rawat',
-      startDate: '10-04-2020',
+      startDate: '10/04/2020',
       status: 'In Progress',
 
     },
     {
       name: 'Sumit Rawat',
-      startDate: '20-04- 2020',
+      startDate: '20/04/2020',
       status: 'In Progress',
 
     },
     {
       name: 'Ganesh Rawat',
-      startDate: '10-06-2020',
+      startDate: '10/06/2020',
       status: 'In Progress',
     },
   ]
 
+  status = [{
+    id: 0, name: '-- Select Status --'
+  }, {
+    id: 1, name: 'In Progress'
+  }, {
+    id: 2, name: 'On Hold'
+  }, {
+    id: 3, name: 'Pending'
+  }, {
+    id: 4, name: 'Completed'
+  }];
+
+  durations = [{
+    id: 0, name: '-- Select Duration --'
+  }, {
+    id: 1, name: 'Monthly'
+  }, {
+    id: 2, name: 'One Time'
+  }];
 
   constructor() { }
 
@@ -67,6 +86,10 @@ export class ProjectComponent implements OnInit {
     {
       this.isShown = !this.isShown;
     }
+  }
+
+  onChange(country: any) {
+
   }
 
 }

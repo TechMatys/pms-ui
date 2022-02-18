@@ -17,6 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { OnlyNumberDirective } from './only-number.directive'
+
 
 @NgModule({
   declarations: [
@@ -32,13 +35,15 @@ import { EmployeePaymentComponent } from './admin/pages/employee-payment/employe
     LoginComponent,
     AdminComponent,
     ProjectPaymentComponent,
-    EmployeePaymentComponent
+    EmployeePaymentComponent,
+    OnlyNumberDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

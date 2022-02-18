@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 interface Employer {
   name: string,
@@ -27,7 +28,7 @@ export class EmployeeComponent implements OnInit {
     },
     {
       name: 'Bonnibel Bubblegum',
-      startDate: '14/5/1990',
+      startDate: '14/05/1990',
       designation: 'Lemon Candy',
     },
     {
@@ -37,10 +38,26 @@ export class EmployeeComponent implements OnInit {
     },
     {
       name: 'Lumpy Space Princess',
-      startDate: '14/7/2005',
+      startDate: '14/07/2005',
       designation: 'Lemon Candy',
     },
-  ]
+  ];
+
+  genders = [{
+    id: 0, name: '-- Select Gender --'
+  }, {
+    id: 1, name: 'Male'
+  }, {
+    id: 2, name: 'Female'
+  }];
+
+  designations = [{
+    id: 0, name: '-- Select Designations --'
+  }, {
+    id: 1, name: 'Developer'
+  }, {
+    id: 2, name: 'Manager'
+  }];
 
   constructor() {
   }
@@ -48,6 +65,9 @@ export class EmployeeComponent implements OnInit {
   addEmployer() {
     this.isShown = false;
     this.isAddNew = true;
+  }
+
+  onChange(country: any) {
   }
 
   ngOnInit(): void {

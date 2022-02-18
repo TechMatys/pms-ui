@@ -51,6 +51,7 @@ export class ProjectComponent implements OnInit {
       status: 'In Progress',
     },
   ]
+<<<<<<< Updated upstream
 
   status = [{
     id: 0, name: '-- Select Status --'
@@ -71,6 +72,9 @@ export class ProjectComponent implements OnInit {
   }, {
     id: 2, name: 'One Time'
   }];
+=======
+  
+>>>>>>> Stashed changes
 
   constructor() { }
 

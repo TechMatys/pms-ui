@@ -30,7 +30,7 @@ export class ProjectComponent implements OnInit {
       name: 'Project 1',
       startDate: '10/05/2020',
       status: 'In Progress',
-      type : 'ASP.net Core'
+      type : 'ASP.Net Core'
       
 
     },
@@ -96,6 +96,11 @@ export class ProjectComponent implements OnInit {
     id: 1, name: 'HTML'
   }, {
     id: 2, name: 'Angular'
+  },
+  {
+    id: 3, name: 'Python'
+  }, {
+    id: 4, name: '.Net Core'
   }];
   constructor() { }
 

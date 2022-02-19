@@ -13,9 +13,9 @@
         </div>
 
         <div class="card-body">
-            <div class="row" style="margin-bottom: 10px;">
+            <div class="row">
                 <div class="col-lg-12">
-                    <button class="btn btn-primary btn-sm" (click)="addEmployer()" style="float:right">Add
+                    <button class="btn btn-primary btn-sm" (click)="addEmployer()">Add
                         Employee</button>
                 </div>
             </div>
@@ -25,21 +25,23 @@
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
+                                <th scope="col">Eamil Id</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Designation</th>
-                                <th style="text-align: center;">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let emp of employer">
                                 <td>{{emp.name}}</td>
+                                <td>{{emp.emailId}}</td>
                                 <td>{{emp.startDate}}</td>
                                 <td>{{emp.designation}}</td>
-                                <td style="text-align: center;">
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">
+                                <td>
+                                    <a href="javascript:void(0)"  ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)"  ngbTooltip="Delete">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
@@ -54,7 +56,7 @@
     <div *ngIf="!isShown">
         <!-- Card Header - Dropdown -->
         <div class="card-header ">
-            <h5 class="m-0 font-weight-bold text-primary">Add Employer</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Add Employee</h5>
 
         </div>
         <!-- Card Body -->
@@ -64,7 +66,7 @@
                     <div class="form-group col-lg-4">
                         <label for="firstName">First Name</label>
                         <input class="form-control" type="text" id="firstName" placeholder="First Name"
-                            autocomplete="off" maxlength="100">
+                            autocomplete="off" maxlength="100" pattern="[a-zA-Z][a-zA-Z ]+">
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="middleName">Middle Name</label>
@@ -77,10 +79,23 @@
                             autocomplete="off" maxlength="100">
                     </div>
                 </div>
-
-
                 <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
+                        <label for="gender">Gender</label>
+                        <select name="gender" class="form-select col-lg-12" (change)="onGenderChange($event.target)">
+                            <option *ngFor="let gender of genders" [value]="gender.id">{{gender.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="dob">Date of Birth</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
+                                #d="ngbDatepicker" mask="00/00/0000" autocomplete="off">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
                         <label for="description">Designation</label>
                         <select name="description" class="form-select col-lg-12"
                             (change)="onDesignationChange($event.target)">
@@ -88,14 +103,48 @@
                                 {{designation.name}}</option>
                         </select>
                     </div>
+                </div>
+                <div class="row">
                     <div class="form-group col-lg-6">
-                        <label for="gender">Gender</label>
-                        <select name="gender" class="form-select col-lg-12" (change)="onGenderChange($event.target)">
-                            <option *ngFor="let gender of genders" [value]="gender.id">{{gender.name}}</option>
-                        </select>
+                        <label for="emailid">Email Id</label>
+                        <input class="form-control" type="text" id="emailid" placeholder="Email Id" autocomplete="off"
+                            maxlength="50">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="mobile">Mobile</label>
+                        <input class="form-control" type="text" id="mobile" placeholder="Mobile Number"
+                            mask="(000) 000 0000" autocomplete="off">
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <label for="address">Address</label>
+                        <input type="text" name="address" Name="address" placeholder="Address" class="form-control "
+                            autocomplete="off" maxlength="100">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="city">City</label>
+                        <select name="city" class="form-select col-lg-12" (change)="onDesignationChange($event.target)">
+                            <option *ngFor="let city of citys" [value]="city.id">
+                                {{city.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="state">State</label>
+                        <select name="state" class="form-select col-lg-12"
+                            (change)="onDesignationChange($event.target)">
+                            <option *ngFor="let state of states" [value]="state.id">
+                                {{state.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="pincode">Pin Code</label>
+                        <input class="form-control" type="text" id="pincode" placeholder="Pin code" mask="000000"
+                            autocomplete="off">
+                    </div>
+                </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="ngbDatepicker">Start Date </label>
@@ -116,26 +165,12 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="form-group col-lg-6">
-                        <label for="mobile">Mobile</label>
-                        <input class="form-control" type="text" id="mobile" placeholder="Mobile Number"
-                            mask="(000) 000 0000" autocomplete="off">
-                    </div>
-                </div>
-
                 <div class="row">
                     <div class="form-group col-lg-12">
-                        <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
-                            style="margin-right: 10px; width:100px;" />
-                        <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update"
-                            style="margin-right: 10px; width:100px;" />
-                        <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
-                            (click)="isShown = true" />
+                        <input type="button"  class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

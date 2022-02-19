@@ -72,117 +72,112 @@
             <form class="form-horizontal">
                 <div class="row">
                     <div class="form-group col-lg-6">
-                        <label for="projectName">Project Name </label>
-                        <input type="text" class="form-control" id="projectName" placeholder="Project Name"
-                            maxlength="20">
+                        <label for="name">Name </label>
+                        <input type="text" class="form-control" id="name" placeholder="Name" maxlength="20">
                     </div>
 
                     <div class="form-group col-lg-6">
-                        <label for="projectName">Project Owner </label>
-                        <input type="text" class="form-control" id="projectOwner" placeholder="Project Owner"
-                            maxlength="50">
+                        <label for="ownerName">Owner Name</label>
+                        <input type="text" class="form-control" id="ownerName" placeholder="Owner Name" maxlength="50">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="description">Description </label>
+                        <textarea type="description" class="form-control" id="description"
+                            placeholder="Enter project description here" maxlength="200"></textarea>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-lg-6">
-                            <label for="projectdescrption">Project Description </label>
-                            <textarea type="projectdescrption" class="form-control" id="txtProject"
-                                placeholder="Enter project description here" maxlength="200"></textarea>
+                    <div class="form-group col-lg-6">
+                        <label for="technology">Technology </label>
+                        <div>
+                            <label class="btn btn-primary-active">
+                                <input type="checkbox"> Angular
+                            </label>
+                            <label class="btn btn-primary-active">
+                                <input type="checkbox"> .NET Core
+                            </label>
+                            <label class="btn btn-primary-active">
+                                <input type="checkbox"> HTML
+                            </label>
+                            <label class="btn btn-primary-active">
+                                <input type="checkbox"> CSS
+                            </label>
+                            <label class="btn btn-primary-active">
+                                <input type="checkbox"> Javascript
+                            </label>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="form-group col-lg-6">
-                            <div class="form-group col-lg-6">
-                                <label for="technology">Technology </label>
-                            </div>
-                            <div class="btn-group" data toggle="buttons">
-                                <label class="btn btn-primary-active">
-                                    <input type="checkbox" > Angular
-                                </label>
-                                <label class="btn btn-primary-active">
-                                    <input type="checkbox" > .NET Core
-                                </label>
-                                <label class="btn btn-primary-active">
-                                    <input type="checkbox" > HTML
-                                </label>
-                                <label class="btn btn-primary-active">
-                                    <input type="checkbox" > CSS
-                                </label>
-                                <label class="btn btn-primary-active">
-                                    <input type="checkbox" > Javascript
-                                </label>
-                            </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="project type">Project Type </label>
+                        <select name="projectType" class="form-select col-lg-12"
+                            (change)="onProjectChange($event.target)">
+                            <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label for="duration">Duration </label>
+                        <select name="duration" class="form-select col-lg-12"
+                            (change)="onDurationChange($event.target)">
+                            <option *ngFor="let duration of durations" [value]="duration.id"> {{duration.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label for="status">Status </label>
+                        <select name="status" class="form-select col-lg-12" (change)="onStatusChange($event.target)">
+                            <option *ngFor="let status of status" [value]="status.id">{{status.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="startDate">Start Date </label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
+                                #d="ngbDatepicker" id="startDate" mask="00/00/0000" autocomplete="off">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-lg-4">
-                            <label for="project type">Project Type </label>
-                            <select name="projectType" class="form-select col-lg-12"
-                                (change)="onProjectChange($event.target)">
-                                <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-lg-4">
-                            <label for="duration">Duration </label>
-                            <select name="duration" class="form-select col-lg-12"
-                                (change)="onDurationChange($event.target)">
-                                <option *ngFor="let duration of durations" [value]="duration.id"> {{duration.name}}
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-lg-4">
-                            <label for="status">Status </label>
-                            <select name="status" class="form-select col-lg-12"
-                                (change)="onStatusChange($event.target)">
-                                <option *ngFor="let status of status" [value]="status.id">{{status.name}}
-                                </option>
-                            </select>
+                    <div class="form-group col-lg-4">
+                        <label for="completionDate">Completion Date </label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
+                                #p="ngbDatepicker" id="compDate" mask="00/00/0000" autocomplete="off">
+                            <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
+                                type="button"></button>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-lg-4">
-                            <label for="startDate">Start Date </label>
+                    <div class="form-group col-lg-4">
+                        <label for="budgetAmount">Budget Amount </label>
+                        <div class="my-1">
+                            <label class="sr-only" for="budgetAmount">Amount</label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
-                                    #d="ngbDatepicker" id="startDate" mask="00/00/0000" autocomplete="off">
-                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
-                                    type="button"></button>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-lg-4">
-                            <label for="completionDate">Completion Date </label>
-                            <div class="input-group">
-                                <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
-                                    #p="ngbDatepicker" id="compDate" mask="00/00/0000" autocomplete="off">
-                                <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
-                                    type="button"></button>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-lg-4">
-                            <label for="budgetAmount">Budget Amount </label>
-                            <div class="my-1">
-                                <label class="sr-only" for="budgetAmount">Amount</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">₹</div>
-                                    </div>
-                                    <input type="text" class="form-control" id="budgetAmount" placeholder="XXXXXXX"
-                                        autocomplete="off" mask="000000">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">₹</div>
                                 </div>
+                                <input type="text" class="form-control" id="budgetAmount" placeholder="XXXXXXX"
+                                    autocomplete="off" mask="000000">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row submit-buttons">
-                            <div class="form-group col-lg-12">
-                                <input type="submit" class="btn btn-success" value="Save" />
-                                <input type="button" class="btn btn-outline-primary" value="Cancel"
-                                    (click)="isShown = true" />
-                            </div>
+                    <div class="row submit-buttons">
+                        <div class="form-group col-lg-12">
+                            <input type="submit" class="btn btn-success" value="Save" />
+                            <input type="button" class="btn btn-outline-primary" value="Cancel"
+                                (click)="isShown = true" />
                         </div>
                     </div>
                 </div>

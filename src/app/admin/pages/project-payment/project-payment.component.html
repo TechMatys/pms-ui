@@ -12,7 +12,7 @@
             <h5 class="m-0 font-weight-bold text-primary"> Project List </h5>
         </div>
         <div class="card-body">
-            <div class="row" >
+            <div class="row mrgn-btm-15">
                 <div class="col-lg-3">
                     <select name="year" class="form-select col-lg-12" (change)="onGridYearChange($event.target)">
                         <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
@@ -24,9 +24,9 @@
                     </select>
                 </div>
 
-                <div class="col-lg-6">
-                    <button class="btn btn-success" (click)="addProjectPayment()" >Add
-                        Project Payment</button>
+                <div class="col-lg-6 algn-right">
+                    <button class="btn btn-primary btn-sm" (click)="addProjectPayment()">
+                        Add Project Payment</button>
                 </div>
             </div>
             <div class="row">
@@ -38,7 +38,7 @@
                                 <th scope="col">Received Amount</th>
                                 <th scope="col">Month/Year</th>
                                 <th scope="col">Payment Date</th>
-                                <th >Action</th>
+                                <th class="action-button">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,8 +55,8 @@
                                 <td>
                                     {{ payment.date}}
                                 </td>
-                                <td >
-                                    <a href="javascript:void(0)"  ngbTooltip="Edit">
+                                <td class="action-button">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
                                     <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">
@@ -89,28 +89,28 @@
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="budgetAmount">Budget Amount </label>
+                        <label for="recievedAmount">Recieved Amount </label>
                         <div class="my-1">
-                            <label class="sr-only" for="budgetAmount">Amount</label>
+                            <label class="sr-only" for="recievedAmount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
-                                <input type="text" class="form-control" id="budgetAmount" placeholder="XXXXXXX"
+                                <input type="text" class="form-control" id="recievedAmount" placeholder="XXXXXXX"
                                     autocomplete="off" mask="0000000">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="recievedamount">Recieved Amount </label>
+                        <label for="balancedAmount">Balanced Amount </label>
                         <div class="my-1">
-                            <label class="sr-only" for="recievedamount">Amount</label>
+                            <label class="sr-only" for="balancedAmount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
-                                <input type="text" class="form-control" id="recievedamount" placeholder="XXXXXXX"
+                                <input type="text" class="form-control" id="balancedAmount" placeholder="XXXXXXX"
                                     autocomplete="off" mask="0000000">
                             </div>
                         </div>
@@ -141,15 +141,13 @@
                                 type="button"></button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
-                                style="margin-right: 10px; width:100px;" />
-
-                            <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
-                                (click)="isShown = true" />
-                        </div>
+                <div class="row submit-buttons">
+                    <div class="form-group col-lg-12">
+                        <input type="submit" class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel"
+                            (click)="isShown = true" />
                     </div>
                 </div>
             </form>

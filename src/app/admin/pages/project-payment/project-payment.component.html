@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let payment of paymentlist">
+                            <tr *ngFor="let payment of projectPaymentlist">
                                 <td>
                                     {{payment.name}}
                                 </td>
@@ -146,8 +146,7 @@
                 <div class="row submit-buttons">
                     <div class="form-group col-lg-12">
                         <input type="submit" class="btn btn-success" value="Save" />
-                        <input type="button" class="btn btn-outline-primary" value="Cancel"
-                            (click)="isShown = true" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
                     </div>
                 </div>
             </form>

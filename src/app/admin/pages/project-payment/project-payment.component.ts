@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-interface Payment {
+interface ProjectPayment {
   name: string;
   receivedAmount: string;
   month: any;
   date: any;
 }
-
 
 @Component({
   selector: 'app-project-payment',
@@ -25,7 +24,7 @@ export class ProjectPaymentComponent implements OnInit {
   month: any;
   year: any;
 
-  paymentlist: Payment[] = [
+  projectPaymentlist: ProjectPayment[] = [
     {
       name: 'Vikas Rawat',
       month: 'May 2020',

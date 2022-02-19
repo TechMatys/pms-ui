@@ -9,7 +9,7 @@
 <div class="card shadow mb-4">
     <div *ngIf="isShown">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Employer List</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Employee List</h5>
         </div>
         <div class="card-body">
             <div class="row mrgn-btm-15">
@@ -31,16 +31,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let emp of employer">
-                                <td>{{emp.name}}</td>
-                                <td>{{emp.emailAddress}}</td>
-                                <td>{{emp.startDate}}</td>
-                                <td>{{emp.designation}}</td>
+                            <tr *ngFor="let employee of employeeList">
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.emailAddress}}</td>
+                                <td>{{employee.startDate}}</td>
+                                <td>{{employee.designation}}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteEmployee(employee)" >
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>

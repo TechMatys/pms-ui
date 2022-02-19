@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
-interface Employer {
+interface Employee {
   name: string,
   emailAddress: string;
   startDate: string;
@@ -20,7 +21,7 @@ export class EmployeeComponent implements OnInit {
   isShown: boolean = false;
   isAddNew: boolean = true;
 
-  employer: Employer[] = [
+  employeeList: Employee[] = [
     {
       name: 'Earl of Lemongrab',
       emailAddress: 'earllemongrab12@gmail.com',
@@ -73,8 +74,7 @@ export class EmployeeComponent implements OnInit {
     id: 2, name: 'Himachal Pradesh'
   }];
 
-  constructor() {
-  }
+  constructor(private toastr: ToastrService) { }
 
   addEmployee() {
     this.isShown = false;
@@ -85,6 +85,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   onGenderChange(item: any) {
+  }
+
+  deleteEmployee(employee: any) {
+    this.toastr.success("Employee deleted successfully", "Sucess");
   }
 
   ngOnInit(): void {

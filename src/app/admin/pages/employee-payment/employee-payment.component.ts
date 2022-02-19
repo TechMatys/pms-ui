@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-interface Employer {
+interface EmployeePayment {
   employeeName: string,
   amount: string;
   month: string;
@@ -20,7 +20,7 @@ export class EmployeePaymentComponent implements OnInit {
   isShown: boolean = true;
   isAddNew: boolean = true;
   
-  employer: Employer[] = [
+  employeePaymentList: EmployeePayment[] = [
     {
       employeeName: 'Subhash Rawat',
       amount: '₹ 70,000',

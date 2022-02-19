@@ -17,7 +17,7 @@
             <div class="row" style="margin-bottom: 10px;">
                 <div class="col-lg-12">
                     <button class="btn btn-primary btn-sm" (click)="addProject()" style="float:right">Add
-                        New</button>
+                        Project</button>
                 </div>
             </div>
             <div class="row">
@@ -29,7 +29,11 @@
                                 <th scope="col">Project Name</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Status</th>
+
                                 <th scope="col">Project Type </th>
+
+                                <th scope="col">Cost</th>
+
                                 <th style="text-align: center;">Action</th>
                             </tr>
                         </thead>
@@ -46,7 +50,11 @@
                                     {{ project.status}}
                                 </td>
                                 <td>
+
                                     {{ project.type}}
+                                </td>
+                                <td>
+                                    {{ project.cost}}
                                 </td>
                                 <td style="text-align: center;">
                                     <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">
@@ -89,14 +97,16 @@
                             <input type="text" class="form-control" id="txtproject" placeholder="Project Discription"
                                 maxlength="200">
                         </div>
+
+                        autocomplete="off" maxlength="100">
+
                     </div>
 
                     <div class="form-group col-lg-6">
                         <label for="duration">Duration </label>
-                        <select class="form-select " aria-label="aria-label">
-                            <option selected> Select Duration</option>
-                            <option value="1">One Time</option>
-                            <option value="2">Monthly</option>
+                        <select name="duration" class="form-select col-lg-12"
+                            (change)="onDurationChange($event.target)">
+                            <option *ngFor="let duration of durations" [value]="duration.id">{{duration.name}}</option>
                         </select>
                     </div>
 
@@ -105,8 +115,8 @@
                     <div class="form-group col-lg-6">
                         <label for="startDate">Start Date </label>
                         <div class="input-group">
-                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker
-                                #d="ngbDatepicker" id="startDate">
+                            <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
+                                #d="ngbDatepicker" id="startDate" mask="00/00/0000" autocomplete="off">
                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                 type="button"></button>
                         </div>
@@ -116,8 +126,8 @@
                     <div class="form-group col-lg-6">
                         <label for="endDate">End Date </label>
                         <div class="input-group">
-                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker
-                                #p="ngbDatepicker" id="endDate">
+                            <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
+                                #p="ngbDatepicker" id="endDate" mask="00/00/0000" autocomplete="off">
                             <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
                                 type="button"></button>
                         </div>
@@ -126,6 +136,7 @@
 
                 <div class="row">
                     <div class="form-group col-lg-6">
+
                         <label for="budgetAmount">Budget Amount </label>
                         <div class="my-1">
                             <label class="sr-only" for="budgetAmount">Amount</label>
@@ -137,15 +148,17 @@
                                     autocomplete="off" mask="000000">
                             </div>
                         </div>
+
+                        <label for="Cost">Cost </label>
+                        <input type="text" class="form-control" id="txtDescription" placeholder="Cost"
+                            autocomplete="off" mask="000000">
+
                     </div>
 
                     <div class="form-group col-lg-6">
-                        <label for="status">Status :</label>
-                        <select class="form-select " aria-label="aria-label">
-                            <option selected> Select Status</option>
-                            <option value="1">Completed</option>
-                            <option value="2">In Progress</option>
-                            <option value="3">Starting</option>
+                        <label for="status">Status </label>
+                        <select name="status" class="form-select col-lg-12" (change)="onStatusChange($event.target)">
+                            <option *ngFor="let status of status" [value]="status.id">{{status.name}}</option>
                         </select>
                     </div>
                 </div>

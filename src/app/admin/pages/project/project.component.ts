@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Project {
+
   name: string;
   startDate: string;
   status: string;
   type : string;
+  cost: string;
+
 }
 
 @Component({
@@ -20,43 +23,72 @@ export class ProjectComponent implements OnInit {
   isShown: boolean = false;
   isAddNew: boolean = true;
   projectList: any;
+  
 
   projectlist: Project[] = [
     {
-      name: 'Vikas Rawat',
-      startDate: '10-05-2020',
+      name: 'Project 1',
+      startDate: '10/05/2020',
       status: 'In Progress',
       type : 'ASP.net Core'
+      cost: '₹ 10,000',
 
     },
     {
-      name: 'Rudra Pratap Singh Bartwal',
-      startDate: '19-05-2021',
+      name: 'Project 2',
+      startDate: '19/05/2021',
       status: 'In Progress',
       type : 'Python'
+      cost: '₹ 10,000',
+
 
     },
     {
-      name: 'Prakash Rawat',
-      startDate: '10-04-2020',
+      name: 'Project 3',
+      startDate: '10/04/2020',
       status: 'In Progress',
       type : 'Angular'
+      cost: '₹ 10,000',
+
 
     },
     {
-      name: 'Sumit Rawat',
-      startDate: '20-04- 2020',
+      name: 'Project 4',
+      startDate: '20/04/2020',
       status: 'In Progress',
       type : 'CSS'
-
+      cost: '₹ 10,000',
     },
     {
-      name: 'Ganesh Rawat',
-      startDate: '10-06-2020',
+      name: 'Project 5',
+      startDate: '10/06/2020',
       status: 'In Progress',
       type : 'HTML'
+      cost: '₹ 10,000',
     },
   ]
+
+
+  status = [{
+    id: 0, name: '-- Select Status --'
+  }, {
+    id: 1, name: 'In Progress'
+  }, {
+    id: 2, name: 'On Hold'
+  }, {
+    id: 3, name: 'Pending'
+  }, {
+    id: 4, name: 'Completed'
+  }];
+
+  durations = [{
+    id: 0, name: '-- Select Duration --'
+  }, {
+    id: 1, name: 'Monthly'
+  }, {
+    id: 2, name: 'One Time'
+  }];
+  
 
 
   constructor() { }
@@ -73,6 +105,14 @@ export class ProjectComponent implements OnInit {
     {
       this.isShown = !this.isShown;
     }
+  }
+
+  onStatusChange(item: any) {
+
+  }
+
+  onDurationChange(item: any) {
+
   }
 
 }

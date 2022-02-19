@@ -17,6 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
+import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -32,15 +35,17 @@ import { EmployeePaymentComponent } from './admin/pages/employee-payment/employe
     LoginComponent,
     AdminComponent,
 
-
-  
+    ProjectPaymentComponent,
+    EmployeePaymentComponent,
+    CompanyExpensesComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11292,3 +11292,53 @@ thead {
   background-color: #fcaeae;
   color: white;
 }
+
+.submit-buttons input[type="submit"], input[type="button"] {
+  margin-right: 10px;
+  width:100px;
+}
+
+.mrgn-btm-5 {
+  margin-bottom: 5px;
+}
+
+.mrgn-btm-10 {
+  margin-bottom: 10px;
+}
+
+.mrgn-btm-15 {
+  margin-bottom: 15px;
+}
+
+.mrgn-btm-20 {
+  margin-bottom: 20px;
+}
+
+.mrgn-top-5 {
+  margin-top: 5px;
+}
+
+.mrgn-top-10 {
+  margin-top: 10px;
+}
+
+.mrgn-top-15 {
+  margin-top: 15px;
+}
+
+.mrgn-top-20 {
+  margin-top: 20px;
+}
+
+.action-button{
+  text-align: center;
+}
+
+.action-button a{
+  margin-right: 10px;
+}
+
+.algn-right{
+  text-align: right;
+}
+

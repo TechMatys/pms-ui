@@ -30,27 +30,27 @@ export class ProjectPaymentComponent implements OnInit {
       name: 'Vikas Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 5,000',
-      date: '10-05-2020',
+      date: '10/05/2020',
     }, {
       name: 'Prakash Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 2,000',
-      date: '10-05-2020',
+      date: '10/05/2020',
     }, {
       name: 'Ganesh Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 5,000',
-      date: '10-05-2020',
+      date: '10/05/2020',
     }, {
       name: 'Vikky Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 6,000',
-      date: '10-05-2020'
+      date: '10/05/2020'
     }, {
       name: 'Rudra Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 7,000',
-      date: '10-05-2020'
+      date: '10/05/2020'
     }];
 
   months = [

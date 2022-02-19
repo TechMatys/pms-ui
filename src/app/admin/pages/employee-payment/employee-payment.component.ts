@@ -25,27 +25,27 @@ export class EmployeePaymentComponent implements OnInit {
       employeeName: 'Subhash Rawat',
       amount: '₹ 70,000',
       month: '02/2022',
-      paymentDate: '28/2/2022'
+      paymentDate: '28/02/2022'
     }, {
       employeeName: 'Tajwar Rawat',
       amount: '₹ 90,000',
       month: '02/2022',
-      paymentDate: '28/2/2022'
+      paymentDate: '28/02/2022'
     }, {
       employeeName: 'Prakash Rawat',
       amount: '₹ 50,000',
       month: '02/2022',
-      paymentDate: '28/2/2022'
+      paymentDate: '28/02/2022'
     }, {
       employeeName: 'Vikash Rawat',
       amount: '₹ 40,000',
       month: '02/2022',
-      paymentDate: '28/2/2022'
+      paymentDate: '28/02/2022'
     }, {
       employeeName: 'Deepak Dhiman',
       amount: '₹ 1,00,000',
       month: '02/2022',
-      paymentDate: '28/2/2022'
+      paymentDate: '28/02/2022'
     }];
 
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 interface Employer {
   name: string,

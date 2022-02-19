@@ -47,8 +47,7 @@ export class ProjectComponent implements OnInit {
       startDate: '10/06/2020',
       status: 'In Progress',
       type : 'HTML'
-    }]
-
+    }];
 
   status = [{
     id: 0, name: '-- Select Status --'

@@ -4,7 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 interface Employer {
   name: string,
-  emailId: string;
+  emailAddress: string;
   startDate: string;
   designation: string;
 }
@@ -24,29 +24,28 @@ export class EmployeeComponent implements OnInit {
   employer: Employer[] = [
     {
       name: 'Earl of Lemongrab',
-      emailId: 'earllemongrab12@gmail.com',
+      emailAddress: 'earllemongrab12@gmail.com',
       startDate: '12/11/2000',
       designation: 'Lemon Candy',
     },
     {
       name: 'Bonnibel Bubblegum',
-      emailId: 'bonnibelbubblegum13@gmail.com',
+      emailAddress: 'bonnibelbubblegum13@gmail.com',
       startDate: '14/05/1990',
       designation: 'Lemon Candy',
     },
     {
       name: 'Phoebe',
-      emailId: 'phoebe15@gmail.com',
+      emailAddress: 'phoebe15@gmail.com',
       startDate: '17/12/2010',
       designation: 'Lemon Candy',
     },
     {
       name: 'Lumpy Space Princess',
-      emailId: 'lumpyprincess20@gmail.com',
+      emailAddress: 'lumpyprincess20@gmail.com',
       startDate: '14/07/2005',
       designation: 'Lemon Candy',
-    },
-  ];
+    }];
 
   genders = [{
     id: 0, name: '-- Select Gender --'
@@ -62,38 +61,18 @@ export class EmployeeComponent implements OnInit {
     id: 1, name: 'Developer'
   }, {
     id: 2, name: 'Manager'
-  }];  
+  }];
 
-  // city name create
-  citys = [{
-    id: 0, name: '-- Select Citys --'
+  // State name create
+  states = [{
+    id: 0, name: '-- Select State --'
   }, {
-    id: 1, name: 'Rudraprayag'
+    id: 1, name: 'Uttarakhand'
   }, {
-    id: 2, name: 'Dehradun'
+    id: 2, name: 'Bihar'
   }, {
-     id: 3, name: 'Pauri Garhwal'
-},  {
-     id: 4, name: 'Gaya'
-}, {
-    id: 5, name: ' Darbhanga'
-}, {
-    id: 6, name: ' Dharamshala'
-},{
-     id: 7, name: ' Solan'
-},];
-
-// State name create
-
-states = [{
-  id: 0, name: '-- Select State --'
-}, {
-  id: 1, name: 'Uttarakhand'
-}, {
-  id: 2, name: 'Bihar'
-}, {
-  id: 2, name: 'Himachal Pradesh'
-}];
+    id: 2, name: 'Himachal Pradesh'
+  }];
 
   constructor() {
   }

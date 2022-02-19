@@ -21,6 +21,7 @@ import { CompanyExpensesComponent } from './admin/pages/company-expenses/company
 import { NgxMaskModule } from 'ngx-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { PopUpComponent } from './core/pop-up/pop-up.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
     ProjectPaymentComponent,
     EmployeePaymentComponent,
     CompanyExpensesComponent,
+    PopUpComponent,
 
   ],
   imports: [

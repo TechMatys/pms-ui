@@ -18,7 +18,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { DesignationComponent } from './admin/pages/designation/designation.component';
 
 
 @NgModule({
@@ -36,7 +35,6 @@ import { DesignationComponent } from './admin/pages/designation/designation.comp
     AdminComponent,
     ProjectPaymentComponent,
     EmployeePaymentComponent,
-    DesignationComponent
   ],
   imports: [
     BrowserModule,

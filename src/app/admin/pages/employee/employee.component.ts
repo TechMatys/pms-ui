@@ -67,7 +67,10 @@ export class EmployeeComponent implements OnInit {
     this.isAddNew = true;
   }
 
-  onChange(country: any) {
+  onDesignationChange(item: any) {
+  }
+
+  onGenderChange(item: any) {
   }
 
   ngOnInit(): void {

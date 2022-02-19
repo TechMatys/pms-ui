@@ -13,23 +13,22 @@
             <h5 class="m-0 font-weight-bold text-primary">Employee Payment List</h5>
         </div>
         <div class="card-body">
-            <div class="row" style="margin-bottom: 10px;">
-                <div class="col-lg-3">
-                    <select name="year" class="form-select col-lg-12" (change)="onChange($event.target)">
+            <div class="row mrgn-btm-15">
+                <div class="col-lg-2">
+                    <select name="year" class="form-select col-lg-12" (change)="onGridYearChange($event.target)">
                         <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
                     </select>
                 </div>
-                <div class="col-lg-3">
-                    <select name="month" class="form-select col-lg-12" (change)="onChange($event.target)">
+                <div class="col-lg-2">
+                    <select name="month" class="form-select col-lg-12" (change)="onGridMonthChange($event.target)">
                         <option *ngFor="let month of months" [value]="month.id">{{month.name}}
                         </option>
                     </select>
                 </div>
-                <div class="col-lg-6">
-                    <button class="btn btn-primary btn-sm" (click)="addEmployer()" style="float:right">Add
-                        Payment</button>
+                <div class="col-lg-8 algn-right">
+                    <button class="btn btn-primary btn-sm" (click)="addEmployeePayment()">
+                        Add Employee Payment</button>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -40,7 +39,7 @@
                                 <th scope="col">Amount</th>
                                 <th scope="col">Month/Year</th>
                                 <th scope="col">Payment Date</th>
-                                <th style="text-align: center;">Action</th>
+                                <th class="action-button">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,11 +48,11 @@
                                 <td>{{emp.amount}}</td>
                                 <td>{{emp.month}}</td>
                                 <td>{{emp.paymentDate}}</td>
-                                <td style="text-align: center;">
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">
+                                <td class="action-button">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
@@ -68,8 +67,9 @@
     <div *ngIf="!isShown">
         <!-- Card Header - Dropdown -->
         <div class="card-header ">
-            <h5 class="m-0 font-weight-bold text-primary">Add Employer</h5>
-
+            <h5 class="m-0 font-weight-bold text-primary">
+                Add Employee Payment
+            </h5>
         </div>
         <!-- Card Body -->
         <div class="card-body">
@@ -77,7 +77,8 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="employee">Employee</label>
-                        <select name="employee" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="employee" class="form-select col-lg-12"
+                            (change)="onEmployeeChange($event.target)">
                             <option *ngFor="let employee of employees" [value]="employee.id">{{employee.name}}</option>
                         </select>
                     </div>
@@ -92,14 +93,14 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="year">Year</label>
-                        <select name="year" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="year" class="form-select col-lg-12" (change)="onYearChange($event.target)">
                             <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
                         </select>
                     </div>
 
                     <div class="form-group col-lg-4">
                         <label for="month">Month</label>
-                        <select name="month" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="month" class="form-select col-lg-12" (change)="onMonthChange($event.target)">
                             <option *ngFor="let month of months" [value]="month.id">{{month.name}} </option>
                         </select>
                     </div>
@@ -115,21 +116,13 @@
                     </div>
                 </div>
 
-
-
-
-                <div class="row">
+                <div class="row submit-buttons">
                     <div class="form-group col-lg-12">
-                        <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
-                            style="margin-right: 10px; width:100px;" />
-                        <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update"
-                            style="margin-right: 10px; width:100px;" />
-                        <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
+                        <input type="submit" class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel"
                             (click)="isShown = true" />
                     </div>
                 </div>
-
-
             </form>
         </div>
     </div>

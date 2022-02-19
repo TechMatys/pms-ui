@@ -27,37 +27,27 @@ export class EmployeePaymentComponent implements OnInit {
       employeeName: 'Subhash Rawat',
       amount: '70,000',
       month: '02/2022',
-      paymentDate: '28/2/2022',
-
-    },
-    {
+      paymentDate: '28/2/2022'
+    }, {
       employeeName: 'Tajwar Rawat',
       amount: '90,000',
       month: '02/2022',
-      paymentDate: '28/2/2022',
-
-    },
-    {
+      paymentDate: '28/2/2022'
+    }, {
       employeeName: 'Prakash Rawat',
       amount: '50,000',
       month: '02/2022',
-      paymentDate: '28/2/2022',
-
-    },
-    {
+      paymentDate: '28/2/2022'
+    }, {
       employeeName: 'Vikash Rawat',
       amount: '40,000',
       month: '02/2022',
-      paymentDate: '28/2/2022',
-
-    },
-
-    {
+      paymentDate: '28/2/2022'
+    }, {
       employeeName: 'Deepak Dhiman',
       amount: '1,00,000',
       month: '02/2022',
-      paymentDate: '28/2/2022',
-
+      paymentDate: '28/2/2022'
     },
   ];
 
@@ -80,7 +70,7 @@ export class EmployeePaymentComponent implements OnInit {
   }];
 
 
- // --Select Month Create--  
+  // --Select Month Create--  
   months = [{
     id: 0, name: '-- Select Month --'
   }, {
@@ -103,11 +93,11 @@ export class EmployeePaymentComponent implements OnInit {
     id: 9, name: 'September'
   }, {
     id: 10, name: 'October'
-  },  {
+  }, {
     id: 11, name: 'November'
-  },  {
+  }, {
     id: 12, name: 'December'
-  },];
+  }];
 
   // --Select Year Create--
   years = [{
@@ -122,18 +112,34 @@ export class EmployeePaymentComponent implements OnInit {
     id: 4, name: '2019'
   }, {
     id: 5, name: '2018'
-  },];
-
+  }];
 
 
   constructor() { }
 
-  addEmployer() {
+  addEmployeePayment() {
     this.isShown = false;
     this.isAddNew = true;
   }
 
-  onChange(employee: any) {
+  onGridYearChange(item: any) {
+
+  }
+
+  onGridMonthChange(item: any) {
+    
+  }
+
+  onEmployeeChange(item: any) {
+    
+  }
+
+  onYearChange(item: any) {
+    
+  }
+
+  onMonthChange(item: any) {
+    
   }
 
   ngOnInit(): void {

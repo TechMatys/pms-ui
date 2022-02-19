@@ -12,53 +12,28 @@
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Employee Payment List</h5>
         </div>
-
         <div class="card-body">
             <div class="row" style="margin-bottom: 10px;">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        <select class="form-select " ngbDropdown="selectedMonth">
-                                            <option value="none" selected>--Select Month--</option>
-                                            <option *ngFor="let month of months" [value]="month">{{ month }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        <select class="form-select " ngbDropdown="selectedYear">
-                                            <option value="none" selected>--Select Year--</option>
-                                            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 mb-4">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        <button class="btn btn-primary btn-sm" (click)="addEmployer()"
-                                            style="float:right">Add
-                                            Payment</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-3">
+                    <select name="year" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
+                    </select>
                 </div>
+                <div class="col-lg-3">
+                    <select name="month" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <option *ngFor="let month of months" [value]="month.id">{{month.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    <button class="btn btn-primary btn-sm" (click)="addEmployer()" style="float:right">Add
+                        Payment</button>
+                </div>
+
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <table class="table table-bordered dataTable">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Employee Name</th>
@@ -102,56 +77,46 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="employee">Employee</label>
-                        <select class="form-select col-lg-12">
-                            <option value="none" selected>--Select Employee--</option>
-                            <option value="1">Subhash Rawat</option>
-                            <option value="2">Tajwar Rawat</option>
-                            <option value="3">Prakash Rawat</option>
-                            <option value="4">Vikash Rawat</option>
-                            <option value="5">Deepak Dhiman</option>
-                            <option value="6">Manmohon Singh</option>
-                            <option value="7">Sudhir Rawat</option>
+                        <select name="employee" class="form-select col-lg-12" (change)="onChange($event.target)">
+                            <option *ngFor="let employee of employees" [value]="employee.id">{{employee.name}}</option>
                         </select>
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="amount">Amount</label>
-                        <input class="form-control" type="text" id="amount" placeholder="Amount">
+                        <input class="form-control" type="text" id="amount" placeholder="Amount" mask="00,00,000"
+                            autocomplete="off">
                     </div>
                 </div>
 
 
                 <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="month">Month</label>
-                        <select class="form-select " ngbDropdown="selectedMonth">
-                            <option value="none" selected>--Select Month--</option>
-                            <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                        <select name="month" class="form-select col-lg-12" (change)="onChange($event.target)">
+                            <option *ngFor="let month of months" [value]="month.id">{{month.name}} </option>
                         </select>
 
                     </div>
 
-                    <div class="form-group col-lg-6">
-                        <label for="years">Year</label>
-                        <select class="form-select " ngbDropdown="selectedYear">
-                            <option value="none" selected>--Select Year--</option>
-                            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                    <div class="form-group col-lg-4">
+                        <label for="year">Year</label>
+                        <select name="year" class="form-select col-lg-12" (change)="onChange($event.target)">
+                            <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
                         </select>
                     </div>
-                </div>
 
-
-                <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="ngbDatepicker">Payment Date</label>
                         <div class="input-group">
                             <input class="form-control" placeholder="MM/DD/YYYY" name="dp" ngbDatepicker
-                                #d="ngbDatepicker">
+                                #d="ngbDatepicker" mask="00/00/0000" autocomplete="off">
                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                 type="button"></button>
                         </div>
                     </div>
-
                 </div>
+
+
 
 
                 <div class="row">

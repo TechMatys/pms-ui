@@ -19,36 +19,34 @@ export class EmployeePaymentComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = true;
   isAddNew: boolean = true;
-  selectedYear: number;
-  years: number[] = [];
-  selectedMonth: number;
-  months: number[] = [];
+  month: any;
+  year: any;
 
   employer: Employer[] = [
     {
       employeeName: 'Subhash Rawat',
-      amount: '70000',
+      amount: '70,000',
       month: '02/2022',
       paymentDate: '28/2/2022',
 
     },
     {
       employeeName: 'Tajwar Rawat',
-      amount: '90000',
+      amount: '90,000',
       month: '02/2022',
       paymentDate: '28/2/2022',
 
     },
     {
       employeeName: 'Prakash Rawat',
-      amount: '50000',
+      amount: '50,000',
       month: '02/2022',
       paymentDate: '28/2/2022',
 
     },
     {
       employeeName: 'Vikash Rawat',
-      amount: '40000',
+      amount: '40,000',
       month: '02/2022',
       paymentDate: '28/2/2022',
 
@@ -56,29 +54,86 @@ export class EmployeePaymentComponent implements OnInit {
 
     {
       employeeName: 'Deepak Dhiman',
-      amount: '100000',
+      amount: '1,00,000',
       month: '02/2022',
       paymentDate: '28/2/2022',
 
     },
-  ]
+  ];
+
+
+  // --Select Employee Name Create--
+  employees = [{
+    id: 0, name: '-- Select Employee --'
+  }, {
+    id: 1, name: 'Subhash Rawat'
+  }, {
+    id: 2, name: 'Tajwar Rawat'
+  }, {
+    id: 3, name: 'Prakash Rawat'
+  }, {
+    id: 4, name: 'Deepak Dhiman'
+  }, {
+    id: 5, name: 'Vikash Rawat'
+  }, {
+    id: 6, name: 'Vikram Rawat'
+  }];
+
+
+ // --Select Month Create--  
+  months = [{
+    id: 0, name: '-- Select Month --'
+  }, {
+    id: 1, name: 'January'
+  }, {
+    id: 2, name: 'February'
+  }, {
+    id: 3, name: 'March'
+  }, {
+    id: 4, name: 'April'
+  }, {
+    id: 5, name: 'May'
+  }, {
+    id: 6, name: 'June'
+  }, {
+    id: 7, name: 'July'
+  }, {
+    id: 8, name: 'August'
+  }, {
+    id: 9, name: 'September'
+  }, {
+    id: 10, name: 'October'
+  },  {
+    id: 11, name: 'November'
+  },  {
+    id: 12, name: 'December'
+  },];
+
+  // --Select Year Create--
+  years = [{
+    id: 0, name: '-- Select Year --'
+  }, {
+    id: 1, name: '2022'
+  }, {
+    id: 2, name: '2021'
+  }, {
+    id: 3, name: '2020'
+  }, {
+    id: 4, name: '2019'
+  }, {
+    id: 5, name: '2018'
+  },];
 
 
 
-  constructor() {
-    this.selectedYear = new Date().getFullYear();
-    for (let year = this.selectedYear; year >= 2020; year--) {
-      this.years.push(year);
-    }
-    this.selectedMonth = new Date().getMonth() + 11;
-    for (let month = this.selectedMonth; month >= 1; month--) {
-      this.months.push(month);
-    }
-  }
+  constructor() { }
 
   addEmployer() {
     this.isShown = false;
     this.isAddNew = true;
+  }
+
+  onChange(employee: any) {
   }
 
   ngOnInit(): void {

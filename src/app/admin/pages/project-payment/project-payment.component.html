@@ -14,36 +14,28 @@
         <div class="card-body">
             <div class="row" style="margin-bottom: 10px;">
                 <div class="col-lg-3">
-
-                    <select name="year" class="form-select col-lg-12" (change)="onChange($event.target)">
+                    <select name="year" class="form-select col-lg-12" (change)="onGridYearChange($event.target)">
                         <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
-
                     </select>
                 </div>
-
-
-
-
                 <div class="col-lg-3">
-                    <select name="month" class="form-select col-lg-12" (change)="onChange($event.target)">
+                    <select name="month" class="form-select col-lg-12" (change)="onGridMonthChange($event.target)">
                         <option *ngFor="let month of months" [value]="month.id">{{ month.name }}</option>
                     </select>
-
                 </div>
 
                 <div class="col-lg-6">
-                    <button class="btn btn-success" (click)="addPayment()" style="float:right">Add
-                        Payment</button>
+                    <button class="btn btn-success" (click)="addProjectPayment()" style="float:right">Add
+                        Project Payment</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
-                                <th scope="col">Amount</th>
+                                <th scope="col">Received Amount</th>
                                 <th scope="col">Month/Year</th>
                                 <th scope="col">Payment Date</th>
                                 <th style="text-align: center;">Action</th>
@@ -51,12 +43,11 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let payment of paymentlist">
-
                                 <td>
                                     {{payment.name}}
                                 </td>
                                 <td>
-                                    {{payment.amount}}
+                                    {{payment.receivedAmount}}
                                 </td>
                                 <td>
                                     {{ payment.month}}
@@ -92,39 +83,37 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="project">Project</label>
-                        <select name="project" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="project" class="form-select col-lg-12" (change)="onProjectChange($event.target)">
                             <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
                         </select>
                     </div>
 
-
                     <div class="form-group col-lg-4">
                         <label for="recieved amount">Recieved Amount </label>
-                        <input class="form-control" type="text" id="recievedamount" placeholder=" Recieved Amount" mask="000000"
-                            autocomplete="off">
+                        <input class="form-control" type="text" id="recievedamount" placeholder=" Recieved Amount"
+                            mask="000000" autocomplete="off">
                     </div>
                     <div class="form-group col-lg-4">
                         <label for=" balanced amount"> Balanced Amount </label>
-                        <input class="form-control" type="text" id="balancedamount" placeholder=" Balanced Amount" mask="000000"
-                            autocomplete="off">
+                        <input class="form-control" type="text" id="balancedamount" placeholder=" Balanced Amount"
+                            mask="000000" autocomplete="off">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="year">Year</label>
-                        <select name="year" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="year" class="form-select col-lg-12" (change)="onYearChange($event.target)">
                             <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
                         </select>
                     </div>
 
                     <div class="form-group col-lg-4">
                         <label for="month">Month </label>
-                        <select name="month" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="month" class="form-select col-lg-12" (change)="onMonthChange($event.target)">
                             <option *ngFor="let month of months" [value]="month.id">{{ month.name }}</option>
                         </select>
                     </div>
-
 
                     <div class="form-group col-lg-4">
                         <label for="paymentDate">Payment Date </label>
@@ -135,8 +124,6 @@
                                 type="button"></button>
                         </div>
                     </div>
-
-
 
                     <div class="row">
                         <div class="form-group col-lg-12">

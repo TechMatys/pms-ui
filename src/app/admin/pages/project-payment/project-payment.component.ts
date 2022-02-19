@@ -29,57 +29,161 @@ export class ProjectPaymentComponent implements OnInit {
   isShown: boolean = false;
   isAddNew: boolean = true;
   paymentList: any;
-  selectedYear: number ;
-years: number[] = [];
-selectedMonth: any;
-months: any[]=[];
+  month:any;
+  year : any
+
 
 
   paymentlist: Payment[] = [
     {
       name: 'Vikas Rawat',
-      month: 'may 2020',
-      amount: 'In Progress',
+      month: 'May 2020',
+      amount: '₹ 5,000',
       date: '10-05-2020',
     },
     {
-      name: 'prakash Rawat',
-      month: 'may 2020',
-      amount: '2000',
+      name: 'Prakash Rawat',
+      month: 'May 2020',
+      amount: '₹ 2,000',
       date: '10-05-2020',
     },
     {
-      name: 'ganesh Rawat',
-      month: 'may 2020',
-      amount: '500',
+      name: 'Ganesh Rawat',
+      month: 'May 2020',
+      amount: '₹ 5,000',
       date: '10-05-2020',
     },
     {
       name: 'Vikky Rawat',
-      month: 'may 2020',
-      amount: '600',
+      month: 'May 2020',
+      amount: '₹ 6,000',
       date: '10-05-2020'
 
     },
     {
-      name: 'rudra Rawat',
-      month: 'may 2020',
-      amount: '700',
+      name: 'Rudra Rawat',
+      month: 'May 2020',
+      amount: '₹ 7,000',
       date: '10-05-2020'
     },
   ]
+  months = [
+    {
+      id: 0, name: '-- Select Month--'
+    },
+    {
+    id: 1,
+    name: 'January'
+},
+{
+    id: 2,
+    name: 'Febuary'
+},
+{
+    id: 3,
+    name: 'March'
+},
+{
+    id: 4,
+    name: 'April'
+},
+{
+    id: 5,
+    name: 'May'
+},
+{
+    id: 6,
+    name: 'June'
+},
+{
+    id: 7,
+    name: 'July'
+},
+{
+    id: 8,
+    name: 'August'
+},
+{
+    id: 9,
+    name: 'Septmber'
+},
+{
+    id: 10,
+    name: 'October'
+},
+{
+    id: 11,
+    name: 'November'
+},
+{
+    id: 12,
+    name: 'December'
+}
+];
+
   
+years = [
+  {
+    id: 0, name: '-- Select Year--'
+  },
+  {
+  id: 1,
+  name: '2022'
+},
+{
+  id: 2,
+  name: '2021'
+},
+{
+  id: 3,
+  name: '2020'
+},
+{
+  id: 4,
+  name: '2019'
+},
+{
+  id: 5,
+  name: '2018'
+},
+{
+  id: 6,
+  name: '2017'
+},
+
+];
+
+projects = [
+  {
+    id: 0, name: '-- Select project--'
+  },
+  {
+  id: 1,
+  name: 'Project Breeze'
+},
+{
+  id: 2,
+  name: 'Dynamic Program'
+},
+{
+  id: 3,
+  name: 'Magnetic Program'
+},
+{
+  id: 4,
+  name: 'Project Signal'
+},
+
+
+];
 
 
 
 
-  constructor() { 
+  constructor( ) { 
 
-    this.selectedYear = new Date().getFullYear();
-  for (let year = this.selectedYear; year >= 2015; year--) {
-    this.years.push(year);
-  }
-  
+   
+ 
  
   }
  // Function to add new button
@@ -88,8 +192,15 @@ months: any[]=[];
   this.isAddNew = true;
   this.paymentList = [];
 }
+
+
+onChange(country: any) {
+
+}
+
   ngOnInit(): void {
     this.isShown = !this.isShown;
+    
   }
   
 

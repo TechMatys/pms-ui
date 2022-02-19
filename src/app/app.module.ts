@@ -19,6 +19,9 @@ import { ProjectPaymentComponent } from './admin/pages/project-payment/project-p
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
 import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { PopUpComponent } from './core/pop-up/pop-up.component';
 
 
 @NgModule({
@@ -34,9 +37,12 @@ import { NgxMaskModule } from 'ngx-mask';
     SideNavComponent,
     LoginComponent,
     AdminComponent,
+
     ProjectPaymentComponent,
     EmployeePaymentComponent,
     CompanyExpensesComponent,
+    PopUpComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,6 +50,8 @@ import { NgxMaskModule } from 'ngx-mask';
     NgbModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

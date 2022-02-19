@@ -4,6 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 interface Employer {
   name: string,
+  emailAddress: string;
   startDate: string;
   designation: string;
 }
@@ -23,25 +24,28 @@ export class EmployeeComponent implements OnInit {
   employer: Employer[] = [
     {
       name: 'Earl of Lemongrab',
+      emailAddress: 'earllemongrab12@gmail.com',
       startDate: '12/11/2000',
       designation: 'Lemon Candy',
     },
     {
       name: 'Bonnibel Bubblegum',
+      emailAddress: 'bonnibelbubblegum13@gmail.com',
       startDate: '14/05/1990',
       designation: 'Lemon Candy',
     },
     {
       name: 'Phoebe',
+      emailAddress: 'phoebe15@gmail.com',
       startDate: '17/12/2010',
       designation: 'Lemon Candy',
     },
     {
       name: 'Lumpy Space Princess',
+      emailAddress: 'lumpyprincess20@gmail.com',
       startDate: '14/07/2005',
       designation: 'Lemon Candy',
-    },
-  ];
+    }];
 
   genders = [{
     id: 0, name: '-- Select Gender --'
@@ -59,10 +63,21 @@ export class EmployeeComponent implements OnInit {
     id: 2, name: 'Manager'
   }];
 
+  // State name create
+  states = [{
+    id: 0, name: '-- Select State --'
+  }, {
+    id: 1, name: 'Uttarakhand'
+  }, {
+    id: 2, name: 'Bihar'
+  }, {
+    id: 2, name: 'Himachal Pradesh'
+  }];
+
   constructor() {
   }
 
-  addEmployer() {
+  addEmployee() {
     this.isShown = false;
     this.isAddNew = true;
   }

@@ -19,9 +19,7 @@ export class EmployeePaymentComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = true;
   isAddNew: boolean = true;
-  month: any;
-  year: any;
-
+  
   employer: Employer[] = [
     {
       employeeName: 'Subhash Rawat',

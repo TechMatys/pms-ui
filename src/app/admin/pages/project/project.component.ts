@@ -5,7 +5,7 @@ interface Project {
   name: string,
   startDate: string,
   status: string,
-  cost: string,
+  type : string
 }
 
 @Component({
@@ -20,42 +20,34 @@ export class ProjectComponent implements OnInit {
   isShown: boolean = false;
   isAddNew: boolean = true;
   projectList: any;
-
+  
   projectlist: Project[] = [
     {
       name: 'Project 1',
       startDate: '10/05/2020',
       status: 'In Progress',
-      cost: '₹ 10,000',
-
-    },
-    {
+      type : 'ASP.Net Core'
+    },{
       name: 'Project 2',
       startDate: '19/05/2021',
       status: 'In Progress',
-      cost: '₹ 10,000',
-
-    },
-    {
+      type : 'Python'
+    },{
       name: 'Project 3',
       startDate: '10/04/2020',
       status: 'In Progress',
-      cost: '₹ 10,000',
-
-    },
-    {
+      type : 'Angular'
+    },{
       name: 'Project 4',
       startDate: '20/04/2020',
       status: 'In Progress',
-      cost: '₹ 10,000',
-    },
-    {
+      type : 'CSS'
+    },{
       name: 'Project 5',
       startDate: '10/06/2020',
       status: 'In Progress',
-      cost: '₹ 10,000',
-    },
-  ]
+      type : 'HTML'
+    }]
 
 
   status = [{
@@ -79,7 +71,18 @@ export class ProjectComponent implements OnInit {
   }];
   
 
-
+  types = [{
+    id: 0, name: '-- Select Project Type --'
+  }, {
+    id: 1, name: 'HTML'
+  }, {
+    id: 2, name: 'Angular'
+  },
+  {
+    id: 3, name: 'Python'
+  }, {
+    id: 4, name: '.Net Core'
+  }];
   constructor() { }
 
 
@@ -101,6 +104,9 @@ export class ProjectComponent implements OnInit {
   }
 
   onDurationChange(item: any) {
+
+  }
+  onProjectChange(item: any) {
 
   }
 

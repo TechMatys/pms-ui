@@ -93,8 +93,12 @@ export class ProjectComponent implements OnInit {
     }
   }
 
-  onChange(country: any) {
+  onStatusChange(item: any) {
 
   }
 
+  onDurationChange(item: any) {
+
+  }
+  
 }

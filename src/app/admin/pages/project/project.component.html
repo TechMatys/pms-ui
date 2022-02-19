@@ -79,7 +79,7 @@
 
                     <div class="form-group col-lg-6">
                         <label for="duration">Duration </label>
-                        <select name="city" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="duration" class="form-select col-lg-12" (change)="onChange($event.target)">
                             <option *ngFor="let duration of durations" [value]="duration.id">{{duration.name}}</option>
                         </select>
                     </div>
@@ -116,7 +116,7 @@
 
                     <div class="form-group col-lg-6">
                         <label for="status">Status </label>
-                        <select name="city" class="form-select col-lg-12" (change)="onChange($event.target)">
+                        <select name="status" class="form-select col-lg-12" (change)="onStatusChange($event.target)">
                             <option *ngFor="let status of status" [value]="status.id">{{status.name}}</option>
                         </select>
                     </div>

@@ -57,6 +57,7 @@ export class ProjectComponent implements OnInit {
     },
   ]
 
+
   status = [{
     id: 0, name: '-- Select Status --'
   }, {
@@ -76,6 +77,8 @@ export class ProjectComponent implements OnInit {
   }, {
     id: 2, name: 'One Time'
   }];
+  
+
 
   constructor() { }
 

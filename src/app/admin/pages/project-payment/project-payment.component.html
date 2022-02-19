@@ -89,14 +89,31 @@
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="recieved amount">Recieved Amount </label>
-                        <input class="form-control" type="text" id="recievedamount" placeholder=" Recieved Amount"
-                            mask="000000" autocomplete="off">
+                        <label for="budgetAmount">Budget Amount </label>
+                        <div class="my-1">
+                            <label class="sr-only" for="budgetAmount">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">₹</div>
+                                </div>
+                                <input type="text" class="form-control" id="budgetAmount" placeholder="XXXXXXX"
+                                    autocomplete="off" mask="0000000">
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-group col-lg-4">
-                        <label for=" balanced amount"> Balanced Amount </label>
-                        <input class="form-control" type="text" id="balancedamount" placeholder=" Balanced Amount"
-                            mask="000000" autocomplete="off">
+                        <label for="recievedamount">Recieved Amount </label>
+                        <div class="my-1">
+                            <label class="sr-only" for="recievedamount">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">₹</div>
+                                </div>
+                                <input type="text" class="form-control" id="recievedamount" placeholder="XXXXXXX"
+                                    autocomplete="off" mask="0000000">
+                            </div>
+                        </div>
                     </div>
                 </div>
 

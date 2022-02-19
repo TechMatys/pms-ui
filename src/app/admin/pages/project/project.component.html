@@ -13,28 +13,25 @@
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary"> Project List </h5>
         </div>
+
         <div class="card-body">
-            <div class="row" style="margin-bottom: 10px;">
+            <div class="row" >
                 <div class="col-lg-12">
-                    <button class="btn btn-primary btn-sm" (click)="addProject()" style="float:right">Add
+                    <button class="btn btn-primary btn-sm" (click)="addProject()" >Add
                         Project</button>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-12">
-
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Status</th>
-
                                 <th scope="col">Project Type </th>
-
-                                <th scope="col">Cost</th>
-
-                                <th style="text-align: center;">Action</th>
+                                <th >Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,14 +50,12 @@
 
                                     {{ project.type}}
                                 </td>
-                                <td>
-                                    {{ project.cost}}
-                                </td>
-                                <td style="text-align: center;">
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">
+
+                                <td >
+                                    <a href="javascript:void(0)"  ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)"  ngbTooltip="Delete">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
@@ -78,7 +73,6 @@
         <!-- Card Body -->
         <div class="card-body">
             <form class="form-horizontal">
-
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="projectName">Project Name </label>
@@ -91,26 +85,60 @@
                         <input type="text" class="form-control" id="projectowner" placeholder="Project Owner"
                             maxlength="20">
                     </div>
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <label for="projectdiscrption">Project Discription </label>
-                            <input type="text" class="form-control" id="txtproject" placeholder="Project Discription"
-                                maxlength="200">
-                        </div>
+                </div>
 
-                        autocomplete="off" maxlength="100">
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <label for="projectdiscrption">Project Discription </label>
+                        <input type="textarea" class="form-control" id="txtproject" placeholder="Project Discription"
+                            maxlength="200">
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="technology">Technology </label>
+                        <div class="btn-group" data toggle="buttons"></div>
+                        <label class="btn btn-primary-active">
+                            <input type="checkbox" checked autocomplete="off">Angular
+                        </label>
+                        <label class="btn btn-primary-active">
+                            <input type="checkbox"  autocomplete="off">.NET Core
+                        </label>
+                        <label class="btn btn-primary-active">
+                            <input type="checkbox"  autocomplete="off">HTML
+                        </label>
                     </div>
 
+
+                    <div class="form-group col-lg-6">
+                        <label for="project type">Project Type </label>
+                        <select name="month" class="form-select col-lg-12" (change)="onProjectChange($event.target)">
+                            <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="duration">Duration </label>
                         <select name="duration" class="form-select col-lg-12"
                             (change)="onDurationChange($event.target)">
-                            <option *ngFor="let duration of durations" [value]="duration.id">{{duration.name}}</option>
+                            <option *ngFor="let duration of durations" [value]="duration.id">
+                                {{duration.name}}
+                            </option>
                         </select>
                     </div>
 
+                    <div class="form-group col-lg-6">
+                        <label for="status">Status </label>
+                        <select name="status" class="form-select col-lg-12" (change)="onStatusChange($event.target)">
+                            <option *ngFor="let status of status" [value]="status.id">{{status.name}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
+
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="startDate">Start Date </label>
@@ -120,23 +148,23 @@
                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                 type="button"></button>
                         </div>
-
                     </div>
 
+
                     <div class="form-group col-lg-6">
-                        <label for="endDate">End Date </label>
+                        <label for="completionDate">Completion Date </label>
                         <div class="input-group">
                             <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
-                                #p="ngbDatepicker" id="endDate" mask="00/00/0000" autocomplete="off">
+                                #p="ngbDatepicker" id="compDate" mask="00/00/0000" autocomplete="off">
                             <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
                                 type="button"></button>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-lg-6">
-
                         <label for="budgetAmount">Budget Amount </label>
                         <div class="my-1">
                             <label class="sr-only" for="budgetAmount">Amount</label>
@@ -148,27 +176,14 @@
                                     autocomplete="off" mask="000000">
                             </div>
                         </div>
-
-                        <label for="Cost">Cost </label>
-                        <input type="text" class="form-control" id="txtDescription" placeholder="Cost"
-                            autocomplete="off" mask="000000">
-
                     </div>
 
-                    <div class="form-group col-lg-6">
-                        <label for="status">Status </label>
-                        <select name="status" class="form-select col-lg-12" (change)="onStatusChange($event.target)">
-                            <option *ngFor="let status of status" [value]="status.id">{{status.name}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-lg-12">
-                        <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
-                            style="margin-right: 10px; width:100px;" />
-
-                        <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
-                            (click)="isShown = true" />
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <input type="button" class="btn btn-success" value="Save"/>
+                            <input type="button" class="btn btn-outline-primary" value="Cancel" 
+                                (click)="isShown = true"/>
+                        </div>
                     </div>
                 </div>
             </form>

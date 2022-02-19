@@ -7,7 +7,7 @@ interface Project {
   startDate: string;
   status: string;
   type : string;
-  cost: string;
+ 
 
 }
 
@@ -31,7 +31,7 @@ export class ProjectComponent implements OnInit {
       startDate: '10/05/2020',
       status: 'In Progress',
       type : 'ASP.net Core'
-      cost: '₹ 10,000',
+      
 
     },
     {
@@ -39,7 +39,7 @@ export class ProjectComponent implements OnInit {
       startDate: '19/05/2021',
       status: 'In Progress',
       type : 'Python'
-      cost: '₹ 10,000',
+   
 
 
     },
@@ -48,7 +48,7 @@ export class ProjectComponent implements OnInit {
       startDate: '10/04/2020',
       status: 'In Progress',
       type : 'Angular'
-      cost: '₹ 10,000',
+   
 
 
     },
@@ -57,14 +57,14 @@ export class ProjectComponent implements OnInit {
       startDate: '20/04/2020',
       status: 'In Progress',
       type : 'CSS'
-      cost: '₹ 10,000',
+      
     },
     {
       name: 'Project 5',
       startDate: '10/06/2020',
       status: 'In Progress',
       type : 'HTML'
-      cost: '₹ 10,000',
+     
     },
   ]
 
@@ -90,7 +90,13 @@ export class ProjectComponent implements OnInit {
   }];
   
 
-
+  types = [{
+    id: 0, name: '-- Select Project Type --'
+  }, {
+    id: 1, name: 'HTML'
+  }, {
+    id: 2, name: 'Angular'
+  }];
   constructor() { }
 
 
@@ -112,6 +118,9 @@ export class ProjectComponent implements OnInit {
   }
 
   onDurationChange(item: any) {
+
+  }
+  onProjectChange(item: any) {
 
   }
 

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Project {
-  name: string;
-  startDate: string;
-  status: string;
+  name: string,
+  startDate: string,
+  status: string,
+  cost: string,
 }
 
 @Component({
@@ -22,33 +23,37 @@ export class ProjectComponent implements OnInit {
 
   projectlist: Project[] = [
     {
-      name: 'Vikas Rawat',
+      name: 'Project 1',
       startDate: '10/05/2020',
       status: 'In Progress',
+      cost: '₹ 10,000',
 
     },
     {
-      name: 'Rudra Pratap Singh Bartwal',
+      name: 'Project 2',
       startDate: '19/05/2021',
       status: 'In Progress',
+      cost: '₹ 10,000',
 
     },
     {
-      name: 'Prakash Rawat',
+      name: 'Project 3',
       startDate: '10/04/2020',
       status: 'In Progress',
+      cost: '₹ 10,000',
 
     },
     {
-      name: 'Sumit Rawat',
+      name: 'Project 4',
       startDate: '20/04/2020',
       status: 'In Progress',
-
+      cost: '₹ 10,000',
     },
     {
-      name: 'Ganesh Rawat',
+      name: 'Project 5',
       startDate: '10/06/2020',
       status: 'In Progress',
+      cost: '₹ 10,000',
     },
   ]
 

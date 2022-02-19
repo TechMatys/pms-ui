@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
+import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
 import { NgxMaskModule } from 'ngx-mask';
 
 
@@ -35,6 +36,7 @@ import { NgxMaskModule } from 'ngx-mask';
     AdminComponent,
     ProjectPaymentComponent,
     EmployeePaymentComponent,
+    CompanyExpensesComponent,
   ],
   imports: [
     BrowserModule,

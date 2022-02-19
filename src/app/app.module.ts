@@ -36,9 +36,11 @@ import { ToastrModule } from 'ngx-toastr';
     SideNavComponent,
     LoginComponent,
     AdminComponent,
+
     ProjectPaymentComponent,
     EmployeePaymentComponent,
     CompanyExpensesComponent,
+
   ],
   imports: [
     BrowserModule,

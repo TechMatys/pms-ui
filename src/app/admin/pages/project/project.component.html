@@ -29,6 +29,7 @@
                                 <th scope="col">Project Name</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Project Type </th>
                                 <th style="text-align: center;">Action</th>
                             </tr>
                         </thead>
@@ -43,6 +44,9 @@
                                 </td>
                                 <td>
                                     {{ project.status}}
+                                </td>
+                                <td>
+                                    {{ project.type}}
                                 </td>
                                 <td style="text-align: center;">
                                     <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">
@@ -70,7 +74,21 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="projectName">Project Name </label>
-                        <input type="text" class="form-control" id="projectName" placeholder="Project Name">
+                        <input type="text" class="form-control" id="projectName" placeholder="Project Name"
+                            maxlength="20">
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="projectName">Project Owner </label>
+                        <input type="text" class="form-control" id="projectowner" placeholder="Project Owner"
+                            maxlength="20">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="projectdiscrption">Project Discription </label>
+                            <input type="text" class="form-control" id="txtproject" placeholder="Project Discription"
+                                maxlength="200">
+                        </div>
                     </div>
 
                     <div class="form-group col-lg-6">
@@ -108,8 +126,17 @@
 
                 <div class="row">
                     <div class="form-group col-lg-6">
-                        <label for="Cost">Cost </label>
-                        <input type="text" class="form-control" id="txtDescription" placeholder="Cost">
+                        <label for="budgetAmount">Budget Amount </label>
+                        <div class="my-1">
+                            <label class="sr-only" for="budgetAmount">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">₹</div>
+                                </div>
+                                <input type="text" class="form-control" id="budgetAmount" placeholder="Amount"
+                                    autocomplete="off" mask="000000">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group col-lg-6">

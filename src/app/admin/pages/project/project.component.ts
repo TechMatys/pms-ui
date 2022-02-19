@@ -5,6 +5,7 @@ interface Project {
   name: string;
   startDate: string;
   status: string;
+  type : string;
 }
 
 @Component({
@@ -25,30 +26,35 @@ export class ProjectComponent implements OnInit {
       name: 'Vikas Rawat',
       startDate: '10-05-2020',
       status: 'In Progress',
+      type : 'ASP.net Core'
 
     },
     {
       name: 'Rudra Pratap Singh Bartwal',
       startDate: '19-05-2021',
       status: 'In Progress',
+      type : 'Python'
 
     },
     {
       name: 'Prakash Rawat',
       startDate: '10-04-2020',
       status: 'In Progress',
+      type : 'Angular'
 
     },
     {
       name: 'Sumit Rawat',
       startDate: '20-04- 2020',
       status: 'In Progress',
+      type : 'CSS'
 
     },
     {
       name: 'Ganesh Rawat',
       startDate: '10-06-2020',
       status: 'In Progress',
+      type : 'HTML'
     },
   ]
 

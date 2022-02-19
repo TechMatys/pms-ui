@@ -98,7 +98,7 @@ states = [{
   constructor() {
   }
 
-  addEmployer() {
+  addEmployee() {
     this.isShown = false;
     this.isAddNew = true;
   }

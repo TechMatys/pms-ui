@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Project {
-
-  name: string;
-  startDate: string;
-  status: string;
-  type : string;
- 
-
+  name: string,
+  startDate: string,
+  status: string,
+  type : string
 }
 
 @Component({
@@ -24,49 +21,33 @@ export class ProjectComponent implements OnInit {
   isAddNew: boolean = true;
   projectList: any;
   
-
   projectlist: Project[] = [
     {
       name: 'Project 1',
       startDate: '10/05/2020',
       status: 'In Progress',
       type : 'ASP.Net Core'
-      
-
-    },
-    {
+    },{
       name: 'Project 2',
       startDate: '19/05/2021',
       status: 'In Progress',
       type : 'Python'
-   
-
-
-    },
-    {
+    },{
       name: 'Project 3',
       startDate: '10/04/2020',
       status: 'In Progress',
       type : 'Angular'
-   
-
-
-    },
-    {
+    },{
       name: 'Project 4',
       startDate: '20/04/2020',
       status: 'In Progress',
       type : 'CSS'
-      
-    },
-    {
+    },{
       name: 'Project 5',
       startDate: '10/06/2020',
       status: 'In Progress',
       type : 'HTML'
-     
-    },
-  ]
+    }]
 
 
   status = [{

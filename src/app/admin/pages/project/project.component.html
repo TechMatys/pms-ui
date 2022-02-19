@@ -80,14 +80,14 @@
                     <div class="form-group col-lg-6">
                         <label for="projectName">Project Owner </label>
                         <input type="text" class="form-control" id="projectOwner" placeholder="Project Owner"
-                            maxlength="20">
+                            maxlength="50">
                     </div>
 
                     <div class="row">
                         <div class="form-group col-lg-6">
                             <label for="projectdescrption">Project Description </label>
                             <textarea type="projectdescrption" class="form-control" id="txtProject"
-                                placeholder="Enter project description" maxlength="200"></textarea>
+                                placeholder="Enter project description here" maxlength="200"></textarea>
                         </div>
 
                         <div class="form-group col-lg-6">
@@ -96,19 +96,19 @@
                             </div>
                             <div class="btn-group" data toggle="buttons">
                                 <label class="btn btn-primary-active">
-                                    <input type="checkbox" checked autocomplete="off"> Angular
+                                    <input type="checkbox" > Angular
                                 </label>
                                 <label class="btn btn-primary-active">
-                                    <input type="checkbox" autocomplete="off"> .NET Core
+                                    <input type="checkbox" > .NET Core
                                 </label>
                                 <label class="btn btn-primary-active">
-                                    <input type="checkbox" autocomplete="off"> HTML
+                                    <input type="checkbox" > HTML
                                 </label>
                                 <label class="btn btn-primary-active">
-                                    <input type="checkbox" autocomplete="off"> CSS
+                                    <input type="checkbox" > CSS
                                 </label>
                                 <label class="btn btn-primary-active">
-                                    <input type="checkbox" autocomplete="off"> Javascript
+                                    <input type="checkbox" > Javascript
                                 </label>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                     <div class="row">
                         <div class="form-group col-lg-4">
                             <label for="project type">Project Type </label>
-                            <select name="month" class="form-select col-lg-12"
+                            <select name="projectType" class="form-select col-lg-12"
                                 (change)="onProjectChange($event.target)">
                                 <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
                             </select>

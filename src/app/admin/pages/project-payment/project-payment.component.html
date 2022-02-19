@@ -12,7 +12,7 @@
             <h5 class="m-0 font-weight-bold text-primary"> Project List </h5>
         </div>
         <div class="card-body">
-            <div class="row" style="margin-bottom: 10px;">
+            <div class="row" >
                 <div class="col-lg-3">
                     <select name="year" class="form-select col-lg-12" (change)="onGridYearChange($event.target)">
                         <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <button class="btn btn-success" (click)="addProjectPayment()" style="float:right">Add
+                    <button class="btn btn-success" (click)="addProjectPayment()" >Add
                         Project Payment</button>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                 <th scope="col">Received Amount</th>
                                 <th scope="col">Month/Year</th>
                                 <th scope="col">Payment Date</th>
-                                <th style="text-align: center;">Action</th>
+                                <th >Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,8 +55,8 @@
                                 <td>
                                     {{ payment.date}}
                                 </td>
-                                <td style="text-align: center;">
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Edit">
+                                <td >
+                                    <a href="javascript:void(0)"  ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
                                     <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">

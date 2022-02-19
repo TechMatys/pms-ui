@@ -25,31 +25,30 @@ export class EmployeePaymentComponent implements OnInit {
   employer: Employer[] = [
     {
       employeeName: 'Subhash Rawat',
-      amount: '70,000',
+      amount: '₹ 70,000',
       month: '02/2022',
       paymentDate: '28/2/2022'
     }, {
       employeeName: 'Tajwar Rawat',
-      amount: '90,000',
+      amount: '₹ 90,000',
       month: '02/2022',
       paymentDate: '28/2/2022'
     }, {
       employeeName: 'Prakash Rawat',
-      amount: '50,000',
+      amount: '₹ 50,000',
       month: '02/2022',
       paymentDate: '28/2/2022'
     }, {
       employeeName: 'Vikash Rawat',
-      amount: '40,000',
+      amount: '₹ 40,000',
       month: '02/2022',
       paymentDate: '28/2/2022'
     }, {
       employeeName: 'Deepak Dhiman',
-      amount: '1,00,000',
+      amount: '₹ 1,00,000',
       month: '02/2022',
       paymentDate: '28/2/2022'
-    },
-  ];
+    }];
 
 
   // --Select Employee Name Create--
@@ -127,19 +126,19 @@ export class EmployeePaymentComponent implements OnInit {
   }
 
   onGridMonthChange(item: any) {
-    
+
   }
 
   onEmployeeChange(item: any) {
-    
+
   }
 
   onYearChange(item: any) {
-    
+
   }
 
   onMonthChange(item: any) {
-    
+
   }
 
   ngOnInit(): void {

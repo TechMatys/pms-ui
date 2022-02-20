@@ -7,6 +7,7 @@ import { EmployeeProjectComponent } from './admin/pages/employee-project/employe
 import { UserComponent } from './admin/pages/user/user.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
+import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,9 @@ const routes: Routes = [
   },
   {
     path: 'EmployeePayment', component: EmployeePaymentComponent
+  },
+  {
+    path: 'CompanyExpenses', component: CompanyExpensesComponent
   },
   {
     path: 'User', component: UserComponent

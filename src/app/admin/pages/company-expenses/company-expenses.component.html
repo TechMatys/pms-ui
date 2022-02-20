@@ -81,7 +81,7 @@
                             autocomplete="off" maxlength="100" formControlName="name" 
                             [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">                        
                     </div>
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="amount">Amount</label>
                         <div class="my-1">
                             <label class="sr-only" for="amount">Amount</label>
@@ -110,7 +110,9 @@
                             <option *ngFor="let month of months" [value]="month.id">{{month.name}} </option>
                         </select>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="paymentdate">Expense Date</label>
                         <div class="input-group">

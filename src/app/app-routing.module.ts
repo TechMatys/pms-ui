@@ -8,6 +8,7 @@ import { UserComponent } from './admin/pages/user/user.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
+import { ReportComponent } from './admin/pages/report/report.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,9 @@ const routes: Routes = [
   },
   {
     path: 'User', component: UserComponent
+  },
+  {
+    path: 'Report', component: ReportComponent
   },
 ];
 

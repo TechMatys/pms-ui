@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface EmployeeProject {
-  name : string;
+  name: string;
   project: any;
-  date: any;
- 
-  
+  assignedDate: any;
 }
 
 @Component({
@@ -22,26 +20,26 @@ export class EmployeeProjectComponent implements OnInit {
   isAddNew: boolean = true;
   employeeProjectList: any;
 
-  employeeprojectlist: EmployeeProject[] = [
+  employeeProjectlist: EmployeeProject[] = [
     {
       name: 'Tajwar Rawat',
-      project: 'project1',
-      date: '10/05/2020',
+      project: 'Project 1',
+      assignedDate: '10/05/2020',
     }, {
       name: 'Prakash Rawat',
-      project: 'project2',
-      date: '10/05/2020',
+      project: 'Project 2',
+      assignedDate: '10/05/2020',
     }, {
       name: 'Vikas Rawat',
-      project: 'project3',
-      date: '10/05/2020',
+      project: 'Project 3',
+      assignedDate: '10/05/2020',
     }, {
       name: 'Deepak Dhiman',
-      project: 'project4',
-      date: '10/05/2020'
-    }, ];
+      project: 'Project 4',
+      assignedDate: '10/05/2020'
+    }];
 
-  employees= [
+  employees = [
     {
       id: 0, name: '-- Select Name--'
     }, {
@@ -74,21 +72,25 @@ export class EmployeeProjectComponent implements OnInit {
       id: 4,
       name: 'Project Signal'
     }];
- 
+
   constructor() { }
+
   // Function to add new button
   addEmployeeProject() {
     this.isShown = false;
     this.isAddNew = true;
     this.employeeProjectList = [];
   }
+
   ngOnInit(): void {
     {
       this.isShown = !this.isShown;
     }
   }
+
   onProjectChange(item: any) {
   }
+
   onEmployeeChange(item: any) {
   }
 }

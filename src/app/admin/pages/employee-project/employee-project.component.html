@@ -30,10 +30,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor=" let  employeeProject of  employeeprojectlist">
+                            <tr *ngFor=" let employeeProject of employeeProjectlist">
                                 <td>{{employeeProject.name}} </td>
                                 <td>{{employeeProject.project}}</td>
-                                <td>{{ employeeProject.date}} </td>
+                                <td>{{ employeeProject.assignedDate}} </td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
@@ -49,10 +49,7 @@
             </div>
         </div>
     </div>
-</div>
 
-
-<div class="card shadow mb-4">
     <div *ngIf="!isShown">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Add Employee Project </h5>
@@ -69,34 +66,38 @@
                             </option>
                         </select>
                     </div>
-                      <div class="form-group col-lg-6">
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
                         <label for="project">Project</label>
                         <select name="project" class="form-select col-lg-12" (change)="onProjectChange($event.target)">
                             <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}
                             </option>
                         </select>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="assignedDate">Assigned Date </label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
+                                #a="ngbDatepicker" id="paymentDate" mask="00/00/0000" autocomplete="off">
+                            <button class="btn btn-outline-secondary calendar" (click)="a.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+
+                    <div class="row submit-buttons">
+                        <div class="form-group col-lg-12">
+                            <input type="submit" class="btn btn-success" value="Save" />
+                            <input type="button" class="btn btn-outline-primary" value="Cancel"
+                                (click)="isShown = true" />
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-
-
-
-        <div class="row">
-            <div class="form-group col-lg-6">
-                <label for="assignedDate">Assigned Date </label>
-                <div class="input-group">
-                    <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker #d="ngbDatepicker"
-                        id="paymentDate" mask="00/00/0000" autocomplete="off">
-                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                </div>
-            </div>
-
-            <div class="row submit-buttons">
-                <div class="form-group col-lg-12">
-                    <input type="submit" class="btn btn-success" value="Save" />
-                    <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
-                </div>
-            </div>
-        </div>
-        </form>
     </div>
 </div>

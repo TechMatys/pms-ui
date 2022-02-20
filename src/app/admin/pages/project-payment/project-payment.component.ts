@@ -5,7 +5,7 @@ interface ProjectPayment {
   name: string;
   receivedAmount: string;
   month: any;
-  date: any;
+  paymentDate: any;
 }
 
 @Component({
@@ -20,36 +20,33 @@ export class ProjectPaymentComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = false;
   isAddNew: boolean = true;
-  paymentList: any;
   
-  year: any;
-
   projectPaymentlist: ProjectPayment[] = [
     {
       name: 'Vikas Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 5,000',
-      date: '10/05/2020',
+      paymentDate: '10/05/2020',
     }, {
       name: 'Prakash Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 2,000',
-      date: '10/05/2020',
+      paymentDate: '10/05/2020',
     }, {
       name: 'Ganesh Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 5,000',
-      date: '10/05/2020',
+      paymentDate: '10/05/2020',
     }, {
       name: 'Vikky Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 6,000',
-      date: '10/05/2020'
+      paymentDate: '10/05/2020'
     }, {
       name: 'Rudra Rawat',
       month: 'May 2020',
       receivedAmount: '₹ 7,000',
-      date: '10/05/2020'
+      paymentDate: '10/05/2020'
     }];
 
   months = [
@@ -140,7 +137,6 @@ export class ProjectPaymentComponent implements OnInit {
   addProjectPayment() {
     this.isShown = false;
     this.isAddNew = true;
-    this.paymentList = [];
   }
 
 

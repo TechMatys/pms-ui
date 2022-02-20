@@ -53,7 +53,7 @@
                                     {{ payment.month}}
                                 </td>
                                 <td>
-                                    {{ payment.date}}
+                                    {{ payment.paymentDate}}
                                 </td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit">
@@ -69,9 +69,7 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="card shadow mb-4">
     <div *ngIf="!isShown">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Add Project Payment</h5>

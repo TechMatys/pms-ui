@@ -11343,3 +11343,16 @@ thead {
   text-align: right;
 }
 
+.menu-icon{
+  float: right;
+}
+
+.logo-red{
+  color: #d00a2b;
+  font-weight: bold;
+}
+
+.logo-purple{
+  color: #572f92;
+  font-weight: bold;
+}

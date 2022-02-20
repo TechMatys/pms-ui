@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PopUpComponent } from './core/pop-up/pop-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReportComponent } from './admin/pages/report/report.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     EmployeePaymentComponent,
     CompanyExpensesComponent,
     PopUpComponent,
+    ReportComponent,
 
   ],
   imports: [

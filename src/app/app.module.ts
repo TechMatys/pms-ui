@@ -22,6 +22,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PopUpComponent } from './core/pop-up/pop-up.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,7 +38,6 @@ import { PopUpComponent } from './core/pop-up/pop-up.component';
     SideNavComponent,
     LoginComponent,
     AdminComponent,
-
     ProjectPaymentComponent,
     EmployeePaymentComponent,
     CompanyExpensesComponent,
@@ -52,6 +52,7 @@ import { PopUpComponent } from './core/pop-up/pop-up.component';
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

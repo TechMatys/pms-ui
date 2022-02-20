@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
+import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface Employee {
   name: string,
@@ -15,6 +17,9 @@ interface Employee {
   styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
+
+  employeeForm: FormGroup;
+  submitted = false;
 
   faEdit = faEdit;
   faDelete = faTrash;
@@ -74,7 +79,14 @@ export class EmployeeComponent implements OnInit {
     id: 2, name: 'Himachal Pradesh'
   }];
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService) {
+    this.employeeForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      emailAddress: ['', Validators.required],
+      mobile: ['', Validators.required]
+    });
+  }
 
   addEmployee() {
     this.isShown = false;
@@ -88,7 +100,25 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: any) {
-    this.toastr.success("Employee deleted successfully", "Sucess");
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.toastr.success("Employee deleted successfully", "Sucess");
+        }
+      });
+  }
+
+  get f() { return this.employeeForm.controls; }
+
+  saveEmployee() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.employeeForm.invalid) {
+      return;
+    }
+
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.employeeForm.value))
   }
 
   ngOnInit(): void {

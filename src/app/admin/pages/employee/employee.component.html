@@ -40,7 +40,7 @@
                                     <a href="javascript:void(0)" ngbTooltip="Edit">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteEmployee(employee)" >
+                                    <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteEmployee(employee)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
@@ -59,12 +59,13 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="firstName">First Name</label>
+                        <label for="firstName">First Name*</label>
                         <input class="form-control" type="text" id="firstName" placeholder="First Name"
-                            autocomplete="off" maxlength="100">
+                            autocomplete="off" maxlength="100" formControlName="firstName" 
+                            [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">                        
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="middleName">Middle Name</label>
@@ -72,9 +73,9 @@
                             autocomplete="off" maxlength="100">
                     </div>
                     <div class="form-group col-lg-4">
-                        <label for="lastNname">Last Name</label>
+                        <label for="lastNname">Last Name*</label>
                         <input class="form-control" type="text" id="lastNname" placeholder="Last Name"
-                            autocomplete="off" maxlength="100">
+                            autocomplete="off" maxlength="100" [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
                     </div>
                 </div>
                 <div class="row">
@@ -88,7 +89,7 @@
                         <label for="dob">Date of Birth</label>
                         <div class="input-group">
                             <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
-                                #d="ngbDatepicker" mask="00/00/0000" autocomplete="off">
+                                #d="ngbDatepicker" id="dob" mask="00/00/0000" autocomplete="off">
                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                 type="button"></button>
                         </div>
@@ -104,14 +105,14 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
-                        <label for="emailAddress">Email Address</label>
-                        <input class="form-control" type="text" id="emailAddress" placeholder="Email Address" autocomplete="off"
-                            maxlength="100">
+                        <label for="emailAddress">Email Address*</label>
+                        <input class="form-control" type="text" id="emailAddress" placeholder="Email Address"
+                            autocomplete="off" maxlength="100" [ngClass]="{ 'is-invalid': submitted && f['emailAddress'].errors }">
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="mobile">Mobile</label>
-                        <input class="form-control" type="text" id="mobile" placeholder="Mobile Number"
-                            mask="(000) 000 0000" autocomplete="off">
+                        <label for="mobile">Mobile*</label>
+                        <input class="form-control" type="text" id="mobile" placeholder="(XXX) XXX XXXX"
+                            mask="(000) 000 0000" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }">
                     </div>
                 </div>
                 <div class="row">
@@ -125,7 +126,7 @@
                     <div class="form-group col-lg-4">
                         <label for="city">City</label>
                         <input class="form-control" type="text" id="city" placeholder="City" autocomplete="off"
-                        maxlength="50">
+                            maxlength="50">
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="state">State</label>
@@ -143,27 +144,27 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
-                        <label for="ngbDatepicker">Start Date </label>
+                        <label for="startDate">Start Date </label>
                         <div class="input-group">
                             <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
-                                #d="ngbDatepicker" mask="00/00/0000" autocomplete="off">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                #s="ngbDatepicker" id="startDate" mask="00/00/0000" autocomplete="off">
+                            <button class="btn btn-outline-secondary calendar" (click)="s.toggle()"
                                 type="button"></button>
                         </div>
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="ngbDatepicker">End Date </label>
+                        <label for="endDate">End Date </label>
                         <div class="input-group">
                             <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
-                                #p="ngbDatepicker" mask="00/00/0000" autocomplete="off">
-                            <button class="btn btn-outline-secondary calendar" (click)="p.toggle()"
+                                #e="ngbDatepicker" id="endDate" mask="00/00/0000" autocomplete="off">
+                            <button class="btn btn-outline-secondary calendar" (click)="e.toggle()"
                                 type="button"></button>
                         </div>
                     </div>
                 </div>
                 <div class="row submit-buttons">
                     <div class="form-group col-lg-12">
-                        <input type="submit"  class="btn btn-success" value="Save" />
+                        <input type="submit" class="btn btn-success" value="Save" />
                         <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
                     </div>
                 </div>

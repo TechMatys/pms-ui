@@ -21,7 +21,7 @@ export class ProjectPaymentComponent implements OnInit {
   isShown: boolean = false;
   isAddNew: boolean = true;
   paymentList: any;
-  month: any;
+  
   year: any;
 
   projectPaymentlist: ProjectPayment[] = [

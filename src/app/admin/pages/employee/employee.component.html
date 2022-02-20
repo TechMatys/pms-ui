@@ -1,3 +1,8 @@
+<script>
+    $(document).ready(function() {
+  $('#dataTable').DataTable();
+});
+</script>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
         Employee
@@ -20,11 +25,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <table class="table table-bordered dataTable">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
-                                <th scope="col">Eamil Address</th>
+                                <th scope="col">Email Address</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Designation</th>
                                 <th class="action-button">Action</th>

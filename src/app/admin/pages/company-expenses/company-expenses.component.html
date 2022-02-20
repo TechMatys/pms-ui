@@ -1,1 +1,134 @@
-<p>company-expenses works!</p>
+<!--Page Title-->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        Company Expenses
+    </h1>
+</div>
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <div *ngIf="isShown">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary"> Company Expenses List</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mrgn-btm-15">
+                <div class="col-lg-2">
+                    <select name="year" class="form-select col-lg-12" (change)="onGridYearChange($event.target)">
+                        <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <select name="month" class="form-select col-lg-12" (change)="onGridMonthChange($event.target)">
+                        <option *ngFor="let month of months" [value]="month.id">{{month.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-8 algn-right">
+                    <button class="btn btn-primary btn-sm" (click)="addExpenses()">
+                        Add Expenses</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Expense Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Month/Year</th>
+                                <th scope="col">Expense Date</th>
+                                <th class="action-button">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let expense of expenseList">
+                                <td>{{expense.expenseName}}</td>
+                                <td>{{expense.amount}}</td>
+                                <td>{{expense.month}}</td>
+                                <td>{{expense.expenseDate}}</td>
+                                <td class="action-button">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                        <fa-icon [icon]="faEdit"></fa-icon>
+                                    </a>
+                                    <a href="javascript:void(0)" ngbTooltip="Delete">
+                                        <fa-icon [icon]="faDelete"></fa-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isShown">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header ">
+            <h5 class="m-0 font-weight-bold text-primary">
+                Add Expense
+            </h5>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <form class="form-horizontal" [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="name">Name*</label>
+                        <input class="form-control" type="text" id="name" placeholder="Name"
+                            autocomplete="off" maxlength="100" formControlName="name" 
+                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">                        
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="amount">Amount</label>
+                        <div class="my-1">
+                            <label class="sr-only" for="amount">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">₹</div>
+                                </div>
+                                <input type="text" class="form-control" id="amount" placeholder="XXXXXXX"
+                                    autocomplete="off" mask="0000000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="year">Year</label>
+                        <select name="year" class="form-select col-lg-12" (change)="onYearChange($event.target)">
+                            <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label for="month">Month</label>
+                        <select name="month" class="form-select col-lg-12" (change)="onMonthChange($event.target)">
+                            <option *ngFor="let month of months" [value]="month.id">{{month.name}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label for="paymentdate">Expense Date</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="MM/DD/YYYY" name="dp" ngbDatepicker
+                                #d="ngbDatepicker" mask="00/00/0000" autocomplete="off">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row submit-buttons">
+                    <div class="form-group col-lg-12">
+                        <input type="submit" class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faDashboard, faUsers, faUser, faProjectDiagram, faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faDashboard, faUsers, faUser, faProjectDiagram, faAngleDown, faAngleRight, faMoneyBill,} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-nav',
@@ -11,8 +11,9 @@ export class SideNavComponent implements OnInit {
   faDashboard = faDashboard;
   faUsers = faUsers;
   faProject = faProjectDiagram;
-  faAngleDown = faAngleDown;
-  faAngleRight = faAngleRight;
+  faArrowLeftLong = faAngleDown;
+  faArrowRight = faAngleRight;
+  faMoney = faMoneyBill;
   faUser = faUser;
   isCollapsedEmployee = true;
   isCollapsedPoject = true;

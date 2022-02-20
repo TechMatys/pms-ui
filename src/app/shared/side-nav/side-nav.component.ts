@@ -11,8 +11,8 @@ export class SideNavComponent implements OnInit {
   faDashboard = faDashboard;
   faUsers = faUsers;
   faProject = faProjectDiagram;
-  faArrowLeftLong = faAngleDown;
-  faArrowRight = faAngleRight;
+  faAngleDown = faAngleDown;
+  faAngleRight = faAngleRight;
   faMoney = faMoneyBill;
   faUser = faUser;
   isCollapsedEmployee = true;

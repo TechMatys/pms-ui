@@ -6,14 +6,18 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">TechMatys</div>
+        <div class="sidebar-brand-text mx-3">
+            <h4>
+              <span class="logo-red">Tech</span><span class="logo-purple">Matys</span>  
+            </h4>
+        </div>
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <li class="nav-item active">
         <a class="nav-link" href="javascript:void(0)" routerLink="">
             <fa-icon [icon]="faDashboard"></fa-icon>
             <span>
@@ -26,16 +30,22 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item active">
-        <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-            aria-controls="collapseTwo">
+    <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)" (click)="collapseProject.toggle()"
+            [attr.aria-expanded]="!isCollapsedPoject" aria-controls="collapseProject">
             <fa-icon [icon]="faProject"></fa-icon>
             <span>Project</span>
+            <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedPoject"></fa-icon>
+            <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedPoject"></fa-icon>
         </a>
-        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div #collapseProject="ngbCollapse" [(ngbCollapse)]="isCollapsedPoject">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="javascript:void(0)" routerLink="Project">Project Details</a>
-                <a class="collapse-item" href="javascript:void(0)" routerLink="ProjectPayment">Project Payment</a>
+                <a class="collapse-item" href="javascript:void(0)" routerLink="Project">
+                    Project Details
+                </a>
+                <a class="collapse-item" href="javascript:void(0)" routerLink="ProjectPayment">
+                    Project Payment
+                </a>
             </div>
         </div>
     </li>
@@ -44,17 +54,25 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item active">
-        <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-            aria-controls="collapseTwo">
+    <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)" (click)="collapseEmployee.toggle()"
+            [attr.aria-expanded]="!isCollapsedEmployee" aria-controls="collapseEmployee">
             <fa-icon [icon]="faUsers"></fa-icon>
             <span>Employee</span>
+            <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedEmployee"></fa-icon>
+            <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedEmployee"></fa-icon>
         </a>
-        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div #collapseEmployee="ngbCollapse" [(ngbCollapse)]="isCollapsedEmployee">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="javascript:void(0)" routerLink="Employee">Employee Details</a>
-                <a class="collapse-item" href="javascript:void(0)" routerLink="EmployeePayment">Employee Payment</a>
-                <a class="collapse-item" href="javascript:void(0)" routerLink="EmployeeProject">Employee Project</a>
+                <a class="collapse-item" href="javascript:void(0)" routerLink="Employee">
+                    Employee Details
+                </a>
+                <a class="collapse-item" href="javascript:void(0)" routerLink="EmployeePayment">
+                    Employee Payment
+                </a>
+                <a class="collapse-item" href="javascript:void(0)" routerLink="EmployeeProject">
+                    Employee Project
+                </a>
             </div>
         </div>
     </li>
@@ -64,18 +82,10 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" routerLink="User">            
+        <a class="nav-link" href="javascript:void(0)" routerLink="User">
             <fa-icon [icon]="faUser"></fa-icon>
-            <span>Users</span></a>
+            <span>Users</span>
+        </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
 </ul>
 <!-- End of Sidebar -->

@@ -21,7 +21,7 @@ export class CompanyExpensesComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
-  isShown: boolean = false;
+  isShown: boolean = true;
   isAddNew: boolean = true;
 
   expenseList: Expenses[] = [
@@ -144,7 +144,6 @@ export class CompanyExpensesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.isShown = !this.isShown;
   }
 
 }

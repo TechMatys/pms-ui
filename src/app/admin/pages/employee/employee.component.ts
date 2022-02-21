@@ -23,7 +23,7 @@ export class EmployeeComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
-  isShown: boolean = false;
+  isShown: boolean = true;
   isAddNew: boolean = true;
 
   employeeList: Employee[] = [
@@ -122,6 +122,5 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isShown = !this.isShown;
   }
 }

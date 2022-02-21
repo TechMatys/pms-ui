@@ -13,20 +13,19 @@
         </span>
       </a>
       <!-- Dropdown - User Information -->
-      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-      
-        <a class="dropdown-item"  href="#" routerLink="Profile"  ><fa-icon [icon]="faProfile"></fa-icon> 
-          Profile</a>
-      
-      
-        <a class="dropdown-item" href="javascript:void(0)">
+      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed">
+
+        <a class="dropdown-item" href="javascript:void(0)" routerLink="Profile">
+          <fa-icon [icon]="faProfile"></fa-icon> My Profile
+        </a>
+        <hr>
+
+        <a class="dropdown-item" href="javascript:void(0)" routerLink="">
           <fa-icon [icon]="faSignOut"></fa-icon> Logout
         </a>
-        
       </div>
     </li>
   </ul>
 
 </nav>
-
-

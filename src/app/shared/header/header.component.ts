@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faSignOut} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +9,8 @@ import { faSignOut } from '@fortawesome/free-solid-svg-icons';
 export class HeaderComponent implements OnInit {
   
   faSignOut = faSignOut;
-  isCollapsed = true;
-
+  isCollapsed = false;
+ 
   constructor() { }
 
   ngOnInit(): void {

@@ -14,11 +14,18 @@
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      
+        <a class="dropdown-item"  href="#" routerLink="Profile"  >Profile</a>
+      
+      
         <a class="dropdown-item" href="javascript:void(0)">
           <fa-icon [icon]="faSignOut"></fa-icon> Logout
         </a>
+        
       </div>
     </li>
   </ul>
 
 </nav>
+
+

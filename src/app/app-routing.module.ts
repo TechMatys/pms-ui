@@ -9,6 +9,7 @@ import { EmployeePaymentComponent } from './admin/pages/employee-payment/employe
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
 import { ReportComponent } from './admin/pages/report/report.component';
+import { ProfileComponent } from './admin/pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,8 @@ const routes: Routes = [
   {
     path: 'Report', component: ReportComponent
   },
+  { path: 'Profile', component: ProfileComponent
+},
 ];
 
 @NgModule({

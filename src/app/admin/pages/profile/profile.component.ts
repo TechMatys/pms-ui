@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  genders = [{
+    id: 0, name: '-- Select Gender --'
+  }, {
+    id: 1, name: 'Male'
+  }, {
+    id: 2, name: 'Female'
+  }];
 
+  
   constructor() { }
 
-  ngOnInit(): void {
+  onGenderChange(item: any) {
+  }
+
+  ngOnInit(): void { 
   }
 
 }

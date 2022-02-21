@@ -15,8 +15,8 @@
         <div class="card-body">
             <div class="row mrgn">
                 <div class="col-lg-12 algn-right">
-                    <button class="btn btn-primary btn-sm" (click)="genrateInvoice()">
-                        Genrate Invoice</button>
+                    <button class="btn btn-primary btn-sm" (click)="generateInvoice()">
+                        Generate Invoice</button>
                 </div>
             </div>
 
@@ -27,15 +27,15 @@
                             <tr>
                                 <th scope="col">Title</th>
                                 <th scope="col">Created By</th>
-                                <th scope="col">Genrate Date</th>
+                                <th scope="col">Generate Date</th>
                                 <th class="action-button">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let genrateInvoice of genrateInvoiceList">
-                                <td>{{genrateInvoice.title}}</td>
-                                <td>{{genrateInvoice.createdBy}}</td>
-                                <td>{{genrateInvoice.genrateDate}}</td>
+                            <tr *ngFor="let generateInvoice of generateInvoiceList">
+                                <td>{{generateInvoice.title}}</td>
+                                <td>{{generateInvoice.createdBy}}</td>
+                                <td>{{generateInvoice.generateDate}}</td>
 
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Download">
@@ -59,7 +59,7 @@
 <div class="card shadow mb-4">
     <div *ngIf="!isShown">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Genrate Invoice </h5>
+            <h5 class="m-0 font-weight-bold text-primary">Generate Invoice </h5>
         </div>
         <div class="card-body">
             <div class="row">

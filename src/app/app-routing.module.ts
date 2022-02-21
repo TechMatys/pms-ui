@@ -11,7 +11,7 @@ import { CompanyExpensesComponent } from './admin/pages/company-expenses/company
 import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
 import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
-import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
+
 
 const routes: Routes = [
   {
@@ -37,11 +37,9 @@ const routes: Routes = [
   },
   {
 
-    path: 'GenrateInvoice', component:GenerateInvoiceComponent
+    path: 'GenerateInvoice', component:GenerateInvoiceComponent
   },
-{
-    path: 'GenerateInvoice', component: GenerateInvoiceComponent
-  },
+
   {
     path: 'User', component: UserComponent
   },

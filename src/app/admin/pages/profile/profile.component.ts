@@ -13,14 +13,14 @@ export class ProfileComponent implements OnInit {
   }, {
     id: 2, name: 'Female'
   }];
-  isShown: boolean | undefined;
+
   
   constructor() { }
 
   onGenderChange(item: any) {
   }
 
-  ngOnInit(): void { this.isShown = !this.isShown;
+  ngOnInit(): void { 
   }
 
 }

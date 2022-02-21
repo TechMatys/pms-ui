@@ -18,7 +18,7 @@ interface ProjectPayment {
 export class ProjectPaymentComponent implements OnInit {
   faEdit = faEdit;
   faDelete = faTrash;
-  isShown: boolean = false;
+  isShown: boolean = true;
   isAddNew: boolean = true;
   
   projectPaymentlist: ProjectPayment[] = [
@@ -161,7 +161,6 @@ export class ProjectPaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isShown = !this.isShown;
   }
 
 }

@@ -17,7 +17,7 @@ export class ProjectComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
-  isShown: boolean = false;
+  isShown: boolean = true;
   isAddNew: boolean = true;
   projectList: any;
   
@@ -93,9 +93,6 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    {
-      this.isShown = !this.isShown;
-    }
   }
 
   onStatusChange(item: any) {

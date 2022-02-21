@@ -23,7 +23,7 @@ export class CompanyExpensesComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = false;
   isAddNew: boolean = true;
-  
+
   expenseList: Expenses[] = [
     {
       expenseName: 'Expense 1',
@@ -52,7 +52,7 @@ export class CompanyExpensesComponent implements OnInit {
       expenseDate: '28/02/2022'
     }];
 
-     // --Select Month Create--  
+  // --Select Month Create--  
   months = [{
     id: 0, name: '-- Select Month --'
   }, {
@@ -96,12 +96,17 @@ export class CompanyExpensesComponent implements OnInit {
     id: 5, name: '2018'
   }];
 
+  uploadedFiles = [{
+    name: 'Reciept.pdf'
+  },{
+    name: 'Bill.pdf'
+  }];
 
-  constructor(private formBuilder: FormBuilder) { 
-  this.expenseForm = this.formBuilder.group({   
-    name: ['', Validators.required]
-  });
-}
+  constructor(private formBuilder: FormBuilder) {
+    this.expenseForm = this.formBuilder.group({
+      name: ['', Validators.required]
+    });
+  }
 
   addExpenses() {
     this.isShown = false;
@@ -117,14 +122,14 @@ export class CompanyExpensesComponent implements OnInit {
   }
 
 
-onYearChange(item: any) {
+  onYearChange(item: any) {
 
-}
+  }
 
-onMonthChange(item: any) {
+  onMonthChange(item: any) {
 
-}
-get f() { return this.expenseForm.controls; }
+  }
+  get f() { return this.expenseForm.controls; }
 
   saveExpense() {
     this.submitted = true;

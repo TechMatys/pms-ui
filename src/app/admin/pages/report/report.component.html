@@ -1,1 +1,45 @@
-<p>report works!</p>
+<!-- Content Row -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h5 class="m-0 font-weight-bold text-primary"> Report </h5>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body">
+        <form class="form-horizontal">
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label for="year">Year</label>
+                    <select name="year" class="form-select col-lg-12" (change)="onYearChange($event.target)">
+                        <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="month">Month </label>
+                    <select name="month" class="form-select col-lg-12" (change)="onMonthChange($event.target)">
+                        <option *ngFor="let month of months" [value]="month.id">{{ month.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label for="reportType">Report Type</label>
+                    <select name="reportType" class="form-select col-lg-12"
+                        (change)="onReportTypeChange($event.target)">
+                        <option *ngFor="let report of reports" [value]="report.id">{{ report.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row submit-buttons">
+                <div class="form-group col-lg-12">
+                    <input type="button" class="btn btn-success" value="Dowload Pdf" />
+                    <input type="button" class="btn btn-outline-primary" value="Download Excel" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

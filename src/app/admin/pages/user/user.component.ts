@@ -5,7 +5,7 @@ interface User {
   userName: string,
   role: string,
   status: string,
-  createDate : string
+  createdDate : string
 }
 
 @Component({
@@ -17,36 +17,35 @@ export class UserComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
-  isShown: boolean = false;
+  isShown: boolean = true;
   isAddNew: boolean = true;
-  userList: any;
 
   userlist: User[] = [
     {
       userName: 'Subhash Rawat',
       role: 'Admin',
       status: 'Active',
-      createDate : '10/02/2022'
+      createdDate : '10/02/2022'
     },{
       userName: 'Tajwar Rawat',
       role: 'Staff',
       status: 'InActive',
-      createDate : '10/02/2022'
+      createdDate : '10/02/2022'
     },{
       userName: 'Deppak Dhiman',
       role: 'Admin',
       status: 'Active',
-      createDate : '10/02/2022'
+      createdDate : '10/02/2022'
     },{
       userName: 'Vikash Rawat',
       role: 'Staff',
       status: 'InActive',
-      createDate : '10/02/2022'
+      createdDate : '10/02/2022'
     },{
       userName: 'Deppak Dhiman',
       role: 'Admin',
       status: 'Active',
-      createDate : '10/02/2022'
+      createdDate : '10/02/2022'
     }];
 
     roles = [{
@@ -71,19 +70,19 @@ export class UserComponent implements OnInit {
   addUser() {
     this.isShown = false;
     this.isAddNew = true;
-    this.userList = [];
   }
 
-  ngOnInit(): void {
-  {
-  this.isShown = !this.isShown;
-    }
-  }
-    onRolesChange(item: any) {
-  }
 
-  onStatusChange(item: any) {
+onRolesChange(item: any) {
+}
 
-  }
+onStatusChange(item: any) {
+
+}
+
+
+  ngOnInit(): void {  }
+  
+ 
 
 }

@@ -16,6 +16,8 @@ interface ProjectPayment {
 
 
 export class ProjectPaymentComponent implements OnInit {
+
+  dtOptions: DataTables.Settings = {};
   faEdit = faEdit;
   faDelete = faTrash;
   isShown: boolean = true;

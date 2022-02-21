@@ -81,14 +81,24 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" routerLink="CompanyExpenses">
-            <fa-icon [icon]="faMoney"></fa-icon>
-            <span>
-                Company Expenses
-            </span>
+        <a class="nav-link" href="javascript:void(0)" (click)="collapseCompany.toggle()"
+            [attr.aria-expanded]="!isCollapsedCompany" aria-controls="collapseEmployee">
+            <fa-icon [icon]="faCompany"></fa-icon>
+            <span>Company</span>
+            <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedCompany"></fa-icon>
+            <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedCompany"></fa-icon>
         </a>
+        <div #collapseCompany="ngbCollapse" [(ngbCollapse)]="isCollapsedCompany">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="javascript:void(0)" routerLink="CompanyExpenses">
+                    Company Expenses
+                </a>
+                <a class="collapse-item" href="javascript:void(0)" routerLink="GenerateInvoice">
+                    Generate Invoice
+                </a>
+            </div>
+        </div>
     </li>
 
     

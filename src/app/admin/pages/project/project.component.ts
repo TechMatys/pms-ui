@@ -15,6 +15,8 @@ interface Project {
 })
 export class ProjectComponent implements OnInit {
 
+  dtOptions: DataTables.Settings = {};
+
   faEdit = faEdit;
   faDelete = faTrash;
   isShown: boolean = true;

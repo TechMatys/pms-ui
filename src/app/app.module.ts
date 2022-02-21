@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
+import { DataTablesModule } from "angular-datatables";
 
 
 
@@ -61,6 +62,7 @@ import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generat
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
+    DataTablesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

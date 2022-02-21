@@ -28,6 +28,7 @@ import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generat
     ReportComponent,
     ProfileComponent,
     GenerateInvoiceComponent,
+    
 
   ],
   imports: [

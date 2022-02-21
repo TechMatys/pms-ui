@@ -10,6 +10,7 @@ import { ProjectPaymentComponent } from './admin/pages/project-payment/project-p
 import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
 import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
+import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
     path: 'CompanyExpenses', component: CompanyExpensesComponent
   },
   {
+    path: 'GenrateInvoice', component:GenerateInvoiceComponent
+  },
+  {
     path: 'User', component: UserComponent
   },
   {
@@ -41,6 +45,7 @@ const routes: Routes = [
   },
   { path: 'Profile', component: ProfileComponent
 },
+
 ];
 
 @NgModule({

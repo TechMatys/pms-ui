@@ -15,6 +15,8 @@ interface EmployeePayment {
 })
 export class EmployeePaymentComponent implements OnInit {
 
+  dtOptions: DataTables.Settings = {};
+
   faEdit = faEdit;
   faDelete = faTrash;
   isShown: boolean = true;
@@ -36,6 +38,81 @@ export class EmployeePaymentComponent implements OnInit {
       amount: '₹ 50,000',
       month: '02/2022',
       paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Vikash Rawat',
+      amount: '₹ 40,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Deepak Dhiman',
+      amount: '₹ 1,00,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Subhash Rawat',
+      amount: '₹ 70,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Tajwar Rawat',
+      amount: '₹ 90,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Prakash Rawat',
+      amount: '₹ 50,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Vikash Rawat',
+      amount: '₹ 40,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Deepak Dhiman',
+      amount: '₹ 1,00,000',
+      month: '02/2022',
+      paymentDate: '28/07/2020'
+    }, {
+      employeeName: 'Subhash Rawat',
+      amount: '₹ 70,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Tajwar Rawat',
+      amount: '₹ 90,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Prakash Rawat',
+      amount: '₹ 50,000',
+      month: '02/2022',
+      paymentDate: '28/12/2019'
+    }, {
+      employeeName: 'Vikash Rawat',
+      amount: '₹ 40,000',
+      month: '02/2022',
+      paymentDate: '28/01/2021'
+    }, {
+      employeeName: 'Deepak Dhiman',
+      amount: '₹ 1,00,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Subhash Rawat',
+      amount: '₹ 70,000',
+      month: '02/2022',
+      paymentDate: '28/02/2020'
+    }, {
+      employeeName: 'Tajwar Rawat',
+      amount: '₹ 90,000',
+      month: '02/2022',
+      paymentDate: '28/02/2022'
+    }, {
+      employeeName: 'Prakash Rawat',
+      amount: '₹ 50,000',
+      month: '02/2022',
+      paymentDate: '28/02/2021'
     }, {
       employeeName: 'Vikash Rawat',
       amount: '₹ 40,000',

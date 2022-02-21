@@ -13,6 +13,8 @@ interface EmployeeProject {
   styleUrls: ['./employee-project.component.scss']
 })
 export class EmployeeProjectComponent implements OnInit {
+  
+  dtOptions: DataTables.Settings = {};
 
   faEdit = faEdit;
   faDelete = faTrash;

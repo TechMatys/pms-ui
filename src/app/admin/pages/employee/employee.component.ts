@@ -18,6 +18,8 @@ interface Employee {
 })
 export class EmployeeComponent implements OnInit {
 
+  dtOptions: DataTables.Settings = {};
+
   employeeForm: FormGroup;
   submitted = false;
 

@@ -15,6 +15,8 @@ interface User {
 })
 export class UserComponent implements OnInit {
 
+  dtOptions: DataTables.Settings = {};
+
   faEdit = faEdit;
   faDelete = faTrash;
   isShown: boolean = true;

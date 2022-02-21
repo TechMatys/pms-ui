@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash, faEye,faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faEye, faDownload } from '@fortawesome/free-solid-svg-icons';
 
-interface GenerateInvoice{
+interface GenerateInvoice {
   title: string,
   createdBy: string;
-  generateDate: string;
+  generatedDate: string;
 }
 @Component({
   selector: 'app-generate-invoice',
@@ -18,35 +18,35 @@ export class GenerateInvoiceComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = true;
   isAddNew: boolean = true;
-  
+
+  dtOptions: DataTables.Settings = {};
 
   generateInvoiceList: GenerateInvoice[] = [
     {
       title: 'Invoice1',
-     createdBy: 'Admin',
-     generateDate: '28/02/2022'
-    },{
+      createdBy: 'Admin',
+      generatedDate: '28/02/2022'
+    }, {
       title: 'Invoice2',
-     createdBy: 'Admin',
-     generateDate: '28/02/2022'
-    },{
+      createdBy: 'Admin',
+      generatedDate: '28/02/2022'
+    }, {
       title: 'Invoice3',
-     createdBy: 'Staff',
-     generateDate: '28/02/2022'
-    },{
+      createdBy: 'Staff',
+      generatedDate: '28/02/2022'
+    }, {
       title: 'Invoice4',
-     createdBy: 'Staff',
-     generateDate: '28/02/2022'
-    }
-  ];
+      createdBy: 'Staff',
+      generatedDate: '28/02/2022'
+    }];
 
 
-  constructor() {}
-    generateInvoice (){
-      this.isShown = false;
-      this.isAddNew = true;
-    }
-   
+  constructor() { }
+  generateInvoice() {
+    this.isShown = false;
+    this.isAddNew = true;
+  }
+
 
   ngOnInit(): void {
   }

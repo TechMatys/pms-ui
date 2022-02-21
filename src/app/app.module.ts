@@ -24,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { PopUpComponent } from './core/pop-up/pop-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReportComponent } from './admin/pages/report/report.component';
+import { ProfileComponent } from './admin/pages/profile/profile.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ReportComponent } from './admin/pages/report/report.component';
     CompanyExpensesComponent,
     PopUpComponent,
     ReportComponent,
+    ProfileComponent,
 
   ],
   imports: [

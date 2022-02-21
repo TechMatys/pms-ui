@@ -16,6 +16,8 @@ interface Expenses {
 })
 export class CompanyExpensesComponent implements OnInit {
 
+  dtOptions: DataTables.Settings = {};
+
   expenseForm: FormGroup;
   submitted = false;
 

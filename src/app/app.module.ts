@@ -29,6 +29,7 @@ import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generat
 import { DataTablesModule } from "angular-datatables";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

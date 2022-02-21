@@ -12,6 +12,7 @@ import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generat
 import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
 
+
 const routes: Routes = [
   {
     path: '', component: DashboardComponent
@@ -35,8 +36,10 @@ const routes: Routes = [
     path: 'CompanyExpenses', component: CompanyExpensesComponent
   },
   {
-    path: 'GenerateInvoice', component: GenerateInvoiceComponent
+
+    path: 'GenerateInvoice', component:GenerateInvoiceComponent
   },
+
   {
     path: 'User', component: UserComponent
   },
@@ -45,6 +48,7 @@ const routes: Routes = [
   },
   { path: 'Profile', component: ProfileComponent
 },
+
 ];
 
 @NgModule({

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface User {
-  name: string,
+  employeeName: string,
   role: string,
   status: string,
-  createdDate : string
+  createdDate: string
 }
 
 @Component({
@@ -22,46 +22,66 @@ export class UserComponent implements OnInit {
 
   userlist: User[] = [
     {
-      name: 'Subhash Rawat',
+      employeeName: 'Subhash Rawat',
       role: 'Admin',
       status: 'Active',
-      createdDate : '10/02/2022'
-    },{
-      name: 'Tajwar Rawat',
+      createdDate: '10/02/2022'
+    }, {
+      employeeName: 'Tajwar Rawat',
       role: 'Staff',
       status: 'InActive',
-      createdDate : '10/02/2022'
-    },{
-      name: 'Deppak Dhiman',
+      createdDate: '10/02/2022'
+    }, {
+      employeeName: 'Deapak Dhiman',
       role: 'Admin',
       status: 'Active',
-      createdDate : '10/02/2022'
-    },{
-      name: 'Vikash Rawat',
+      createdDate: '10/02/2022'
+    }, {
+      employeeName: 'Vikash Rawat',
       role: 'Staff',
       status: 'InActive',
-      createdDate : '10/02/2022'
-    },{
-      name: 'Deppak Dhiman',
+      createdDate: '10/02/2022'
+    }, {
+      employeeName: 'Prakash Rawat',
       role: 'Admin',
       status: 'Active',
-      createdDate : '10/02/2022'
+      createdDate: '10/02/2022'
     }];
 
-    roles = [{
-      id: 0, name: '-- Select Roles --'
+  employeesName = [
+    {
+      id: 0, name: '-- Select Employee Name--'
     }, {
-      id: 1, name: 'Admin'
+      id: 1,
+      name: 'Subhash Rawat'
     }, {
-      id: 2, name: 'Staff'
+      id: 2,
+      name: 'Tajwar Rawat'
+    }, {
+      id: 3,
+      name: 'Deapak Dhiman'
+    }, {
+      id: 4,
+      name: 'Vikash Rawat'
+    }, {
+      id: 5,
+      name: 'Prakash Rawat'
     }];
+
+  roles = [{
+    id: 0, name: '-- Select Roles --'
+  }, {
+    id: 1, name: 'Admin'
+  }, {
+    id: 2, name: 'Staff'
+  }];
 
   status = [{
     id: 0, name: '-- Select Status --'
   }, {
     id: 1, name: 'Active'
   }, {
-    id: 2, name: 'InActive'  
+    id: 2, name: 'InActive'
   }];
 
   constructor() { }
@@ -72,17 +92,18 @@ export class UserComponent implements OnInit {
     this.isAddNew = true;
   }
 
+  onEmployeeChange(item: any) {
+  }
+  onRolesChange(item: any) {
+  }
 
-onRolesChange(item: any) {
-}
+  onStatusChange(item: any) {
 
-onStatusChange(item: any) {
-
-}
+  }
 
 
-  ngOnInit(): void {  }
-  
- 
+  ngOnInit(): void { }
+
+
 
 }

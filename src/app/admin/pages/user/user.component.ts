@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface User {
-  userName: string,
+  name: string,
   role: string,
   status: string,
   createdDate : string
@@ -22,27 +22,27 @@ export class UserComponent implements OnInit {
 
   userlist: User[] = [
     {
-      userName: 'Subhash Rawat',
+      name: 'Subhash Rawat',
       role: 'Admin',
       status: 'Active',
       createdDate : '10/02/2022'
     },{
-      userName: 'Tajwar Rawat',
+      name: 'Tajwar Rawat',
       role: 'Staff',
       status: 'InActive',
       createdDate : '10/02/2022'
     },{
-      userName: 'Deppak Dhiman',
+      name: 'Deppak Dhiman',
       role: 'Admin',
       status: 'Active',
       createdDate : '10/02/2022'
     },{
-      userName: 'Vikash Rawat',
+      name: 'Vikash Rawat',
       role: 'Staff',
       status: 'InActive',
       createdDate : '10/02/2022'
     },{
-      userName: 'Deppak Dhiman',
+      name: 'Deppak Dhiman',
       role: 'Admin',
       status: 'Active',
       createdDate : '10/02/2022'

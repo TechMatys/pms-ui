@@ -26,7 +26,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
+                                <th scope="col">Employee Name</th>
                                 <th scope="col">Role</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Created Date </th>
@@ -36,7 +36,7 @@
                         <tbody>
                             <tr *ngFor="let user of userlist">
                                 <td>
-                                    {{user.name}}
+                                    {{user.employeeName}}
                                 </td>
                                 <td>
                                     {{user.role}}
@@ -73,8 +73,12 @@
             <form class="form-horizontal">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="name">Name </label>
-                        <input type="text" class="form-control" id="name" placeholder="Name" maxlength="20" autocomplete="off">
+                        <label for="employeeName">Employee Name</label>
+                        <select name="employeeName" class="form-select col-lg-12"
+                            (change)="onEmployeeChange($event.target)">
+                            <option *ngFor="let employee of employeesName" [value]="employee.id">{{ employee.name }}
+                            </option>
+                        </select>
                     </div>
 
                     <div class="form-group col-lg-4">

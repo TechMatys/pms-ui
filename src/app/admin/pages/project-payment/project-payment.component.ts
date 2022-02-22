@@ -132,8 +132,7 @@ export class ProjectPaymentComponent implements OnInit {
       name: 'Project Signal'
     }];
 
-  constructor() {
-  }
+  constructor() { }
 
   // Function to add new button
   addProjectPayment() {

@@ -107,15 +107,13 @@
                             <div class="form-group col-lg-12 mb-4 mrgn-top-15">
                                 <strong>Employee </strong>
                                 <div>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Employee Detial
-                                    </label>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Employee Project
-                                    </label>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Employee Payment
-                                    </label>
+                                    <ul class="technology-list">
+                                        <li *ngFor="let employee of employeeScreens">
+                                            <label class="btn btn-primary-active">
+                                                <input type="checkbox" checked> {{employee.name}}
+                                            </label>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <hr>
                             </div>
@@ -125,12 +123,13 @@
                             <div class="form-group col-lg-12">
                                 <strong>Project </strong>
                                 <div>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Project Detail
-                                    </label>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Project Payment
-                                    </label>
+                                    <ul class="technology-list">
+                                        <li *ngFor="let project of projectScreens">
+                                            <label class="btn btn-primary-active">
+                                                <input type="checkbox" checked> {{project.name}}
+                                            </label>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <hr>
                             </div>
@@ -140,18 +139,13 @@
                             <div class="form-group col-lg-12">
                                 <strong>Company </strong>
                                 <div>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Company Expenses
-                                    </label>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Users
-                                    </label>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Generate Invoice
-                                    </label>
-                                    <label class="btn btn-primary-active">
-                                        <input type="checkbox" checked> Report
-                                    </label>
+                                    <ul class="technology-list">
+                                        <li *ngFor="let company of companyScreens">
+                                            <label class="btn btn-primary-active">
+                                                <input type="checkbox" checked> {{company.name}}
+                                            </label>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

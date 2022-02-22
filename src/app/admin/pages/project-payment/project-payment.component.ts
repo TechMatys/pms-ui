@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
 
 interface ProjectPayment {
   name: string;
@@ -115,24 +116,12 @@ export class ProjectPaymentComponent implements OnInit {
       name: '2017'
     }];
 
-  projects = [
-    {
-      id: 0, name: '-- Select project--'
-    }, {
-      id: 1,
-      name: 'Project Breeze'
-    }, {
-      id: 2,
-      name: 'Dynamic Program'
-    }, {
-      id: 3,
-      name: 'Magnetic Program'
-    }, {
-      id: 4,
-      name: 'Project Signal'
-    }];
+    projects: GlobalCodes[];
 
-  constructor() {
+  constructor(private globalCodesService: GlobalCodesService) {
+
+    this.projects = this.globalCodesService.projects;
+
   }
 
   // Function to add new button

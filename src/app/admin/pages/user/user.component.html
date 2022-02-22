@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions"  class="row-border hover">
+                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
                         <thead>
                             <tr>
                                 <th scope="col">Employee Name</th>
@@ -99,67 +99,71 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-lg-6">
-                        <div>
-                            <label for="screenPermission">Screen Permission</label>
+                    <div class="form-group col-lg-12">
+                        <label for="screenPermission">Screen Permission</label>
+                    </div>
+                    <div class="card shadow ">
+                        <div class="row">
+                            <div class="form-group col-lg-12 mb-4 mrgn-top-15">
+                                <strong>Employee </strong>
+                                <div>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Employee Detial
+                                    </label>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Employee Project
+                                    </label>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Employee Payment
+                                    </label>
+                                </div>
+                                <hr>
+                            </div>
                         </div>
-                        <label for="employee">Employee </label>
-                        <div>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox" checked> Employee Detial
-                            </label>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox" checked> Employee Project
-                            </label>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox" checked> Employee Payment
-                            </label>
+
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <strong>Project </strong>
+                                <div>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Project Detail
+                                    </label>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Project Payment
+                                    </label>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <strong>Company </strong>
+                                <div>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Company Expenses
+                                    </label>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Users
+                                    </label>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Generate Invoice
+                                    </label>
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox" checked> Report
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-lg-6">
-                        <label for="employee">Project </label>
-                        <div>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox" checked> Project Detail
-                            </label>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox" checked> Project Payment
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="form-group col-lg-6">
-                        <div>
-                            <label for="company">Company </label>
-                        </div>
-                        <label class="btn btn-primary-active" >
-                            <input type="checkbox" checked> Company Expenses
-                        </label>
-                        <label class="btn btn-primary-active">
-                            <input type="checkbox" checked> Users
-                        </label>
-                        <label class="btn btn-primary-active">
-                            <input type="checkbox" checked> Generate Invoice
-                        </label>
-                        <label class="btn btn-primary-active">
-                            <input type="checkbox" checked> Report
-                        </label>
-                    </div>
-                </div>
-
-                <div class="row submit-buttons">
+                <div class="row submit-buttons mrgn-top-15">
                     <div class="form-group col-lg-12">
                         <input type="submit" class="btn btn-success" value="Save" />
                         <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

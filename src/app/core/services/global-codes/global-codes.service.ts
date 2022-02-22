@@ -71,5 +71,15 @@ export class GlobalCodesService {
       name: 'Project Signal'
     }];
 
+    
+
+  roles = [{
+    id: 0, name: '-- Select Roles --'
+  }, {
+    id: 1, name: 'Admin'
+  }, {
+    id: 2, name: 'Staff'
+  }];
+  
   constructor() { }
 }

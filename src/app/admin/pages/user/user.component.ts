@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
 
 interface User {
   employeeName: string,
@@ -70,23 +71,42 @@ export class UserComponent implements OnInit {
       name: 'Prakash Rawat'
     }];
 
-  roles = [{
-    id: 0, name: '-- Select Roles --'
-  }, {
-    id: 1, name: 'Admin'
-  }, {
-    id: 2, name: 'Staff'
-  }];
+    employeeScreens = [{
+      id: 0, name: 'Employee Detail'
+    }, {
+      id: 1, name: '.Employee Project'
+    }, {
+      id: 2, name: 'Employee Payment' 
+    }];
 
-  status = [{
-    id: 0, name: '-- Select Status --'
-  }, {
-    id: 1, name: 'Active'
-  }, {
-    id: 2, name: 'InActive'
-  }];
+    projectScreens = [{
+      id: 0, name: 'Project Detail'
+    }, {      
+      id: 1, name: 'Project Payment' 
+    }];
 
-  constructor() { }
+    companyScreens = [{
+      id: 0, name: 'Company Expenses'
+    }, {
+      id: 1, name: 'Users'
+    }, {
+      id: 2, name: 'Generate Invoice' 
+    }, {
+      id: 2, name: 'Report' 
+    }];
+
+
+
+    status: GlobalCodes[];
+    roles: GlobalCodes[];
+    
+
+  constructor(private globalCodesService: GlobalCodesService) {
+
+    this.status = this.globalCodesService.status;
+    this.roles = this.globalCodesService.roles;
+    
+   }
 
   // Function to add new button
   addUser() {

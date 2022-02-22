@@ -15,9 +15,9 @@
         <div class="card-body">
             <div class="row mrgn-btm-15">
                 <div class="col-lg-2">
-                    <select name="year" class="form-select col-lg-12" (change)="onGridYearChange($event.target)">
-                        <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
-                    </select>
+                    <input  formControlName="year"  autocomplete="off" class="form-control" 
+                    name="date" bsDatepicker [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}" 
+                     placeholder="Calendar">
                 </div>
                 <div class="col-lg-2">
                     <select name="month" class="form-select col-lg-12" (change)="onGridMonthChange($event.target)">

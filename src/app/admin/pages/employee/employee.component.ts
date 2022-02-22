@@ -3,6 +3,7 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GlobalCodesService, GlobalCodes } from 'src/app/core/services/global-codes/global-codes.service';
 
 interface Employee {
   name: string,
@@ -54,22 +55,6 @@ export class EmployeeComponent implements OnInit {
       designation: 'Lemon Candy',
     }];
 
-  genders = [{
-    id: 0, name: '-- Select Gender --'
-  }, {
-    id: 1, name: 'Male'
-  }, {
-    id: 2, name: 'Female'
-  }];
-
-  designations = [{
-    id: 0, name: '-- Select Designations --'
-  }, {
-    id: 1, name: 'Developer'
-  }, {
-    id: 2, name: 'Manager'
-  }];
-
   // State name create
   states = [{
     id: 0, name: '-- Select State --'
@@ -80,15 +65,26 @@ export class EmployeeComponent implements OnInit {
   }, {
     id: 2, name: 'Himachal Pradesh'
   }];
+  
+  genders: GlobalCodes[];   
+  designations: GlobalCodes[];
+  status: GlobalCodes[];
+  
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService, private globalCodesService: GlobalCodesService) {
+    
+    this.genders = this.globalCodesService.genders;
+    this.designations = this.globalCodesService.designations;
+    this.status = this.globalCodesService.status;
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService) {
     this.employeeForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       emailAddress: ['', Validators.required],
       mobile: ['', Validators.required]
     });
+    
   }
+  
 
   addEmployee() {
     this.isShown = false;
@@ -99,6 +95,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   onGenderChange(item: any) {
+  }
+  
+  onStatusChange(item: any) {
+
   }
 
   deleteEmployee(employee: any) {

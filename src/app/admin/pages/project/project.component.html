@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions"  class="row-border hover">
+                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
@@ -93,21 +93,13 @@
                     <div class="form-group col-lg-6">
                         <label for="technology">Technology </label>
                         <div>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox"> Angular
-                            </label>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox"> .NET Core
-                            </label>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox"> HTML
-                            </label>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox"> CSS
-                            </label>
-                            <label class="btn btn-primary-active">
-                                <input type="checkbox"> Javascript
-                            </label>
+                            <ul class="technology-list">
+                                <li *ngFor="let technology of technologies">
+                                    <label class="btn btn-primary-active">
+                                        <input type="checkbox"> {{technology.name}}
+                                    </label>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

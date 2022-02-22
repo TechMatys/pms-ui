@@ -52,26 +52,7 @@ export class GlobalCodesService {
     id: 3, name: 'CSS'
   }, {
     id: 4, name: 'Javascript'
-  }];
-
-  projects: GlobalCodes[] = [
-    {
-      id: 0, name: '-- Select project--'
-    }, {
-      id: 1,
-      name: 'Project Breeze'
-    }, {
-      id: 2,
-      name: 'Dynamic Program'
-    }, {
-      id: 3,
-      name: 'Magnetic Program'
-    }, {
-      id: 4,
-      name: 'Project Signal'
-    }];
-
-    
+  }];    
 
   roles = [{
     id: 0, name: '-- Select Roles --'

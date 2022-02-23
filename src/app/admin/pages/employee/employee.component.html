@@ -50,6 +50,14 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr *ngIf="!employeeList.length">
+                                <td colspan="5" class="grid-loader">
+                                    <label>
+                                        Fetching data. Please wait
+                                        <img src="../../../../assets/img/loader.gif">
+                                    </label>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -16,21 +16,17 @@
         </div>
         <div class="card-body">
             <div class="row mrgn-btm-15 ">
-                <div class="col-lg-1 filerDate">
-                    <label>Start Date</label>
+                <div class="col-lg-2">
+                    <strong>Start Month/Year</strong>
+                    <input type="text" placeholder="MM/YYYY" class="form-control" bsDatepicker mask="00/0000"
+                        [bsConfig]="{dateInputFormat: 'MM/YYYY'}" minMode="month">
                 </div>
                 <div class="col-lg-2">
-                    <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                        [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
+                    <strong>End Month/Year</strong>
+                    <input type="text" placeholder="MM/YYYY" class="form-control" bsDatepicker mask="00/0000"
+                        [bsConfig]="{dateInputFormat: 'MM/YYYY'}" minMode="month">
                 </div>
-                <div class="col-lg-1 filerDate">
-                    <label>End Date</label>
-                </div>
-                <div class="col-lg-2">
-                    <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                        [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
-                </div>
-                <div class="col-lg-6 algn-right">
+                <div class="col-lg-8 algn-right">
                     <button class="btn btn-primary btn-sm header-btn" (click)="addEmployeePayment()">
                         Add Employee Payment
                     </button>

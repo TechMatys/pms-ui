@@ -11373,3 +11373,13 @@ input[type="file"] {
   display: inline; 
   list-style-type: none;
 }
+
+.grid-loader img{
+  height: 50px;
+}
+
+.grid-loader label{
+  font-weight: bold;
+  font-style: italic;
+  font-size: 18px;
+}

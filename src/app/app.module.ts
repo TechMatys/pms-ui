@@ -27,8 +27,7 @@ import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
 import { DataTablesModule } from "angular-datatables";
-
-
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -63,6 +62,7 @@ import { DataTablesModule } from "angular-datatables";
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     DataTablesModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

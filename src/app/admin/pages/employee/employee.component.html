@@ -50,7 +50,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr *ngIf="!employeeList.length">
                                 <td colspan="5" class="grid-loader">
                                     <label>
                                         Fetching data. Please wait

@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { Component, OnInit } from '@angular/core';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 
 
@@ -10,38 +9,43 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
   styleUrls: ['./dashboard.component.scss']
 })
 
-
 export class DashboardComponent implements OnInit {
 
-  public barChartOptions: ChartConfiguration['options'] = {   
-
+  public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.scaleLabel: "<%= ' $' + Number(value)%>"
+
+    layout: {
+      padding: {
+        bottom: 10
+      }
+    },   
+
     scales: {
       x: {
-        max: 12,
-        grid: {drawBorder: false,
+        time: {
+          unit: 'month'
+        },
+        grid: {
+          drawBorder: false,
           display: false
-        }
+        },
       },
       y: {
         max: 200000,
-       
-        
-        grid: {color: "rgb(234, 236, 244)",
-        drawBorder: false,
-        borderDash: [2],
-          display: true
-          
+        grid: {
+          color: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          display: true,
         },
-        ticks: {stepSize: 50000,
+        ticks: {
+          stepSize: 50000,
           // Include a dollar sign in the ticks
-          callback: function (value : any) {
-            return '₹ ' +  dollarIndianLocale.format(value);
+          callback: function (value: any) {
+            return '₹ ' + dollarIndianLocale.format(value);
           }
         }
       }
-      
     },
 
     plugins: {
@@ -52,7 +56,7 @@ export class DashboardComponent implements OnInit {
         anchor: 'end',
         align: 'end',
         display: false
-        
+
       },
       tooltip: {
         titleMarginBottom: 10,
@@ -69,7 +73,6 @@ export class DashboardComponent implements OnInit {
         }
       }
     },
-
   };
 
   public barChartType: ChartType = 'bar';
@@ -87,7 +90,6 @@ export class DashboardComponent implements OnInit {
         maxBarThickness: 30,
         data: [90000, 140000, 20000, 150000, 30000, 120000],
         label: 'Revenue'
-        
       }
     ]
   };

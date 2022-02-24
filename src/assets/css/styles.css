@@ -11288,7 +11288,7 @@ button.calendar, button.calendar:active {
   background-position: center;
 }
 
-thead {
+.dataTable  thead {
   background-color: #fcaeae;
   color: white;
 }
@@ -11374,6 +11374,11 @@ input[type="file"] {
   list-style-type: none;
 }
 
+.filerDate label{
+  padding-top: 5px;
+  font-weight: bold;
+}
+
 .grid-loader img{
   height: 50px;
 }
@@ -11382,4 +11387,8 @@ input[type="file"] {
   font-weight: bold;
   font-style: italic;
   font-size: 18px;
+}
+
+.header-btn {
+  margin-top: 20px;
 }

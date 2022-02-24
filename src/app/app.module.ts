@@ -28,6 +28,7 @@ import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
 import { DataTablesModule } from "angular-datatables";
 import { NgChartsModule } from 'ng2-charts';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { NgChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     DataTablesModule,
     NgChartsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

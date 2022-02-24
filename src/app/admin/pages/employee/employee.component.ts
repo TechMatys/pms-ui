@@ -23,6 +23,7 @@ export class EmployeeComponent implements OnInit {
 
   employeeForm: FormGroup;
   submitted = false;
+  today: Date;
 
   faEdit = faEdit;
   faDelete = faTrash;
@@ -75,6 +76,7 @@ export class EmployeeComponent implements OnInit {
     this.genders = this.globalCodesService.genders;
     this.designations = this.globalCodesService.designations;
     this.status = this.globalCodesService.status;
+    this.today = new Date();
 
     this.employeeForm = this.formBuilder.group({
       firstName: ['', Validators.required],

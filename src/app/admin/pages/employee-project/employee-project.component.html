@@ -82,10 +82,8 @@
                     <div class="form-group col-lg-6">
                         <label for="assignedDate">Assigned Date </label>
                         <div class="input-group">
-                            <input class="form-control" placeholder="DD/MM/YYYY" name="dp" ngbDatepicker
-                                #a="ngbDatepicker" id="paymentDate" mask="00/00/0000" autocomplete="off">
-                            <button class="btn btn-outline-secondary calendar" (click)="a.toggle()"
-                                type="button"></button>
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
+                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
                         </div>
                     </div>
 

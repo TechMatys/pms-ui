@@ -10,26 +10,29 @@
 <div class="card shadow mb-4">
     <div *ngIf="isShown">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Employee Payment List</h5>
+            <h5 class="m-0 font-weight-bold text-primary">
+                Employee Payment List
+            </h5>
         </div>
         <div class="card-body">
-            <div class="row mrgn-btm-15">
+            <div class="row mrgn-btm-15 ">
                 <div class="col-lg-2">
-                    <select name="year" class="form-select col-lg-12" (change)="onGridYearChange($event.target)">
-                        <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
-                    </select>
+                    <strong>Start Month/Year</strong>
+                    <input type="text" placeholder="MM/YYYY" class="form-control" bsDatepicker mask="00/0000"
+                        [bsConfig]="{dateInputFormat: 'MM/YYYY'}" minMode="month">
                 </div>
                 <div class="col-lg-2">
-                    <select name="month" class="form-select col-lg-12" (change)="onGridMonthChange($event.target)">
-                        <option *ngFor="let month of months" [value]="month.id">{{month.name}}
-                        </option>
-                    </select>
+                    <strong>End Month/Year</strong>
+                    <input type="text" placeholder="MM/YYYY" class="form-control" bsDatepicker mask="00/0000"
+                        [bsConfig]="{dateInputFormat: 'MM/YYYY'}" minMode="month">
                 </div>
                 <div class="col-lg-8 algn-right">
-                    <button class="btn btn-primary btn-sm" (click)="addEmployeePayment()">
-                        Add Employee Payment</button>
+                    <button class="btn btn-primary btn-sm header-btn" (click)="addEmployeePayment()">
+                        Add Employee Payment
+                    </button>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-lg-12">
                     <table datatable [dtOptions]="dtOptions" class="row-border hover">
@@ -75,14 +78,16 @@
         <div class="card-body">
             <form class="form-horizontal">
                 <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="employee">Employee</label>
                         <select name="employee" class="form-select col-lg-12"
                             (change)="onEmployeeChange($event.target)">
                             <option *ngFor="let employee of employees" [value]="employee.id">{{employee.name}}</option>
                         </select>
                     </div>
-                    <div class="form-group col-lg-6">
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
                         <label for="amount">Amount</label>
                         <div class="my-1">
                             <label class="sr-only" for="amount">Amount</label>
@@ -99,35 +104,24 @@
 
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="year">Year</label>
-                        <select name="year" class="form-select col-lg-12" (change)="onYearChange($event.target)">
-                            <option *ngFor="let year of years" [value]="year.id">{{year.name}}</option>
-                        </select>
+                        <label for="year">Payment Month/Year</label>
+                        <input autocomplete="off" class="form-control" name="date" bsDatepicker
+                            [bsConfig]="{dateInputFormat: 'MM/YYYY'}" minMode="month" placeholder="MM/YYYY"
+                            mask="00/0000">
                     </div>
-
-                    <div class="form-group col-lg-4">
-                        <label for="month">Month</label>
-                        <select name="month" class="form-select col-lg-12" (change)="onMonthChange($event.target)">
-                            <option *ngFor="let month of months" [value]="month.id">{{month.name}} </option>
-                        </select>
-                    </div>
-
+                </div>
+                <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="paymentdate">Payment Date</label>
-                        <div class="input-group">
-                            <input class="form-control" placeholder="MM/DD/YYYY" name="dp" ngbDatepicker
-                                #d="ngbDatepicker" mask="00/00/0000" autocomplete="off">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
-                                type="button"></button>
-                        </div>
+                        <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
+                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
                     </div>
                 </div>
 
                 <div class="row submit-buttons">
                     <div class="form-group col-lg-12">
                         <input type="submit" class="btn btn-success" value="Save" />
-                        <input type="button" class="btn btn-outline-primary" value="Cancel"
-                            (click)="isShown = true" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
                     </div>
                 </div>
             </form>

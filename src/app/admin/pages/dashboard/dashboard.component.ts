@@ -20,22 +20,28 @@ export class DashboardComponent implements OnInit {
     scales: {
       x: {
         max: 12,
-        grid: {
+        grid: {drawBorder: false,
           display: false
         }
       },
       y: {
-        max: 300000,
-        grid: {
+        max: 200000,
+       
+        
+        grid: {color: "rgb(234, 236, 244)",
+        drawBorder: false,
+        borderDash: [2],
           display: true
+          
         },
-        ticks: {
+        ticks: {stepSize: 50000,
           // Include a dollar sign in the ticks
           callback: function (value : any) {
             return '₹ ' +  dollarIndianLocale.format(value);
           }
         }
       }
+      
     },
 
     plugins: {
@@ -46,6 +52,7 @@ export class DashboardComponent implements OnInit {
         anchor: 'end',
         align: 'end',
         display: false
+        
       },
       tooltip: {
         titleMarginBottom: 10,
@@ -80,6 +87,7 @@ export class DashboardComponent implements OnInit {
         maxBarThickness: 30,
         data: [90000, 140000, 20000, 150000, 30000, 120000],
         label: 'Revenue'
+        
       }
     ]
   };

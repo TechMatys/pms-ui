@@ -98,7 +98,7 @@
                         <label for="dob">Date of Birth</label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
+                            [maxDate]="today"  [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
@@ -156,14 +156,14 @@
                         <label for="startDate">Start Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                            [maxDate]="today" [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
+                             [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="endDate">End Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                            [maxDate]="today" [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                             [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                         </div>
                     </div>
                     <div class="form-group col-lg-4">

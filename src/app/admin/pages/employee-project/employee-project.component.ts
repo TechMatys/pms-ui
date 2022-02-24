@@ -74,8 +74,9 @@ export class EmployeeProjectComponent implements OnInit {
       id: 4,
       name: 'Project Signal'
     }];
+  today: Date;
 
-  constructor() { }
+  constructor() { this.today = new Date();}
 
   // Function to add new button
   addEmployeeProject() {

@@ -11374,6 +11374,11 @@ input[type="file"] {
   list-style-type: none;
 }
 
+.filerDate label{
+  padding-top: 5px;
+  font-weight: bold;
+}
+
 .grid-loader img{
   height: 50px;
 }

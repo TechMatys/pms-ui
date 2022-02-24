@@ -187,9 +187,10 @@ export class EmployeePaymentComponent implements OnInit {
   }, {
     id: 5, name: '2018'
   }];
+  today: Date;
 
 
-  constructor() { }
+  constructor() { this.today = new Date(); }
 
   addEmployeePayment() {
     this.isShown = false;

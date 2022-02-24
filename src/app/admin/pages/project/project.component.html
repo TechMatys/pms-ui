@@ -128,7 +128,7 @@
                         <label for="startDate">Start Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
+                            [maxDate]="today"  [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                         </div>
                     </div>
 
@@ -136,7 +136,7 @@
                         <label for="completionDate">Completion Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
+                              [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                         </div>
                     </div>
 

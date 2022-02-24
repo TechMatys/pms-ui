@@ -54,9 +54,10 @@ export class ProjectComponent implements OnInit {
     status: GlobalCodes[];
     durations: GlobalCodes[];
     technologies: GlobalCodes[];
+  today: Date;
 
   constructor(private globalCodesService: GlobalCodesService) { 
-
+    this.today = new Date();
     this.status = this.globalCodesService.status;
     this.durations = this.globalCodesService.durations;
     this.technologies= this.globalCodesService.technologies;

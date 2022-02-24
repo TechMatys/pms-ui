@@ -103,8 +103,11 @@ export class CompanyExpensesComponent implements OnInit {
   },{
     name: 'Bill.pdf'
   }];
+  date: string | undefined;
+  today: Date;
 
   constructor(private formBuilder: FormBuilder) {
+    this.today = new Date();
     this.expenseForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -145,7 +148,7 @@ export class CompanyExpensesComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {this.date = new Date().toISOString().slice(0, 10);
   }
 
 }

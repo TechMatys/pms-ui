@@ -11314,6 +11314,10 @@ button.calendar, button.calendar:active {
   margin-bottom: 20px;
 }
 
+.mrgn-btm-25 {
+  margin-bottom: 25px;
+}
+
 .mrgn-top-5 {
   margin-top: 5px;
 }
@@ -11328,6 +11332,10 @@ button.calendar, button.calendar:active {
 
 .mrgn-top-20 {
   margin-top: 20px;
+}
+
+.mrgn-top-25 {
+  margin-top: 25px;
 }
 
 .action-button{

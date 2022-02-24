@@ -11288,7 +11288,7 @@ button.calendar, button.calendar:active {
   background-position: center;
 }
 
-thead {
+.dataTable  thead {
   background-color: #fcaeae;
   color: white;
 }
@@ -11382,4 +11382,8 @@ input[type="file"] {
   font-weight: bold;
   font-style: italic;
   font-size: 18px;
+}
+
+.header-btn {
+  margin-top: 20px;
 }

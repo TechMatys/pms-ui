@@ -9,28 +9,35 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
+
 export class DashboardComponent implements OnInit {
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  public barChartOptions: ChartConfiguration['options'] = {   
 
-  public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.scaleLabel: "<%= ' $' + Number(value)%>"
     scales: {
-      x: { max:5,
-        
-        grid: {
-        display: false
-        
-      }},
-      y: {
-        max: 250000,
+      x: {
+        max: 12,
         grid: {
           display: false
         }
-        
-      } },
-      
+      },
+      y: {
+        max: 300000,
+        grid: {
+          display: true
+        },
+        ticks: {
+          // Include a dollar sign in the ticks
+          callback: function (value : any) {
+            return '₹ ' +  dollarIndianLocale.format(value);
+          }
+        }
+      }
+    },
+
     plugins: {
       legend: {
         display: true,
@@ -38,61 +45,49 @@ export class DashboardComponent implements OnInit {
       datalabels: {
         anchor: 'end',
         align: 'end',
-        display : false
-      } 
-    } 
+        display: false
+      },
+      tooltip: {
+        titleMarginBottom: 10,
+        titleColor: '#6e707e',
+        bodyColor: '#008223',
+        padding: 15,
+        backgroundColor: "rgb(255,255,255)",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        displayColors: false,
+        caretPadding: 10,
+        callbacks: {
+          label: tooltipItem => '₹ ' + tooltipItem.raw,
+        }
+      }
+    },
+
   };
- 
+
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [
-    DataLabelsPlugin 
+    DataLabelsPlugin
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: [ 'January','February','March','April','May','June','July', 'August', 'September', 'October', 'November', 'December' ],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
     datasets: [
-      {  backgroundColor: "#4e73df",
-      hoverBackgroundColor: "#2e59d9",
-      borderColor: "#4e73df",
-      maxBarThickness: 30,
-      
-      data: [  90000, 140000, 20000, 150000, 30000, 120000 ], label: "Revenue "   }
-     
+      {
+        backgroundColor: "#4e73df",
+        hoverBackgroundColor: "#2e59d9",
+        borderColor: "#4e73df",
+        maxBarThickness: 30,
+        data: [90000, 140000, 20000, 150000, 30000, 120000],
+        label: 'Revenue'
+      }
     ]
   };
-
-  // events
-  public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40 ];
-
-    this.chart?.update();
-     {
-      
-    }
-   
-    
-  }
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  
-
 }
+
+const dollarIndianLocale = Intl.NumberFormat('en-IN');

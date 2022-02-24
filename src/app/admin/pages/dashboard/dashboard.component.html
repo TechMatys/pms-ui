@@ -132,8 +132,12 @@
             </div>
             <div class="card-body">
                 <div class="chart-bar">
-                    <canvas id="myBarChart" baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-                        [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    <canvas id="myBarChart" 
+                    baseChart 
+                    [data]="barChartData" 
+                    [type]="barChartType"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins">
                     </canvas>
                 </div>
             </div>

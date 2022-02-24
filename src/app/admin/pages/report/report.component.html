@@ -9,7 +9,7 @@
         <form class="form-horizontal">
 
             <div class="row">
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-4">
                     <label for="stratdate">Start Date</label>
                     <div class="input-group">
                         <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
@@ -17,9 +17,11 @@
                             [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                     </div>
                 </div>
+            </div>
 
+            <div class="row">
 
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-4">
                     <label for="enddate">End Date</label>
                     <div class="input-group">
                         <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
@@ -29,9 +31,8 @@
                 </div>
             </div>
 
-
             <div class="row">
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-4">
                     <label for="reportType">Report Type</label>
                     <select name="reportType" class="form-select col-lg-12"
                         (change)="onReportTypeChange($event.target)">

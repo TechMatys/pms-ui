@@ -59,14 +59,10 @@ export class EmployeeComponent implements OnInit {
     this.today = new Date();
 
     this.employeeForm = this.formBuilder.group({
+      employeeId: [0],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      emailAddress: ['', Validators.required],
-      mobile: ['', Validators.required]
     });
-
   }
-
 
   addEmployee() {
     this.isShown = false;
@@ -84,11 +80,25 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: any) {
-    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
-      .then((confirmed) => {
-        if (confirmed) {
-          this.toastr.success("Employee deleted successfully", "Sucess");
-        }
+    this.http.delete(this.controllerName, employee.employeeId)
+      .subscribe(res => {
+        this.toastr.success("Employee deleted successfully", "Success");
+        this.getAllEmployeeList();
+      });
+
+    // this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
+    //   .then((confirmed) => {
+    //     if (confirmed) {
+    //       this.toastr.success("Employee deleted successfully", "Success");
+    //     }
+    //   });
+  }
+
+  editEmployee(employee: any) {
+    this.http.get(this.controllerName, employee.employeeId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.employeeForm.setValue(res);
       });
   }
 
@@ -102,15 +112,26 @@ export class EmployeeComponent implements OnInit {
       return;
     }
 
-    this.http.create(this.controllerName, this.employeeForm).subscribe(res => {
-      //toastr.success()
-      this.getAllEmployeeList();
-    });
-
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.employeeForm.value))
+    const employeeData = this.employeeForm.value;
+    const employeeId = employeeData.employeeId;
+    if (employeeId < 1) {
+      this.http.create(this.controllerName, this.employeeForm.value)
+        .subscribe(res => {
+          this.toastr.success("Employee created successfully", "Success");
+          this.getAllEmployeeList();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, employeeId, this.employeeForm.value)
+        .subscribe(res => {
+          this.toastr.success("Employee updated successfully", "Success");
+          this.getAllEmployeeList();
+        });
+    }
   }
 
   getAllEmployeeList() {
+    this.isShown = true;
     this.http.getAll(this.controllerName).subscribe(res => {
       this.employeeList = res;
     });

@@ -13,7 +13,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { LoginComponent } from './home/login/login.component';
 import { AdminComponent } from './admin/admin.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
@@ -30,6 +29,7 @@ import { DataTablesModule } from "angular-datatables";
 import { NgChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   declarations: [
@@ -50,14 +50,11 @@ import { HttpClientModule } from '@angular/common/http';
     PopUpComponent,
     ReportComponent,
     ProfileComponent,
-    GenerateInvoiceComponent,
-    
-
+    GenerateInvoiceComponent,  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
@@ -65,8 +62,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     DataTablesModule,
     NgChartsModule,
-    BsDatepickerModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    CollapseModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,7 +5,7 @@
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button"
-        (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseProject">
+        (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSettings">
         <span class="mr-2 d-none d-lg-inline text-gray-600 small">
           <h6>
             Welcome Admin
@@ -13,8 +13,7 @@
         </span>
       </a>
       <!-- Dropdown - User Information -->
-      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" #collapse="ngbCollapse"
-        [(ngbCollapse)]="isCollapsed">
+      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" [collapse]="isCollapsed" [isAnimated]="true">
 
         <a class="dropdown-item" href="javascript:void(0)" routerLink="Profile">
           <fa-icon [icon]="faProfile"></fa-icon> My Profile

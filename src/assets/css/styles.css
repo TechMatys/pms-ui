@@ -5749,7 +5749,7 @@ a.close.disabled {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1040;
+  z-index: 1040 !important;
   width: 100vw;
   height: 100vh;
   background-color: #000;
@@ -5767,10 +5767,12 @@ a.close.disabled {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid #e3e6f0;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+  background-color: #f5f5f5;
+  color: black;
 }
 
 .modal-header .close {
@@ -11399,4 +11401,8 @@ input[type="file"] {
 
 .header-btn {
   margin-top: 20px;
+}
+
+.pop-up-btn {
+  width: 100px !important;
 }

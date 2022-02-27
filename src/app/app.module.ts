@@ -13,7 +13,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { LoginComponent } from './home/login/login.component';
 import { AdminComponent } from './admin/admin.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
@@ -29,6 +28,7 @@ import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generat
 import { DataTablesModule } from "angular-datatables";
 import { NgChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   declarations: [
@@ -49,14 +49,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     PopUpComponent,
     ReportComponent,
     ProfileComponent,
-    GenerateInvoiceComponent,
-    
-
+    GenerateInvoiceComponent,  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
@@ -64,6 +61,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ReactiveFormsModule,
     DataTablesModule,
     NgChartsModule,
+    CollapseModule,
     BsDatepickerModule.forRoot()
   ],
   providers: [],

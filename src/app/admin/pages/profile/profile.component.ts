@@ -13,9 +13,13 @@ export class ProfileComponent implements OnInit {
   }, {
     id: 2, name: 'Female'
   }];
-
   
-  constructor() { }
+  today: Date;
+
+  constructor() { 
+    this.today = new Date();
+
+  }
 
   onGenderChange(item: any) {
   }

@@ -1,13 +1,10 @@
 <div class="modal-header">
-    <h5 class="modal-title">{{ title }}</h5>
-    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h5 class="modal-title pop-up-header">{{ title }}</h5>
   </div>
   <div class="modal-body">
     <div [innerHTML]="message"></div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
-    <button *ngIf="btnCancelText" type="button" class="btn btn-outline-secondary" (click)="decline()">{{ btnCancelText }}</button>
+    <button type="button" class="btn btn-success pop-up-btn" (click)="accept()">{{ btnOkText }}</button>
+    <button *ngIf="btnCancelText" type="button" class="btn btn-outline-secondary pop-up-btn" (click)="decline()">{{ btnCancelText }}</button>
   </div>

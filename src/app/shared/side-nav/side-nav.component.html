@@ -32,14 +32,14 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="collapseProject.toggle()"
-            [attr.aria-expanded]="!isCollapsedPoject" aria-controls="collapseProject">
+        <a class="nav-link" href="javascript:void(0)" (click)="isCollapsedPoject = !isCollapsedPoject" 
+        [attr.aria-expanded]="!isCollapsedPoject" aria-controls="collapseProject">
             <fa-icon [icon]="faProject"></fa-icon>
             <span>Project</span>
             <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedPoject"></fa-icon>
             <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedPoject"></fa-icon>
         </a>
-        <div #collapseProject="ngbCollapse" [(ngbCollapse)]="isCollapsedPoject">
+        <div [collapse]="isCollapsedPoject" [isAnimated]="true">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="javascript:void(0)" routerLink="Project">
                     Project Details
@@ -56,14 +56,14 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="collapseEmployee.toggle()"
-            [attr.aria-expanded]="!isCollapsedEmployee" aria-controls="collapseEmployee">
+        <a class="nav-link" href="javascript:void(0)" (click)="isCollapsedEmployee = !isCollapsedEmployee" 
+        [attr.aria-expanded]="!isCollapsedEmployee" aria-controls="isCollapsedEmployee">
             <fa-icon [icon]="faUsers"></fa-icon>
             <span>Employee</span>
             <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedEmployee"></fa-icon>
             <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedEmployee"></fa-icon>
         </a>
-        <div #collapseEmployee="ngbCollapse" [(ngbCollapse)]="isCollapsedEmployee">
+        <div [collapse]="isCollapsedEmployee" [isAnimated]="true">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="javascript:void(0)" routerLink="Employee">
                     Employee Details
@@ -82,14 +82,14 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="collapseCompany.toggle()"
-            [attr.aria-expanded]="!isCollapsedCompany" aria-controls="collapseEmployee">
+        <a class="nav-link" href="javascript:void(0)" (click)="isCollapsedCompany = !isCollapsedCompany" 
+        [attr.aria-expanded]="!isCollapsedCompany" aria-controls="collapseEmployee">
             <fa-icon [icon]="faCompany"></fa-icon>
             <span>Company</span>
             <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedCompany"></fa-icon>
             <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedCompany"></fa-icon>
         </a>
-        <div #collapseCompany="ngbCollapse" [(ngbCollapse)]="isCollapsedCompany">
+        <div [collapse]="isCollapsedCompany" [isAnimated]="true">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="javascript:void(0)" routerLink="CompanyExpenses">
                     Company Expenses

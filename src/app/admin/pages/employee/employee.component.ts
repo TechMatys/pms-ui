@@ -103,7 +103,7 @@ export class EmployeeComponent implements OnInit {
 
   }
 
-  deleteEmployee(employee: any) {
+  deleteEmployee(employee: any) {    
     this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
       .then((confirmed) => {
         if (confirmed) {

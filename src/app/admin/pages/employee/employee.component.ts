@@ -80,18 +80,16 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: any) {
-    this.http.delete(this.controllerName, employee.employeeId)
-      .subscribe(res => {
-        this.toastr.success("Employee deleted successfully", "Success");
-        this.getAllEmployeeList();
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.http.delete(this.controllerName, employee.employeeId)
+            .subscribe(res => {
+              this.toastr.success("Employee deleted successfully", "Success");
+              this.getAllEmployeeList();
+            });
+        }
       });
-
-    // this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
-    //   .then((confirmed) => {
-    //     if (confirmed) {
-    //       this.toastr.success("Employee deleted successfully", "Success");
-    //     }
-    //   });
   }
 
   editEmployee(employee: any) {

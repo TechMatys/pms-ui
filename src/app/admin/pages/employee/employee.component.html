@@ -32,12 +32,12 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let employee of employeeList">
-                                <td>{{employee.name}}</td>
-                                <td>{{employee.emailAddress}}</td>
-                                <td>{{employee.startDate}}</td>
-                                <td>{{employee.designation}}</td>
+                                <td>{{employee.firstName}} {{employee.lastName}}</td>
+                                <td>{{employee.emailAddress || 'N/A'}}</td>
+                                <td>{{employee.startDate || 'N/A'}}</td>
+                                <td>{{employee.designation || 'N/A'}}</td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editEmployee(employee)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
                                     <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteEmployee(employee)">
@@ -83,8 +83,7 @@
                     <div class="form-group col-lg-4">
                         <label for="lastNname">Last Name*</label>
                         <input class="form-control" type="text" id="lastNname" placeholder="Last Name"
-                            autocomplete="off" maxlength="100"
-                            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
+                            autocomplete="off" maxlength="100">
                     </div>
                 </div>
                 <div class="row">
@@ -115,14 +114,12 @@
                     <div class="form-group col-lg-6">
                         <label for="emailAddress">Email Address*</label>
                         <input class="form-control" type="text" id="emailAddress" placeholder="Email Address"
-                            autocomplete="off" maxlength="100"
-                            [ngClass]="{ 'is-invalid': submitted && f['emailAddress'].errors }">
+                            autocomplete="off" maxlength="100">
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="mobile">Mobile*</label>
                         <input class="form-control" type="text" id="mobile" placeholder="(XXX) XXX XXXX"
-                            mask="(000) 000 0000" autocomplete="off"
-                            [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }">
+                            mask="(000) 000 0000" autocomplete="off">
                     </div>
                 </div>
                 <div class="row">

@@ -4,9 +4,11 @@ import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalCodesService, GlobalCodes } from 'src/app/core/services/global-codes/global-codes.service';
+import { HttpService } from 'src/app/core/services/https/http.service';
 
 interface Employee {
-  name: string,
+  firstName: string,
+  lastName: string,
   emailAddress: string;
   startDate: string;
   designation: string;
@@ -29,32 +31,9 @@ export class EmployeeComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = true;
   isAddNew: boolean = true;
+  controllerName = "Employee";
 
-  employeeList: Employee[] = [
-    {
-      name: 'Earl of Lemongrab',
-      emailAddress: 'earllemongrab12@gmail.com',
-      startDate: '12/11/2000',
-      designation: 'Lemon Candy',
-    },
-    {
-      name: 'Bonnibel Bubblegum',
-      emailAddress: 'bonnibelbubblegum13@gmail.com',
-      startDate: '14/05/1990',
-      designation: 'Lemon Candy',
-    },
-    {
-      name: 'Phoebe',
-      emailAddress: 'phoebe15@gmail.com',
-      startDate: '17/12/2010',
-      designation: 'Lemon Candy',
-    },
-    {
-      name: 'Lumpy Space Princess',
-      emailAddress: 'lumpyprincess20@gmail.com',
-      startDate: '14/07/2005',
-      designation: 'Lemon Candy',
-    }];
+  employeeList: Employee[] = [];
 
   // State name create
   states = [{
@@ -66,27 +45,24 @@ export class EmployeeComponent implements OnInit {
   }, {
     id: 2, name: 'Himachal Pradesh'
   }];
-  
-  genders: GlobalCodes[];   
+
+  genders: GlobalCodes[];
   designations: GlobalCodes[];
   status: GlobalCodes[];
-  
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService, private globalCodesService: GlobalCodesService) {
-    
+
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
+    private globalCodesService: GlobalCodesService, private http: HttpService) {
+
     this.genders = this.globalCodesService.genders;
     this.designations = this.globalCodesService.designations;
     this.status = this.globalCodesService.status;
     this.today = new Date();
 
     this.employeeForm = this.formBuilder.group({
+      employeeId: [0],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      emailAddress: ['', Validators.required],
-      mobile: ['', Validators.required]
     });
-    
   }
-  
 
   addEmployee() {
     this.isShown = false;
@@ -98,17 +74,29 @@ export class EmployeeComponent implements OnInit {
 
   onGenderChange(item: any) {
   }
-  
+
   onStatusChange(item: any) {
 
   }
 
-  deleteEmployee(employee: any) {    
+  deleteEmployee(employee: any) {
     this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
       .then((confirmed) => {
         if (confirmed) {
-          this.toastr.success("Employee deleted successfully", "Sucess");
+          this.http.delete(this.controllerName, employee.employeeId)
+            .subscribe(res => {
+              this.toastr.success("Employee deleted successfully", "Success");
+              this.getAllEmployeeList();
+            });
         }
+      });
+  }
+
+  editEmployee(employee: any) {
+    this.http.get(this.controllerName, employee.employeeId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.employeeForm.setValue(res);
       });
   }
 
@@ -122,9 +110,32 @@ export class EmployeeComponent implements OnInit {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.employeeForm.value))
+    const employeeData = this.employeeForm.value;
+    const employeeId = employeeData.employeeId;
+    if (employeeId < 1) {
+      this.http.create(this.controllerName, this.employeeForm.value)
+        .subscribe(res => {
+          this.toastr.success("Employee created successfully", "Success");
+          this.getAllEmployeeList();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, employeeId, this.employeeForm.value)
+        .subscribe(res => {
+          this.toastr.success("Employee updated successfully", "Success");
+          this.getAllEmployeeList();
+        });
+    }
+  }
+
+  getAllEmployeeList() {
+    this.isShown = true;
+    this.http.getAll(this.controllerName).subscribe(res => {
+      this.employeeList = res;
+    });
   }
 
   ngOnInit(): void {
+    this.getAllEmployeeList();
   }
 }

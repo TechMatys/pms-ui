@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpService } from 'src/app/core/services/https/http.service';
 
 export interface GlobalCodes {
   id: number,
@@ -10,6 +12,8 @@ export interface GlobalCodes {
 })
 export class GlobalCodesService {
 
+  controllerName : string = "global-codes";
+
   genders: GlobalCodes[] = [{
     id: 0, name: '-- Select Gender --'
   }, {
@@ -18,13 +22,7 @@ export class GlobalCodesService {
     id: 2, name: 'Female'
   }];
 
-  designations: GlobalCodes[] = [{
-    id: 0, name: '-- Select Designations --'
-  }, {
-    id: 1, name: 'Developer'
-  }, {
-    id: 2, name: 'Manager'
-  }];
+  designations: GlobalCodes[] = [];
 
   status: GlobalCodes[] = [{
     id: 0, name: '-- Select Status --'
@@ -52,7 +50,7 @@ export class GlobalCodesService {
     id: 3, name: 'CSS'
   }, {
     id: 4, name: 'Javascript'
-  }];    
+  }];
 
   roles = [{
     id: 0, name: '-- Select Roles --'
@@ -61,6 +59,11 @@ export class GlobalCodesService {
   }, {
     id: 2, name: 'Staff'
   }];
-  
-  constructor() { }
+
+  constructor(public http: HttpService) {  }
+
+  getDesignations(): Observable<any[]> {
+    this.controllerName = this.controllerName + "/designations"
+    return this.http.getAll(this.controllerName);
+  }
 }

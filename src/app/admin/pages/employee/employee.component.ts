@@ -48,13 +48,12 @@ export class EmployeeComponent implements OnInit {
 
   genders: GlobalCodes[];
   designations: GlobalCodes[] = [];
-  status: GlobalCodes[];
+  status: GlobalCodes[] = [];
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
 
     this.genders = this.globalCodesService.genders;
-    this.status = this.globalCodesService.status;
     this.today = new Date();
 
     this.employeeForm = this.formBuilder.group({
@@ -63,10 +62,16 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  getDesignaton (){
-    this.globalCodesService.getDesignations().subscribe(res => {
+  getDesignation (){
+    this.globalCodesService.getGlobalCodes("designations").subscribe(res => {
       // this.designations.spl({id: 0, name: '-- Select Desination --'})
       this.designations = res;
+    });
+  }
+
+  getStatus (){
+    this.globalCodesService.getGlobalCodes("employee-status").subscribe(res => {
+      this.status = res;
     });
   }
 
@@ -143,6 +148,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllEmployeeList();
-    this.getDesignaton();
+    this.getDesignation();
+    this.getStatus();
   }
 }

@@ -5,6 +5,8 @@ import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalCodesService, GlobalCodes } from 'src/app/core/services/global-codes/global-codes.service';
 import { HttpService } from 'src/app/core/services/https/http.service';
+import { Observable } from 'rxjs';
+
 
 interface Employee {
   firstName: string,
@@ -21,6 +23,7 @@ interface Employee {
 })
 export class EmployeeComponent implements OnInit {
 
+
   dtOptions: DataTables.Settings = {};
 
   employeeForm: FormGroup;
@@ -34,35 +37,26 @@ export class EmployeeComponent implements OnInit {
   controllerName = "Employee";
 
   employeeList: Employee[] = [];
-
-  // State name create
-  states = [{
-    id: 0, name: '-- Select State --'
-  }, {
-    id: 1, name: 'Uttarakhand'
-  }, {
-    id: 2, name: 'Bihar'
-  }, {
-    id: 2, name: 'Himachal Pradesh'
-  }];
-
-  genders: GlobalCodes[];
-  designations: GlobalCodes[];
-  status: GlobalCodes[];
+  states: GlobalCodes[] = [];
+  genders: GlobalCodes[] = [];
+  designations: GlobalCodes[] = [];
+  status: GlobalCodes[] = [];
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
 
     this.genders = this.globalCodesService.genders;
-    this.designations = this.globalCodesService.designations;
     this.status = this.globalCodesService.status;
+    this.designations = this.globalCodesService.designations;
     this.today = new Date();
 
     this.employeeForm = this.formBuilder.group({
       employeeId: [0],
       firstName: ['', Validators.required],
     });
+
   }
+
 
   addEmployee() {
     this.isShown = false;
@@ -133,9 +127,22 @@ export class EmployeeComponent implements OnInit {
     this.http.getAll(this.controllerName).subscribe(res => {
       this.employeeList = res;
     });
+
+  }
+  getstates(){
+    this.globalCodesService.getGlobalCodes("states").subscribe(res => {
+      this.states = res;
+    });
+  }
+  getgenders(){
+    this.globalCodesService.getGlobalCodes("genders").subscribe(res => {
+      this.genders = res;
+    });
   }
 
   ngOnInit(): void {
     this.getAllEmployeeList();
+    this.getstates();
+    this.getgenders();
   }
 }

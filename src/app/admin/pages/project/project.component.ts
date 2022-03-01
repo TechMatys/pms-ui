@@ -6,7 +6,7 @@ interface Project {
   name: string,
   startDate: string,
   status: string,
-  technology : string
+  technology: string
 }
 
 @Component({
@@ -22,55 +22,65 @@ export class ProjectComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = true;
   isAddNew: boolean = true;
-  
+
   projectlist: Project[] = [
     {
       name: 'Project 1',
       startDate: '10/05/2020',
       status: 'In Progress',
-      technology : 'ASP.Net Core'
-    },{
+      technology: 'ASP.Net Core'
+    }, {
       name: 'Project 2',
       startDate: '19/05/2021',
       status: 'In Progress',
-      technology : 'Python'
-    },{
+      technology: 'Python'
+    }, {
       name: 'Project 3',
       startDate: '10/04/2020',
       status: 'In Progress',
-      technology : 'Angular'
-    },{
+      technology: 'Angular'
+    }, {
       name: 'Project 4',
       startDate: '20/04/2020',
       status: 'In Progress',
-      technology : 'CSS'
-    },{
+      technology: 'CSS'
+    }, {
       name: 'Project 5',
       startDate: '10/06/2020',
       status: 'In Progress',
-      technology : 'HTML'
-    }];  
+      technology: 'HTML'
+    }];
 
-    status: GlobalCodes[];
-    durations: GlobalCodes[];
-    technologies: GlobalCodes[];
+  status: GlobalCodes[] = [];
+  durations: GlobalCodes[] = [];
+  technologies: GlobalCodes[] = [];
   today: Date;
 
-  constructor(private globalCodesService: GlobalCodesService) { 
+  constructor(private globalCodesService: GlobalCodesService) {
     this.today = new Date();
-    this.status = this.globalCodesService.status;
-    this.durations = this.globalCodesService.durations;
-    this.technologies= this.globalCodesService.technologies;
   }
 
+  getStatus() {
+    this.globalCodesService.getGlobalCodes("project-status").subscribe(res => {
+      this.status = res;
+    });
+  }
 
+  getDurations() {
+    this.globalCodesService.getGlobalCodes("project-durations").subscribe(res => {
+      this.durations = res;
+    });
+  }
+
+  getTechnologies() {
+    this.globalCodesService.getGlobalCodes("technologies").subscribe(res => {
+      this.technologies = res;
+    });
+  }
   // Function to add new button
   addProject() {
     this.isShown = false;
     this.isAddNew = true;
-  }
-
-  ngOnInit(): void {
   }
 
   onStatusChange(item: any) {
@@ -83,5 +93,13 @@ export class ProjectComponent implements OnInit {
   onProjectChange(item: any) {
 
   }
+  ngOnInit(): void {
+
+    this.getStatus();
+    this.getDurations();
+    this.getTechnologies();
+  }
+
+
 
 }

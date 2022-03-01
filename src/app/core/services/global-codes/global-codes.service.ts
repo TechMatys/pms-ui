@@ -24,25 +24,9 @@ export class GlobalCodesService {
     id: 2, name: 'Female'
   }];
 
-  durations: GlobalCodes[] = [{
-    id: 0, name: '-- Select Duration --'
-  }, {
-    id: 1, name: 'Monthly'
-  }, {
-    id: 2, name: 'One Time'
-  }];
+  durations: GlobalCodes[] = [];
 
-  technologies: GlobalCodes[] = [{
-    id: 0, name: 'Angular'
-  }, {
-    id: 1, name: '.NET Core'
-  }, {
-    id: 2, name: 'HTML'
-  }, {
-    id: 3, name: 'CSS'
-  }, {
-    id: 4, name: 'Javascript'
-  }];
+  technologies: GlobalCodes[] = [];
 
   roles = [{
     id: 0, name: '-- Select Roles --'

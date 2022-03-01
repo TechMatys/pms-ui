@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import { HttpService } from 'src/app/core/services/https/http.service';
 interface EmployeePayment {
   employeeName: string,
   amount: string;
   month: string;
   paymentDate: string;
+  
+}
+interface Employee {
+employeeId: number;
+firstName : string;
+lastName : string;
 }
 
 @Component({
@@ -21,7 +27,9 @@ export class EmployeePaymentComponent implements OnInit {
   faDelete = faTrash;
   isShown: boolean = true;
   isAddNew: boolean = true;
-  
+
+ 
+
   employeePaymentList: EmployeePayment[] = [
     {
       employeeName: 'Subhash Rawat',
@@ -127,21 +135,7 @@ export class EmployeePaymentComponent implements OnInit {
 
 
   // --Select Employee Name Create--
-  employees = [{
-    id: 0, name: '-- Select Employee --'
-  }, {
-    id: 1, name: 'Subhash Rawat'
-  }, {
-    id: 2, name: 'Tajwar Rawat'
-  }, {
-    id: 3, name: 'Prakash Rawat'
-  }, {
-    id: 4, name: 'Deepak Dhiman'
-  }, {
-    id: 5, name: 'Vikash Rawat'
-  }, {
-    id: 6, name: 'Vikram Rawat'
-  }];
+  employees: Employee[] = [];
 
 
   // --Select Month Create--  
@@ -190,7 +184,7 @@ export class EmployeePaymentComponent implements OnInit {
   today: Date;
 
 
-  constructor() { this.today = new Date(); }
+  constructor(private http: HttpService) { this.today = new Date(); }
 
   addEmployeePayment() {
     this.isShown = false;
@@ -216,10 +210,16 @@ export class EmployeePaymentComponent implements OnInit {
   onMonthChange(item: any) {
 
   }
+  getAllemployees() {
+    this.http.getAll('employee').subscribe(res => {
+      this.employees = res;
+    });
 
+  }
   
 
   ngOnInit(): void {
+    this.getAllemployees();
   }
 
 }

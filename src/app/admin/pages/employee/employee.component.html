@@ -111,7 +111,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="description">Designation</label>
-                        <select name="description" class="form-select col-lg-12">
+                        <select name="description" class="form-select col-lg-12" formControlName="designationId">
                             <option value="0">-- Select Designation --</option>
                             <option *ngFor="let designation of designations" [value]="designation.id">
                                 {{designation.name}}</option>

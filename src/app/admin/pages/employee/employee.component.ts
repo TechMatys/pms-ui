@@ -57,6 +57,18 @@ export class EmployeeComponent implements OnInit {
 
   }
 
+  getDesignation (){
+    this.globalCodesService.getGlobalCodes("designations").subscribe(res => {
+      // this.designations.spl({id: 0, name: '-- Select Desination --'})
+      this.designations = res;
+    });
+  }
+
+  getStatus (){
+    this.globalCodesService.getGlobalCodes("employee-status").subscribe(res => {
+      this.status = res;
+    });
+  }
 
   addEmployee() {
     this.isShown = false;
@@ -129,12 +141,12 @@ export class EmployeeComponent implements OnInit {
     });
 
   }
-  getstates(){
+  getStates(){
     this.globalCodesService.getGlobalCodes("states").subscribe(res => {
       this.states = res;
     });
   }
-  getgenders(){
+  getGenders(){
     this.globalCodesService.getGlobalCodes("genders").subscribe(res => {
       this.genders = res;
     });
@@ -142,7 +154,9 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllEmployeeList();
-    this.getstates();
-    this.getgenders();
+    this.getStates();
+    this.getGenders();
+    this.getDesignation();
+    this.getStatus();
   }
 }

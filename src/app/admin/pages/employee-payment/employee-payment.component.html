@@ -84,7 +84,8 @@
                         <label for="employee">Employee</label>
                         <select name="employee" class="form-select col-lg-12"
                             (change)="onEmployeeChange($event.target)">
-                            <option *ngFor="let employee of employees" [value]="employee.id">{{employee.name}}</option>
+                            <option value="0">-- Select Employee --</option>
+                            <option *ngFor="let employee of employees" [value]="employee.employeeId">{{employee.firstName}} {{employee.lastName}}</option>
                         </select>
                     </div>
                 </div>

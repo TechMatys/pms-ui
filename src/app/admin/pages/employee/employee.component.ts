@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { GlobalCodesService, GlobalCodes } from 'src/app/core/services/global-codes/global-codes.service';
 import { HttpService } from 'src/app/core/services/https/http.service';
-import { Observable } from 'rxjs';
-
 
 interface Employee {
   firstName: string,
@@ -23,7 +21,6 @@ interface Employee {
 })
 export class EmployeeComponent implements OnInit {
 
-
   dtOptions: DataTables.Settings = {};
 
   employeeForm: FormGroup;
@@ -32,6 +29,7 @@ export class EmployeeComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
+  faCalendar = faCalendarAlt;
   isShown: boolean = true;
   isAddNew: boolean = true;
   controllerName = "Employee";
@@ -53,31 +51,30 @@ export class EmployeeComponent implements OnInit {
     this.employeeForm = this.formBuilder.group({
       employeeId: [0],
       firstName: ['', Validators.required],
-      middleName:[ ''],
-      lastName:[ '' ],
-      gender :[''],
-      emailAddress :[''],
-      mobile :[''],
-      dateOfBirth :[''],
-      address :[''],
-      city :[''],
-      stateId :[''],
-      postalCode :[''],
-      startDate :[''],
-      endDate :['']
-      
+      middleName: [''],
+      lastName: ['', Validators.required],
+      gender: [''],
+      emailAddress: [''],
+      mobile: [''],
+      dateOfBirth: new FormControl(new Date()),
+      address: [''],
+      city: [''],
+      stateId: [0],
+      postalCode: [''],
+      startDate: new FormControl(new Date()),
+      endDate: [''],
     });
 
   }
 
-  getDesignation (){
+  getDesignation() {
     this.globalCodesService.getGlobalCodes("designations").subscribe(res => {
       // this.designations.spl({id: 0, name: '-- Select Desination --'})
       this.designations = res;
     });
   }
 
-  getStatus (){
+  getStatus() {
     this.globalCodesService.getGlobalCodes("employee-status").subscribe(res => {
       this.status = res;
     });
@@ -86,16 +83,6 @@ export class EmployeeComponent implements OnInit {
   addEmployee() {
     this.isShown = false;
     this.isAddNew = true;
-  }
-
-  onDesignationChange(item: any) {
-  }
-
-  onGenderChange(item: any) {
-  }
-
-  onStatusChange(item: any) {
-
   }
 
   deleteEmployee(employee: any) {
@@ -154,12 +141,12 @@ export class EmployeeComponent implements OnInit {
     });
 
   }
-  getStates(){
+  getStates() {
     this.globalCodesService.getGlobalCodes("states").subscribe(res => {
       this.states = res;
     });
   }
-  getGenders(){
+  getGenders() {
     this.globalCodesService.getGlobalCodes("genders").subscribe(res => {
       this.genders = res;
     });

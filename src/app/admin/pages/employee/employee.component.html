@@ -102,11 +102,11 @@
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
                                 [maxDate]="today" formControlName="dateOfBirth" #dob="bsDatepicker" readonly
                                 [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" (click)="dob.toggle()">
-                                        <fa-icon [icon]="faCalendar"></fa-icon>
-                                    </button>
-                                </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="dob.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
@@ -162,20 +162,20 @@
                         <label for="startDate">Start Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                            formControlName="startDate" [maxDate]="today" #sd="bsDatepicker" readonly
+                                formControlName="startDate" [maxDate]="today" #sd="bsDatepicker" readonly
                                 [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" (click)="sd.toggle()">
-                                        <fa-icon [icon]="faCalendar"></fa-icon>
-                                    </button>
-                                </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="sd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="endDate">End Date </label>
                         <div class="input-group">
-                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" formControlName="endDate" bsDatepicker
-                                [maxDate]="today" #ed="bsDatepicker" readonly
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" formControlName="endDate"
+                                bsDatepicker [maxDate]="today" #ed="bsDatepicker" readonly
                                 [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false, containerClass: 'theme-dark-blue'}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" (click)="ed.toggle()">

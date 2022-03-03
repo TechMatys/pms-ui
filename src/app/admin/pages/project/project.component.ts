@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
 import { HttpService } from 'src/app/core/services/https/http.service';
@@ -27,6 +27,7 @@ export class ProjectComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
+  faCalendar = faCalendarAlt;
   isShown: boolean = true;
   isAddNew: boolean = true;
   controllerName = "Project";
@@ -37,6 +38,7 @@ export class ProjectComponent implements OnInit {
   durations: GlobalCodes[] = [];
   technologies: GlobalCodes[] = [];
   today: Date;
+  dtTrigger: any;
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
@@ -47,12 +49,12 @@ export class ProjectComponent implements OnInit {
       name: [''],
       ownerName: [''],
       description: [''],
-      startDate: [''],
+      startDate: new FormControl(new Date()),
       durationId: [0],
       statusId: [0],
-      technologie: new FormControl(),
-      completionDate: [''],
-      budgetAmount: ['']
+      technologies: new FormControl(),
+      completionDate: new FormControl(new Date()),
+      budgetAmount: [''],
     });
   }
 
@@ -142,6 +144,7 @@ export class ProjectComponent implements OnInit {
     this.getStatus();
     this.getDurations();
     this.getTechnologies();
+    
   }
 
 

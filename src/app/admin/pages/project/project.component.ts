@@ -38,7 +38,6 @@ export class ProjectComponent implements OnInit {
   durations: GlobalCodes[] = [];
   technologies: GlobalCodes[] = [];
   today: Date;
-  dtTrigger: any;
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {

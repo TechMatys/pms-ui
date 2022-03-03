@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
+import { HttpService } from 'src/app/core/services/https/http.service';
+import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
 interface Project {
   name: string,
@@ -16,48 +20,41 @@ interface Project {
 })
 export class ProjectComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
+
+  projectForm: FormGroup;
+  submitted = false;
 
   faEdit = faEdit;
   faDelete = faTrash;
+  faCalendar = faCalendarAlt;
   isShown: boolean = true;
   isAddNew: boolean = true;
+  controllerName = "Project";
 
-  projectlist: Project[] = [
-    {
-      name: 'Project 1',
-      startDate: '10/05/2020',
-      status: 'In Progress',
-      technology: 'ASP.Net Core'
-    }, {
-      name: 'Project 2',
-      startDate: '19/05/2021',
-      status: 'In Progress',
-      technology: 'Python'
-    }, {
-      name: 'Project 3',
-      startDate: '10/04/2020',
-      status: 'In Progress',
-      technology: 'Angular'
-    }, {
-      name: 'Project 4',
-      startDate: '20/04/2020',
-      status: 'In Progress',
-      technology: 'CSS'
-    }, {
-      name: 'Project 5',
-      startDate: '10/06/2020',
-      status: 'In Progress',
-      technology: 'HTML'
-    }];
+  projectlist: Project[] = [];
 
   status: GlobalCodes[] = [];
   durations: GlobalCodes[] = [];
   technologies: GlobalCodes[] = [];
   today: Date;
 
-  constructor(private globalCodesService: GlobalCodesService) {
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
+    private globalCodesService: GlobalCodesService, private http: HttpService) {
     this.today = new Date();
+
+    this.projectForm = this.formBuilder.group({
+      projectId: [0],
+      name: [''],
+      ownerName: [''],
+      description: [''],
+      startDate: new FormControl(new Date()),
+      durationId: [0],
+      statusId: [0],
+      technologies: new FormControl(),
+      completionDate: new FormControl(new Date()),
+      budgetAmount: [''],
+    });
   }
 
   getStatus() {
@@ -82,22 +79,71 @@ export class ProjectComponent implements OnInit {
     this.isShown = false;
     this.isAddNew = true;
   }
-
-  onStatusChange(item: any) {
-
+  
+  deleteProject(project: any) {
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this project?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.http.delete(this.controllerName, project.projectId)
+            .subscribe(res => {
+              this.toastr.success("Project deleted successfully", "Success");
+              this.getAllProjectList();
+            });
+        }
+      });
   }
 
-  onDurationChange(item: any) {
+  editProject(project: any) {
+    this.http.get(this.controllerName, project.projectId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.projectForm.setValue(res);
+      });
+  }
+
+  get f() { return this.projectForm.controls; }
+
+  saveProject() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.projectForm.invalid) {
+      return;
+    }
+
+    const projectData = this.projectForm.value;
+    const projectId = projectData.projectId;
+    if (projectId < 1) {
+      this.http.create(this.controllerName, projectData)
+        .subscribe(res => {
+          this.toastr.success("Project created successfully", "Success");
+          this.getAllProjectList();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, projectId, projectData)
+        .subscribe(res => {
+          this.toastr.success("Project updated successfully", "Success");
+          this.getAllProjectList();
+        });
+    }
+  }
+
+  getAllProjectList() {
+    this.isShown = true;
+    this.http.getAll(this.controllerName).subscribe(res => {
+      this.projectlist = res;
+    });
 
   }
-  onProjectChange(item: any) {
-
-  }
+  
   ngOnInit(): void {
 
+    this.getAllProjectList();
     this.getStatus();
     this.getDurations();
     this.getTechnologies();
+    
   }
 
 

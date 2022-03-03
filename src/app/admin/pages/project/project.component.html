@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                    <table class="table table-stripped">
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
@@ -39,20 +39,20 @@
                                     {{project.name}}
                                 </td>
                                 <td>
-                                    {{project.startDate}}
+                                    {{project.startDate }}
                                 </td>
                                 <td>
-                                    {{ project.status}}
+                                    {{ project.status || 'N/A' }}
                                 </td>
                                 <td>
-                                    {{ project.technology}}
+                                    {{ project.technology || 'N/A' }}
                                 </td>
 
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editProject(project)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteProject(project)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
@@ -70,16 +70,19 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" [formGroup]="projectForm" (ngSubmit)="saveProject()">
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="name">Name </label>
-                        <input type="text" class="form-control" id="name" placeholder="Name" maxlength="20">
+                        <input type="text" class="form-control" id="name" placeholder="Name" maxlength="20"
+                            autocomplete="off" formControlName="name"
+                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
                     </div>
 
                     <div class="form-group col-lg-6">
                         <label for="ownerName">Owner Name</label>
-                        <input type="text" class="form-control" id="ownerName" placeholder="Owner Name" maxlength="50">
+                        <input type="text" class="form-control" id="ownerName" placeholder="Owner Name" maxlength="50"
+                            autocomplete="off" formControlName="ownerName">
                     </div>
                 </div>
 
@@ -87,16 +90,17 @@
                     <div class="form-group col-lg-6">
                         <label for="description">Description </label>
                         <textarea type="description" class="form-control" id="description"
-                            placeholder="Enter project description here" maxlength="200"></textarea>
+                            placeholder="Enter project description here" maxlength="200"
+                            formControlName="description"></textarea>
                     </div>
 
                     <div class="form-group col-lg-6">
-                        <label for="technology">Technology </label>
+                        <label for="technology">Technology</label>
                         <div>
                             <ul class="technology-list">
                                 <li *ngFor="let technology of technologies">
                                     <label class="btn btn-primary-active">
-                                        <input type="checkbox"> {{technology.name}}
+                                        <input type="checkbox" formControlName="technologies"> {{technology.name}}
                                     </label>
                                 </li>
                             </ul>
@@ -107,8 +111,7 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="duration">Duration </label>
-                        <select name="duration" class="form-select col-lg-12"
-                            (change)="onDurationChange($event.target)">
+                        <select name="duration" class="form-select col-lg-12" formControlName="durationId">
                             <option value="0">-- Select Duration --</option>
                             <option *ngFor="let duration of durations" [value]="duration.id"> {{duration.name}}
                             </option>
@@ -117,7 +120,7 @@
 
                     <div class="form-group col-lg-4">
                         <label for="status">Status </label>
-                        <select name="status" class="form-select col-lg-12" (change)="onStatusChange($event.target)">
+                        <select name="status" class="form-select col-lg-12" formControlName="statusId">
                             <option value="0">-- Select Status --</option>
                             <option *ngFor="let status of status" [value]="status.id">{{status.name}}
                             </option>
@@ -130,8 +133,13 @@
                         <label for="startDate">Start Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                mask="00/00/0000" [maxDate]="today"
-                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                                formControlName="startDate" [maxDate]="today" #sd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="sd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -139,8 +147,13 @@
                         <label for="completionDate">Completion Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                mask="00/00/0000"
-                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                                formControlName="completionDate" [maxDate]="today" #sd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="sd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -153,19 +166,21 @@
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="budgetAmount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="000000">
+                                    mask="000000" autocomplete="off" formControlName="budgetAmount">
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row submit-buttons">
-                        <div class="form-group col-lg-12">
-                            <input type="submit" class="btn btn-success" value="Save" />
-                            <input type="button" class="btn btn-outline-primary" value="Cancel"
-                                (click)="isShown = true" />
-                        </div>
+
+
+                <div class="row submit-buttons">
+                    <div class="form-group col-lg-12">
+                        <input type="submit" class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
                     </div>
                 </div>
+
             </form>
         </div>
     </div>

@@ -57,6 +57,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr *ngIf="!projectlist.length">
+                                <td colspan="5">
+                                    No project founds
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

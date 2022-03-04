@@ -54,10 +54,10 @@
                                 <td>{{employeePayment.month}}</td>
                                 <td>{{employeePayment.paymentDate}}</td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit"(click)="editEmployee(employeePayment)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete"(click)="deleteEmployee(employeePayment)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
@@ -78,12 +78,11 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" [formGroup]="employeeForm" (ngSubmit)="saveEmployeePayment()">
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="employee">Employee</label>
-                        <select name="employee" class="form-select col-lg-12"
-                            (change)="onEmployeeChange($event.target)">
+                        <select name="employee" class="form-select col-lg-12" formControlName="employeeId">
                             <option value="0">-- Select Employee --</option>
                             <option *ngFor="let employee of employees" [value]="employee.employeeId">{{employee.firstName}} {{employee.lastName}}</option>
                         </select>
@@ -98,8 +97,8 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
-                                <input type="text" class="form-control" id="amount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000">
+                                <input type="text" class="form-control"    id="amount" placeholder="XXXXXXX"
+                                    autocomplete="off" mask="0000000" >
                             </div>
                         </div>
                     </div>
@@ -110,15 +109,22 @@
                         <label for="year">Payment Month/Year</label>
                         <input autocomplete="off" class="form-control" name="date" bsDatepicker [maxDate]="today"
                             [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}" minMode="month"
-                            placeholder="MM/YYYY" mask="00/0000">
+                            placeholder="MM/YYYY">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="paymentdate">Payment Date</label>
-                        <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
+                        <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker 
                             [maxDate]="today"
                             [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="notes">Note</label>
+                        <textarea type="text" name="notes" placeholder="Note" class="form-control "
+                            autocomplete="off" maxlength="200" formControlName="notes"></textarea>
                     </div>
                 </div>
 

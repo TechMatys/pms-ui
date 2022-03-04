@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from 'src/app/core/services/https/http.service';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
+
 interface EmployeePayment {
   employeeName: string,
   amount: string;
@@ -25,158 +29,102 @@ export class EmployeePaymentComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
+ 
   isShown: boolean = true;
   isAddNew: boolean = true;
-
+  controllerName = "Employee";
  
 
-  employeePaymentList: EmployeePayment[] = [
-    {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/07/2020'
-    }, {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/12/2019'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/01/2021'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2020'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/02/2021'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }];
-
-
-  // --Select Employee Name Create--
+  employeePaymentList: EmployeePayment[] = [];
   employees: Employee[] = [];
-
-
+  employeeForm: FormGroup;
+  submitted = false;
   today: Date;
 
 
-  constructor(private http: HttpService) { this.today = new Date(); }
+  constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) { this.today = new Date();
+  
+    this.employeeForm = this.formBuilder.group({
+      employeeId: [0],
+      amount: [''],
+      paymentMonth :[''],
+      paymentYear : [''],
+      PaymentDate :[''],
+      notes :['']
+    });
+  }
 
+
+  
   addEmployeePayment() {
     this.isShown = false;
     this.isAddNew = true;
   }
-
-  onGridYearChange(item: any) {
-
-  }
-
-  onGridMonthChange(item: any) {
-
-  }
-
-  onEmployeeChange(item: any) {
-
-  }
-
-  onYearChange(item: any) {
-
-  }
-
-  onMonthChange(item: any) {
-
-  }
+  
   getAllemployees() {
     this.http.getAll('employee').subscribe(res => {
       this.employees = res;
     });
+  }
+
+  deleteEmployee(employee: any) {
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.http.delete(this.controllerName, employee.employeeId)
+            .subscribe(res => {
+              this.toastr.success("Employee deleted successfully", "Success");
+              this.getAllemployees();
+            });
+        }
+      });
+  }
+
+  editEmployee(employee: any) {
+    this.http.get(this.controllerName, employee.employeeId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.employeeForm.setValue(res);
+      });
+  }
+  saveEmployeePayment() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.employeeForm.invalid) {
+      return;
+    }
+
+    const employeeData = this.employeeForm.value;
+    const employeeId = employeeData.employeeId;
+    if (employeeId < 1) {
+      this.http.create(this.controllerName, this.employeeForm.value)
+        .subscribe(res => {
+          this.toastr.success("Employee created successfully", "Success");
+          this.getAllemployeePayment();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, employeeId, this.employeeForm.value)
+        .subscribe(res => {
+          this.toastr.success("Employee updated successfully", "Success");
+          this.getAllemployeePayment();
+        });
+    }
+  }
+
+  getAllemployeePayment() {
+    this.isShown = true;
+    this.http.getAll(this.controllerName).subscribe(res => {
+      this.employees = res;
+    });
 
   }
-  
+
 
   ngOnInit(): void {
     this.getAllemployees();
+    this.getAllemployeePayment();
   }
 
 }

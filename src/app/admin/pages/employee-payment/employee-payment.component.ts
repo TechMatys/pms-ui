@@ -25,7 +25,7 @@ lastName : string;
 })
 export class EmployeePaymentComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
 
   faEdit = faEdit;
   faDelete = faTrash;

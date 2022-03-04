@@ -37,7 +37,7 @@
             <hr>
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                    <table class="table table-stripped">
                         <thead>
                             <tr>
                                 <th scope="col">Employee Name</th>
@@ -62,6 +62,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr *ngIf="!employeePaymentList.length">
+                                <td colspan="5">
+                                    No records found
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -80,7 +85,7 @@
         <div class="card-body">
             <form class="form-horizontal" [formGroup]="employeeForm" (ngSubmit)="saveEmployeePayment()">
                 <div class="row">
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-6">
                         <label for="employee">Employee</label>
                         <select name="employee" class="form-select col-lg-12" formControlName="employeeId">
                             <option value="0">-- Select Employee --</option>
@@ -89,7 +94,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-6">
                         <label for="amount">Amount</label>
                         <div class="my-1">
                             <label class="sr-only" for="amount">Amount</label>
@@ -105,7 +110,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-6">
                         <label for="year">Payment Month/Year</label>
                         <input autocomplete="off" class="form-control" name="date" bsDatepicker [maxDate]="today"
                             [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}" minMode="month"
@@ -113,7 +118,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-6">
                         <label for="paymentdate">Payment Date</label>
                         <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker 
                             [maxDate]="today"
@@ -121,7 +126,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-6">
                         <label for="notes">Note</label>
                         <textarea type="text" name="notes" placeholder="Note" class="form-control "
                             autocomplete="off" maxlength="200" formControlName="notes"></textarea>

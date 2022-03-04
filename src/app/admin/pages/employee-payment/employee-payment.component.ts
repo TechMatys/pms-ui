@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from 'src/app/core/services/https/http.service';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
+
 interface EmployeePayment {
   employeeName: string,
   amount: string;
   month: string;
   paymentDate: string;
-  
+
 }
 interface Employee {
-employeeId: number;
-firstName : string;
-lastName : string;
+  employeeId: number;
+  firstName: string;
+  lastName: string;
 }
 
 @Component({
@@ -21,162 +25,104 @@ lastName : string;
 })
 export class EmployeePaymentComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
 
   faEdit = faEdit;
   faDelete = faTrash;
+
   isShown: boolean = true;
   isAddNew: boolean = true;
+  controllerName = "Employee-Payment";
 
- 
-
-  employeePaymentList: EmployeePayment[] = [
-    {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/07/2020'
-    }, {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/12/2019'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/01/2021'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Subhash Rawat',
-      amount: '₹ 70,000',
-      month: '02/2022',
-      paymentDate: '28/02/2020'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      amount: '₹ 90,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      amount: '₹ 50,000',
-      month: '02/2022',
-      paymentDate: '28/02/2021'
-    }, {
-      employeeName: 'Vikash Rawat',
-      amount: '₹ 40,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }, {
-      employeeName: 'Deepak Dhiman',
-      amount: '₹ 1,00,000',
-      month: '02/2022',
-      paymentDate: '28/02/2022'
-    }];
-
-
-  // --Select Employee Name Create--
-  employees: Employee[] = [];
-
-
+  employeePaymentList: EmployeePayment[] = [];
+  employeesList: Employee[] = [];
+  employeePaymentForm: FormGroup;
+  submitted = false;
   today: Date;
 
+  constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) {
+    this.today = new Date();
 
-  constructor(private http: HttpService) { this.today = new Date(); }
+    this.employeePaymentForm = this.formBuilder.group({
+      employeePaymentId: [0],
+      employeeId: [0],
+      amount: [''],
+      paymentMonthYear: [''],
+      paymentDate: [''],
+      notes: [''],
+      createdBy: ['']
+    });
+  }
 
   addEmployeePayment() {
     this.isShown = false;
     this.isAddNew = true;
   }
 
-  onGridYearChange(item: any) {
-
-  }
-
-  onGridMonthChange(item: any) {
-
-  }
-
-  onEmployeeChange(item: any) {
-
-  }
-
-  onYearChange(item: any) {
-
-  }
-
-  onMonthChange(item: any) {
-
-  }
-  getAllemployees() {
-    this.http.getAll('employee').subscribe(res => {
-      this.employees = res;
+  getAllEmployees() {
+    this.http.getAll('Employee').subscribe(res => {
+      this.employeesList = res;
     });
-
   }
-  
+
+  deleteEmployee(employeePayment: any) {
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee payment?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.http.delete(this.controllerName, employeePayment.employeePaymentId)
+            .subscribe(res => {
+              this.toastr.success("Employee payment deleted successfully", "Success");
+              this.getAllEmployeePayment();
+            });
+        }
+      });
+  }
+
+  editEmployee(employePayment: any) {
+    this.http.get(this.controllerName, employePayment.employeePaymentId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.employeePaymentForm.setValue(res);
+      });
+  }
+
+  saveEmployeePayment() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    // if (this.employeePaymentForm.invalid) {
+    //   return;
+    // }
+
+    const employeePaymentData = this.employeePaymentForm.value;
+    const employeePaymentId = employeePaymentData.employeePaymentId;
+
+    if (employeePaymentId < 1) {
+      this.http.create(this.controllerName, employeePaymentData)
+        .subscribe(res => {
+          this.toastr.success("Employee payment added successfully", "Success");
+          this.getAllEmployeePayment();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, employeePaymentId, employeePaymentData)
+        .subscribe(res => {
+          this.toastr.success("Employee payment updated successfully", "Success");
+          this.getAllEmployeePayment();
+        });
+    }
+  }
+
+  getAllEmployeePayment() {
+    this.isShown = true;
+    this.http.getAll(this.controllerName).subscribe(res => {
+      this.employeePaymentList = res;
+    });
+  }
 
   ngOnInit(): void {
-    this.getAllemployees();
+    this.getAllEmployees();
+    this.getAllEmployeePayment();
   }
 
 }

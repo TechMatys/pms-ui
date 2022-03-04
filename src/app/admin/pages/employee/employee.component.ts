@@ -50,9 +50,9 @@ export class EmployeeComponent implements OnInit {
 
     this.employeeForm = this.formBuilder.group({
       employeeId: [0],
-      firstName: ['', Validators.required],
+      firstName: [''],
       middleName: [''],
-      lastName: ['', Validators.required],
+      lastName: [''],
       gender: [0],
       emailAddress: [''],
       mobile: [''],
@@ -107,15 +107,15 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  get f() { return this.employeeForm.controls; }
+  //get f() { return this.employeeForm.controls; }
 
   saveEmployee() {
     this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.employeeForm.invalid) {
-      return;
-    }
+     //stop here if form is invalid
+   // if (this.employeeForm.invalid) {
+   //  return;
+   //}
 
     const employeeData = this.employeeForm.value;
     const employeeId = employeeData.employeeId;

@@ -107,9 +107,9 @@ export class ProjectComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.projectForm.invalid) {
-      return;
-    }
+   //if (this.projectForm.invalid) {
+     // return;
+  //}
 
     const projectData = this.projectForm.value;
     const projectId = projectData.projectId;

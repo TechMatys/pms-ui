@@ -65,11 +65,11 @@ export class EmployeePaymentComponent implements OnInit {
     });
   }
 
-  deleteEmployee(employee: any) {
+  deleteEmployee(employeePayment: any) {
     this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee payment?', 'Yes', 'No', 'md')
       .then((confirmed) => {
         if (confirmed) {
-          this.http.delete(this.controllerName, employee.employeeId)
+          this.http.delete(this.controllerName, employeePayment.employeePaymentId)
             .subscribe(res => {
               this.toastr.success("Employee payment deleted successfully", "Success");
               this.getAllEmployeePayment();

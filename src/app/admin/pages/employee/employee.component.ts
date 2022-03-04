@@ -50,20 +50,22 @@ export class EmployeeComponent implements OnInit {
 
     this.employeeForm = this.formBuilder.group({
       employeeId: [0],
-      firstName: ['', Validators.required],
-      middleName: [''],
-      lastName: ['', Validators.required],
+      firstName: [null, Validators.required],
+      middleName: [null],
+      lastName: [null, Validators.required],
       gender: [0],
-      emailAddress: [''],
-      mobile: [''],
+      emailAddress: [null],
+      mobile: [null],
       dateOfBirth: new FormControl(new Date()),
-      address: [''],
-      city: [''],
+      address: [null],
+      city: [null],
       stateId: [0],
+      statusId: [0],
       designationId: [0],
-      postalCode: [''],
+      postalCode: [null],
       startDate: new FormControl(new Date()),
-      endDate: [''],
+      endDate: [null],
+      managedBy: [0],
     });
 
   }

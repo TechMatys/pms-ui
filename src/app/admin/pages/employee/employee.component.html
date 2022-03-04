@@ -45,12 +45,17 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr *ngIf="!employeeList.length">
+                            <!-- <tr *ngIf="!employeeList.length">
                                 <td colspan="5" class="grid-loader">
                                     <label>
                                         Fetching data. Please wait
                                         <img src="../../../../assets/img/loader.gif">
                                     </label>
+                                </td>
+                            </tr> -->
+                            <tr *ngIf="!employeeList.length">
+                                <td colspan="5" class="grid-loader">
+                                    No Records Found
                                 </td>
                             </tr>
                         </tbody>
@@ -186,7 +191,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="status">Status </label>
-                        <select name="status" class="form-select col-lg-12">
+                        <select name="status" class="form-select col-lg-12" formControlName="statusId">
                             <option value="0">-- Select Status --</option>
                             <option *ngFor="let status of status" [value]="status.id">{{status.name}}
                             </option>

@@ -48,9 +48,9 @@ export class EmployeePaymentComponent implements OnInit {
       employeeId: [0],
       amount: [''],
       paymentMonthYear: [''],
-      paymentDate: new FormControl(new Date()),
+      paymentDate: [''],
       notes: [''],
-      createdBy: [0]
+      createdBy: ['']
     });
   }
 
@@ -90,9 +90,9 @@ export class EmployeePaymentComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.employeePaymentForm.invalid) {
-      return;
-    }
+    // if (this.employeePaymentForm.invalid) {
+    //   return;
+    // }
 
     const employeePaymentData = this.employeePaymentForm.value;
     const employeePaymentId = employeePaymentData.employeePaymentId;

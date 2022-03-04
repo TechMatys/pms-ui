@@ -52,7 +52,7 @@ export class ProjectComponent implements OnInit {
       durationId: [0],
       statusId: [0],
       technologies: new FormControl(),
-      completionDate: new FormControl(new Date()),
+      completionDate: [''],
       budgetAmount: [''],
     });
   }

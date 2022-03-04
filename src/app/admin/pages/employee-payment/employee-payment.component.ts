@@ -10,12 +10,12 @@ interface EmployeePayment {
   amount: string;
   month: string;
   paymentDate: string;
-  
+
 }
 interface Employee {
-employeeId: number;
-firstName : string;
-lastName : string;
+  employeeId: number;
+  firstName: string;
+  lastName: string;
 }
 
 @Component({
@@ -29,102 +29,100 @@ export class EmployeePaymentComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
- 
+
   isShown: boolean = true;
   isAddNew: boolean = true;
-  controllerName = "Employee";
- 
+  controllerName = "Employee-Payment";
 
   employeePaymentList: EmployeePayment[] = [];
-  employees: Employee[] = [];
-  employeeForm: FormGroup;
+  employeesList: Employee[] = [];
+  employeePaymentForm: FormGroup;
   submitted = false;
   today: Date;
 
+  constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) {
+    this.today = new Date();
 
-  constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) { this.today = new Date();
-  
-    this.employeeForm = this.formBuilder.group({
+    this.employeePaymentForm = this.formBuilder.group({
+      employeePaymentId: [0],
       employeeId: [0],
       amount: [''],
-      paymentMonth :[''],
-      paymentYear : [''],
-      PaymentDate :[''],
-      notes :['']
+      paymentMonthYear: [''],
+      paymentDate: new FormControl(new Date()),
+      notes: [''],
+      createdBy: [0]
     });
   }
 
-
-  
   addEmployeePayment() {
     this.isShown = false;
     this.isAddNew = true;
   }
-  
-  getAllemployees() {
-    this.http.getAll('employee').subscribe(res => {
-      this.employees = res;
+
+  getAllEmployees() {
+    this.http.getAll('Employee').subscribe(res => {
+      this.employeesList = res;
     });
   }
 
   deleteEmployee(employee: any) {
-    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee?', 'Yes', 'No', 'md')
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee payment?', 'Yes', 'No', 'md')
       .then((confirmed) => {
         if (confirmed) {
           this.http.delete(this.controllerName, employee.employeeId)
             .subscribe(res => {
-              this.toastr.success("Employee deleted successfully", "Success");
-              this.getAllemployees();
+              this.toastr.success("Employee payment deleted successfully", "Success");
+              this.getAllEmployeePayment();
             });
         }
       });
   }
 
-  editEmployee(employee: any) {
-    this.http.get(this.controllerName, employee.employeeId)
+  editEmployee(employePayment: any) {
+    this.http.get(this.controllerName, employePayment.employeePaymentId)
       .subscribe(res => {
         this.isShown = false;
-        this.employeeForm.setValue(res);
+        this.employeePaymentForm.setValue(res);
       });
   }
+
   saveEmployeePayment() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.employeeForm.invalid) {
+    if (this.employeePaymentForm.invalid) {
       return;
     }
 
-    const employeeData = this.employeeForm.value;
-    const employeeId = employeeData.employeeId;
-    if (employeeId < 1) {
-      this.http.create(this.controllerName, this.employeeForm.value)
+    const employeePaymentData = this.employeePaymentForm.value;
+    const employeePaymentId = employeePaymentData.employeePaymentId;
+
+    if (employeePaymentId < 1) {
+      this.http.create(this.controllerName, employeePaymentData)
         .subscribe(res => {
-          this.toastr.success("Employee created successfully", "Success");
-          this.getAllemployeePayment();
+          this.toastr.success("Employee payment added successfully", "Success");
+          this.getAllEmployeePayment();
         });
     }
     else {
-      this.http.update(this.controllerName, employeeId, this.employeeForm.value)
+      this.http.update(this.controllerName, employeePaymentId, employeePaymentData)
         .subscribe(res => {
-          this.toastr.success("Employee updated successfully", "Success");
-          this.getAllemployeePayment();
+          this.toastr.success("Employee payment updated successfully", "Success");
+          this.getAllEmployeePayment();
         });
     }
   }
 
-  getAllemployeePayment() {
+  getAllEmployeePayment() {
     this.isShown = true;
     this.http.getAll(this.controllerName).subscribe(res => {
-      this.employees = res;
+      this.employeePaymentList = res;
     });
-
   }
 
-
   ngOnInit(): void {
-    this.getAllemployees();
-    this.getAllemployeePayment();
+    this.getAllEmployees();
+    this.getAllEmployeePayment();
   }
 
 }

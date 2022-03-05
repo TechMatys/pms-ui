@@ -1,7 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { HttpService } from 'src/app/core/services/https/http.service';
 
+interface Dashboard {
+  totalEmployees: number,
+  totalProjects: number,
+  monthlyEarning: number;
+  annualEarning: number;
+  projectRevenue: ProjectRevenue[];
+  projectStatusDetail: ProjectStatusDetail[];
+}
+
+interface ProjectRevenue {
+  month: string,
+  amount: number
+}
+
+interface ProjectStatusDetail {
+  totalProject: number,
+  status: string,  
+  percentage: string,
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +29,12 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
   styleUrls: ['./dashboard.component.scss']
 })
 
+
 export class DashboardComponent implements OnInit {
+
+  controllerName = "Dashboard";
+
+  dashboardItems: Dashboard;
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -18,7 +43,7 @@ export class DashboardComponent implements OnInit {
       padding: {
         bottom: 10
       }
-    },   
+    },
 
     scales: {
       x: {
@@ -94,9 +119,25 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  constructor(private http: HttpService) {
+    this.dashboardItems = {
+      totalEmployees: 0,
+      totalProjects: 0,
+      monthlyEarning: 0,
+      annualEarning: 0,
+      projectRevenue: [],
+      projectStatusDetail: []
+    };
+  }
+
+  getDashboardItems() {
+    this.http.getAll(this.controllerName).subscribe((res : any) => {
+      this.dashboardItems = res;
+    });
+  }
 
   ngOnInit(): void {
+    this.getDashboardItems();
   }
 }
 

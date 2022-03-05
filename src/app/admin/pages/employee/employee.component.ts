@@ -50,20 +50,22 @@ export class EmployeeComponent implements OnInit {
 
     this.employeeForm = this.formBuilder.group({
       employeeId: [0],
-      firstName: [''],
-      middleName: [''],
-      lastName: [''],
+      firstName: [null, Validators.required],
+      middleName: [null],
+      lastName: [null, Validators.required],
       gender: [0],
-      emailAddress: [''],
-      mobile: [''],
-      dateOfBirth: new FormControl(new Date()),
-      address: [''],
-      city: [''],
+      emailAddress: [null],
+      mobile: [null],
+      dateOfBirth: new FormControl(this.today),
+      address: [null],
+      city: [null],
       stateId: [0],
+      statusId: [0],
       designationId: [0],
-      postalCode: [''],
-      startDate: new FormControl(new Date()),
-      endDate: [''],
+      postalCode: [null],
+      startDate: new FormControl(this.today),
+      endDate: [null],
+      managedBy: [0],
     });
 
   }
@@ -82,8 +84,21 @@ export class EmployeeComponent implements OnInit {
   }
 
   addEmployee() {
+    this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
+  }
+
+  resetForm(){
+    this.employeeForm.reset();
+    this.employeeForm.controls['dateOfBirth'].setValue(this.today); 
+    this.employeeForm.controls['startDate'].setValue(this.today); 
+    this.employeeForm.controls['gender'].setValue(0); 
+    this.employeeForm.controls['stateId'].setValue(0); 
+    this.employeeForm.controls['statusId'].setValue(0);  
+    this.employeeForm.controls['designationId'].setValue(0); 
+    this.employeeForm.controls['employeeId'].setValue(0); 
+    this.employeeForm.controls['managedBy'].setValue(0); 
   }
 
   deleteEmployee(employee: any) {

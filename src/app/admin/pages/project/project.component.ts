@@ -45,15 +45,18 @@ export class ProjectComponent implements OnInit {
 
     this.projectForm = this.formBuilder.group({
       projectId: [0],
-      name: [''],
-      ownerName: [''],
-      description: [''],
-      startDate: new FormControl(new Date()),
+      name: [null],
+      ownerName: [null],
+      description: [null],
+
+      startDate: new FormControl(this.today),
       durationId: [0],
       statusId: [0],
-      technologies: new FormControl(),
-      completionDate: [''],
-      budgetAmount: [''],
+      technologies: [null],
+      completionDate: [null],
+      budgetAmount: [null],
+      managedBy: [-1]
+
     });
   }
 
@@ -76,6 +79,7 @@ export class ProjectComponent implements OnInit {
   }
   // Function to add new button
   addProject() {
+    this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
   }
@@ -107,9 +111,11 @@ export class ProjectComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.projectForm.invalid) {
-      return;
-    }
+    // if (this.projectForm.invalid) {
+    //   return;
+    // }
+    
+    this.projectForm.controls['managedBy'].setValue(-1); 
 
     const projectData = this.projectForm.value;
     const projectId = projectData.projectId;
@@ -137,6 +143,15 @@ export class ProjectComponent implements OnInit {
 
   }
   
+  resetForm(){
+    this.projectForm.reset();
+    this.projectForm.controls['startDate'].setValue(this.today); 
+    this.projectForm.controls['statusId'].setValue(0); 
+    this.projectForm.controls['durationId'].setValue(0); 
+    this.projectForm.controls['projectId'].setValue(0); 
+    this.projectForm.controls['managedBy'].setValue(-1); 
+  }
+
   ngOnInit(): void {
 
     this.getAllProjectList();

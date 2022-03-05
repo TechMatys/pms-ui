@@ -45,15 +45,15 @@ export class ProjectComponent implements OnInit {
 
     this.projectForm = this.formBuilder.group({
       projectId: [0],
-      name: [''],
-      ownerName: [''],
-      description: [''],
+      name: [null],
+      ownerName: [null],
+      description: [null],
       startDate: new FormControl(new Date()),
       durationId: [0],
       statusId: [0],
       technologies: new FormControl(),
-      completionDate: [''],
-      budgetAmount: [''],
+      completionDate: [null],
+      budgetAmount: [null],
     });
   }
 

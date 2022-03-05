@@ -46,11 +46,11 @@ export class EmployeePaymentComponent implements OnInit {
     this.employeePaymentForm = this.formBuilder.group({
       employeePaymentId: [0],
       employeeId: [0],
-      amount: [''],
-      paymentMonthYear: [''],
-      paymentDate: [''],
-      notes: [''],
-      createdBy: ['']
+      amount: [null],
+      paymentMonthYear: [null],
+      paymentDate: [new FormControl(this.today)],
+      notes: [null],
+      managedBy: [-1]
     });
   }
 
@@ -93,6 +93,7 @@ export class EmployeePaymentComponent implements OnInit {
     // if (this.employeePaymentForm.invalid) {
     //   return;
     // }
+    this.employeePaymentForm.controls['managedBy'].setValue(-1);
 
     const employeePaymentData = this.employeePaymentForm.value;
     const employeePaymentId = employeePaymentData.employeePaymentId;

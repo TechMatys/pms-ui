@@ -119,10 +119,18 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
+                        
                         <label for="paymentdate">Payment Date</label>
-                        <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker 
-                            [maxDate]="today" formControlName="paymentDate"
-                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                        <div class="input-group">
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                                [maxDate]="today" formControlName="paymentDate" #pd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="pd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

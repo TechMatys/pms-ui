@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -39,6 +39,7 @@ export class EmployeePaymentComponent implements OnInit {
   employeePaymentForm: FormGroup;
   submitted = false;
   today: Date;
+  faCalendar = faCalendarAlt;
 
   constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) {
     this.today = new Date();
@@ -46,18 +47,28 @@ export class EmployeePaymentComponent implements OnInit {
     this.employeePaymentForm = this.formBuilder.group({
       employeePaymentId: [0],
       employeeId: [0],
-      amount: [''],
-      paymentMonthYear: [''],
-      paymentDate: [''],
-      notes: [''],
-      createdBy: ['']
+      amount: [null],
+      paymentMonthYear: [null],
+      paymentDate: new FormControl(this.today),
+      notes: [null],
+      managedBy: [-1]
     });
   }
 
   addEmployeePayment() {
+    this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
   }
+
+  resetForm(){
+    this.employeePaymentForm.reset();
+    this.employeePaymentForm.controls['paymentDate'].setValue(this.today); 
+    this.employeePaymentForm.controls['employeePaymentId'].setValue(0); 
+    this.employeePaymentForm.controls['employeeId'].setValue(0);  
+    this.employeePaymentForm.controls['managedBy'].setValue(-1); 
+  }
+
 
   getAllEmployees() {
     this.http.getAll('Employee').subscribe(res => {
@@ -93,6 +104,7 @@ export class EmployeePaymentComponent implements OnInit {
     // if (this.employeePaymentForm.invalid) {
     //   return;
     // }
+    this.employeePaymentForm.controls['managedBy'].setValue(-1);
 
     const employeePaymentData = this.employeePaymentForm.value;
     const employeePaymentId = employeePaymentData.employeePaymentId;

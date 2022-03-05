@@ -65,7 +65,7 @@ export class EmployeeComponent implements OnInit {
       postalCode: [null],
       startDate: new FormControl(this.today),
       endDate: [null],
-      managedBy: [0],
+      managedBy: [-1],
     });
 
   }
@@ -98,7 +98,7 @@ export class EmployeeComponent implements OnInit {
     this.employeeForm.controls['statusId'].setValue(0);  
     this.employeeForm.controls['designationId'].setValue(0); 
     this.employeeForm.controls['employeeId'].setValue(0); 
-    this.employeeForm.controls['managedBy'].setValue(0); 
+    this.employeeForm.controls['managedBy'].setValue(-1); 
   }
 
   deleteEmployee(employee: any) {

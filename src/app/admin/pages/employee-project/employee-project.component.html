@@ -20,7 +20,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions"  class="row-border hover">
+                    <table class="table table-stripped">
                         <thead>
                             <tr>
                                 <th scope="col">Employee Name</th>
@@ -30,17 +30,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor=" let employeeProject of employeeProjectlist">
-                                <td>{{employeeProject.name}} </td>
-                                <td>{{employeeProject.project}}</td>
+                            <tr *ngFor=" let employeeProject of employeeProjectList">
+                                <td>{{employeeProject.employeeName}} </td>
+                                <td>{{employeeProject.projectName}}</td>
                                 <td>{{ employeeProject.assignedDate}} </td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editEmployeeProject(employeeProject)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete"  (click)="deleteEmployeeProject(employeeProject)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!employeeProjectList.length">
+                                <td colspan="4">
+                                    No Records Records
                                 </td>
                             </tr>
                         </tbody>
@@ -56,13 +61,13 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" [formGroup]="employeeProjectForm" (ngSubmit)="saveEmployeeProject()">
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="employee">Employee</label>
-                        <select name="employee" class="form-select col-lg-12"
-                            (change)="onEmployeeChange($event.target)">
-                            <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.name }}
+                        <select name="employee" class="form-select col-lg-12"formControlName="employeeId" >
+                            <option value="0">-- Select Employee --</option>
+                            <option *ngFor="let employee of employeesList" [value]="employee.employeeId">{{ employee.firstName }} {{ employee.lastName }}
                             </option>
                         </select>
                     </div>
@@ -71,8 +76,9 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="project">Project</label>
-                        <select name="project" class="form-select col-lg-12" (change)="onProjectChange($event.target)">
-                            <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}
+                        <select name="project" class="form-select col-lg-12" formControlName="projectId">
+                            <option value="0">-- Select Project --</option>
+                            <option *ngFor="let project of projectsList" [value]="project.projectId">{{ project.name }}
                             </option>
                         </select>
                     </div>
@@ -82,8 +88,21 @@
                     <div class="form-group col-lg-6">
                         <label for="assignedDate">Assigned Date </label>
                         <div class="input-group">
-                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                            [maxDate]="today"  [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                                [maxDate]="today" formControlName="assignedDate" #pd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="pd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label for="notes">Note</label>
+                            <textarea type="text" name="notes" placeholder="Enter notes here" class="form-control "
+                                autocomplete="off" maxlength="200" formControlName="notes"></textarea>
                         </div>
                     </div>
 

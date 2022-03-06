@@ -53,6 +53,7 @@ export class ProjectPaymentComponent implements OnInit {
       balancedAmount: [null],
       paymentMonthYear: [null],
       paymentDate: new FormControl(this.today),
+      notes: [null],
       managedBy: [-1]
     });
 

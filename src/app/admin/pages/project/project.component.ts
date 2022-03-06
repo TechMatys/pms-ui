@@ -48,7 +48,6 @@ export class ProjectComponent implements OnInit {
       name: [null],
       ownerName: [null],
       description: [null],
-
       startDate: new FormControl(this.today),
       durationId: [0],
       statusId: [0],

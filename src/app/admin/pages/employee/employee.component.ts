@@ -122,15 +122,15 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  get f() { return this.employeeForm.controls; }
+  //get f() { return this.employeeForm.controls; }
 
   saveEmployee() {
     this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.employeeForm.invalid) {
-      return;
-    }
+     //stop here if form is invalid
+   // if (this.employeeForm.invalid) {
+   //  return;
+   //}
 
     const employeeData = this.employeeForm.value;
     const employeeId = employeeData.employeeId;

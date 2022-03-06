@@ -5,7 +5,6 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 interface Expenses {
   expenseName: string,
   amount: string;
-  month: string;
   expenseDate: string;
 }
 
@@ -30,43 +29,39 @@ export class CompanyExpensesComponent implements OnInit {
     {
       expenseName: 'Expense 1',
       amount: '₹ 4,000',
-      month: '02/2022',
       expenseDate: '28/02/2022'
     }, {
       expenseName: 'Expense 2',
       amount: '₹ 4,000',
-      month: '02/2022',
       expenseDate: '28/02/2022'
     }, {
       expenseName: 'Expense 3',
       amount: '₹ 4,000',
-      month: '02/2022',
       expenseDate: '28/02/2022'
     }, {
       expenseName: 'Expense 4',
       amount: '₹ 4,000',
-      month: '02/2022',
       expenseDate: '28/02/2022'
     }, {
       expenseName: 'Expense 5',
       amount: '₹ 4,000',
-      month: '02/2022',
       expenseDate: '28/02/2022'
     }];
 
-  
+
   uploadedFiles = [{
     name: 'Reciept.pdf'
-  },{
+  }, {
     name: 'Bill.pdf'
   }];
+
   date: string | undefined;
   today: Date;
 
   constructor(private formBuilder: FormBuilder) {
     this.today = new Date();
     this.expenseForm = this.formBuilder.group({
-      name: ['', Validators.required]
+      title: ['', Validators.required]
     });
   }
 
@@ -105,7 +100,8 @@ export class CompanyExpensesComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {this.date = new Date().toISOString().slice(0, 10);
+  ngOnInit(): void {
+    this.date = new Date().toISOString().slice(0, 10);
   }
 
 }

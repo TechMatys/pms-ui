@@ -36,7 +36,6 @@
                             <tr>
                                 <th scope="col">Expense Name</th>
                                 <th scope="col">Amount</th>
-                                <th scope="col">Month/Year</th>
                                 <th scope="col">Expense Date</th>
                                 <th class="action-button">Action</th>
                             </tr>
@@ -45,7 +44,6 @@
                             <tr *ngFor="let expense of expenseList">
                                 <td>{{expense.expenseName}}</td>
                                 <td>{{expense.amount}}</td>
-                                <td>{{expense.month}}</td>
                                 <td>{{expense.expenseDate}}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit">
@@ -75,15 +73,17 @@
             <form class="form-horizontal" [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="name">Name*</label>
-                        <input class="form-control" type="text" id="name" placeholder="Name" autocomplete="off"
-                            maxlength="100" formControlName="name"
-                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+                        <label for="title">Title*</label>
+                        <input class="form-control" type="text" id="title" placeholder="Title" autocomplete="off"
+                            maxlength="100" formControlName="title"
+                            [ngClass]="{ 'is-invalid': submitted && f['title'].errors }">
                     </div>
+                   
+                </div>
+                <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="amount">Amount</label>
                         <div class="my-1">
-                            <label class="sr-only" for="amount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
@@ -94,14 +94,7 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="form-group col-lg-4">
-                        <label for="year">Payment Month/Year</label>
-                        <input autocomplete="off" class="form-control" name="date" bsDatepicker
-                            [bsConfig]="{dateInputFormat: 'MM/YYYY',containerClass: 'theme-dark-blue'}" minMode="month" placeholder="MM/YYYY"
-                            mask="00/0000" [maxDate]="today" >
-                    </div>
                     <div class="form-group col-lg-4">
                         <label for="paymentdate">Expense Date</label>
                         <div class="input-group">
@@ -111,7 +104,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-lg-8">
+                    <div class="form-group col-lg-4">
+                        <label for="notes">Note</label>
+                        <textarea type="text" name="notes" placeholder="Enter notes here" class="form-control "
+                            autocomplete="off" maxlength="200" formControlName="notes"></textarea>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="false">
+                    <div class="form-group col-lg-4">
                         <label class="custom-file-upload">
                             <input type="file" />
                             Upload Files

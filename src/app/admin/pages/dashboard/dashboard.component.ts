@@ -33,8 +33,10 @@ interface ProjectStatusDetail {
 export class DashboardComponent implements OnInit {
 
   controllerName = "Dashboard";
-
   dashboardItems: Dashboard;
+
+  revenueMonth : any = ['January', 'Febraury', 'March', 'April', 'May', 'June'];
+  revenueAmount : any = [100000, 150000, 120000, 110000, 150000, 100000];
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -106,14 +108,14 @@ export class DashboardComponent implements OnInit {
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: this.revenueMonth,
     datasets: [
       {
         backgroundColor: "#4e73df",
         hoverBackgroundColor: "#2e59d9",
         borderColor: "#4e73df",
         maxBarThickness: 30,
-        data: [90000, 140000, 20000, 150000, 30000, 120000],
+        data: this.revenueAmount,
         label: 'Revenue'
       }
     ]

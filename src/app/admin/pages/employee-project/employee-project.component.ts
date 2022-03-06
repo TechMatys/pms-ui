@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -7,19 +7,22 @@ import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
 
 interface EmployeeProject {
-  name: string;
-  project: any;
-  assignedDate: any;
+  employeeName: string;
+  projectName: string;
+  assignedDate: string;
+  createdDate: string;
+  
 }
 
 interface Employee {
   employeeId: number;
-  employeeName: string;
+  firstName: string;
+  lastName: string;
 }
 
 interface Project {
  projectId:number;
- projectName: string;
+ name: string;
 }
 
 @Component({
@@ -33,6 +36,7 @@ export class EmployeeProjectComponent implements OnInit {
 
   faEdit = faEdit;
   faDelete = faTrash;
+  faCalendar = faCalendarAlt;
   isShown: boolean = true;
   isAddNew: boolean = true;
   
@@ -40,7 +44,7 @@ export class EmployeeProjectComponent implements OnInit {
 
   employeeProjectList: EmployeeProject[] = [];
   employeesList: Employee[] = [];
-  projects: Project[] = [];
+  projectsList: Project[] = [];
   employeeProjectForm: FormGroup;
   submitted = false;
   today: Date;
@@ -48,6 +52,7 @@ export class EmployeeProjectComponent implements OnInit {
   constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) { this.today = new Date();
    
     this.employeeProjectForm = this.formBuilder.group({
+      employeeProjectId: [0],
       employeeId: [0],
       projectId: [0],
       assignedDate: new FormControl(this.today),
@@ -55,22 +60,36 @@ export class EmployeeProjectComponent implements OnInit {
       managedBy: [-1]
     });}
 
-  
-
-  
   // Function to add new button
   addEmployeeProject() {
+    this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
-    this.employeeProjectList = [];
   }
+
+  resetForm(){
+    this.employeeProjectForm.reset();
+    this.employeeProjectForm.controls['assignedDate'].setValue(this.today); 
+    this.employeeProjectForm.controls['employeeProjectId'].setValue(0); 
+    this.employeeProjectForm.controls['employeeId'].setValue(0); 
+    this.employeeProjectForm.controls['projectId'].setValue(0);  
+    this.employeeProjectForm.controls['managedBy'].setValue(-1); 
+  }
+
+
   getAllEmployees() {
     this.http.getAll('Employee').subscribe(res => {
-      this.employeeProjectList = res;
+      this.employeesList = res;
     });
   }
 
-  deleteEmployee(employeeProject: any) {
+  getAllProjects() {
+    this.http.getAll('Project').subscribe(res => {
+      this.projectsList = res;
+    });
+  }
+
+  deleteEmployeeProject(employeeProject: any) {
     this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this employee project?', 'Yes', 'No', 'md')
       .then((confirmed) => {
         if (confirmed) {
@@ -81,10 +100,9 @@ export class EmployeeProjectComponent implements OnInit {
             });
         }
       });
-      
   }
 
-  editEmployee(employeProject: any) {
+  editEmployeeProject(employeProject: any) {
     this.http.get(this.controllerName, employeProject.employeeProjectId)
       .subscribe(res => {
         this.isShown = false;
@@ -124,6 +142,7 @@ export class EmployeeProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllEmployees();
+    this.getAllProjects();
     this.getAllEmployeeProject();
   }
  

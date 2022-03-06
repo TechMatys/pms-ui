@@ -31,14 +31,14 @@
                         </thead>
                         <tbody>
                             <tr *ngFor=" let employeeProject of employeeProjectList">
-                                <td>{{employeeProject.name}} </td>
-                                <td>{{employeeProject.project}}</td>
+                                <td>{{employeeProject.employeeName}} </td>
+                                <td>{{employeeProject.projectName}}</td>
                                 <td>{{ employeeProject.assignedDate}} </td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit"(click)="editEmployee(employeeProject)">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editEmployeeProject(employeeProject)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete"(click)="deleteEmployee(employeeProject)">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete"  (click)="deleteEmployeeProject(employeeProject)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
@@ -67,7 +67,7 @@
                         <label for="employee">Employee</label>
                         <select name="employee" class="form-select col-lg-12"formControlName="employeeId" >
                             <option value="0">-- Select Employee --</option>
-                            <option *ngFor="let employee of employeesList" [value]="employee.employeeId">{{ employee.employeeName }}
+                            <option *ngFor="let employee of employeesList" [value]="employee.employeeId">{{ employee.firstName }} {{ employee.lastName }}
                             </option>
                         </select>
                     </div>
@@ -78,7 +78,7 @@
                         <label for="project">Project</label>
                         <select name="project" class="form-select col-lg-12" formControlName="projectId">
                             <option value="0">-- Select Project --</option>
-                            <option *ngFor="let project of projects" [value]="project.projectId">{{ project.projectName }}
+                            <option *ngFor="let project of projectsList" [value]="project.projectId">{{ project.name }}
                             </option>
                         </select>
                     </div>
@@ -88,8 +88,14 @@
                     <div class="form-group col-lg-6">
                         <label for="assignedDate">Assigned Date </label>
                         <div class="input-group">
-                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker mask="00/00/0000"
-                            [maxDate]="today"  [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                                [maxDate]="today" formControlName="assignedDate" #pd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="pd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="row">

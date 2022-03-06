@@ -26,7 +26,7 @@ interface Project {
 
 export class ProjectPaymentComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
 
   faEdit = faEdit;
   faDelete = faTrash;
@@ -49,8 +49,8 @@ export class ProjectPaymentComponent implements OnInit {
      this.projectPaymentForm = this.formBuilder.group({
       projectPaymentId: [0],
       projectId: [0],
-      recievedAmount:[null],
-      balancedamount: [null],
+      receivedAmount:[null],
+      balancedAmount: [null],
       paymentMonthYear: [null],
       paymentDate: new FormControl(this.today),
       managedBy: [-1]

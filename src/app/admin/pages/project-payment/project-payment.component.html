@@ -44,26 +44,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let projectpayment of projectPaymentList">
+                            <tr *ngFor="let projectPayment of projectPaymentList">
                                 <td>
-                                    {{projectpayment.projectName}}
+                                    {{projectPayment.projectName}}
                                 </td>
                                 <td>
-                                    {{projectpayment.receivedAmount}}
+                                    {{projectPayment.receivedAmount || 'N/A'}}
                                 </td>
                                 <td>
-                                    {{projectpayment.month}}
+                                    {{projectPayment.month || 'N/A'}}
                                 </td>
                                 <td>
-                                    {{projectpayment.paymentDate}}
+                                    {{projectPayment.paymentDate}}
                                 </td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editProject(projectPayment)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete" (click)="deleteProject(projectPayment)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!projectPaymentList.length">
+                                <td colspan="5">
+                                        No Records Found
                                 </td>
                             </tr>
                         </tbody>
@@ -92,15 +97,14 @@
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="recievedAmount">Recieved Amount </label>
+                        <label for="receivedAmount">Received Amount</label>
                         <div class="my-1">
-                            <label class="sr-only" for="recievedAmount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
-                                <input type="text" class="form-control" id="recievedAmount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000" formControlName="recievedAmount">
+                                <input type="text" class="form-control" id="receivedAmount" placeholder="XXXXXXX"
+                                    autocomplete="off" mask="0000000" formControlName="receivedAmount">
                             </div>
                         </div>
                     </div>
@@ -108,7 +112,6 @@
                     <div class="form-group col-lg-4">
                         <label for="balancedAmount">Balanced Amount </label>
                         <div class="my-1">
-                            <label class="sr-only" for="balancedAmount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>

@@ -16,12 +16,14 @@
                 <div class="col-lg-2">
                     <strong>Start Month/Year</strong>
                     <input type="text" placeholder="MM/YYYY" class="form-control" bsDatepicker mask="00/0000"
-                    [maxDate]="today" [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}" minMode="month">
+                        [maxDate]="today" [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}"
+                        minMode="month">
                 </div>
                 <div class="col-lg-2">
                     <strong>End Month/Year</strong>
                     <input type="text" placeholder="MM/YYYY" class="form-control" bsDatepicker mask="00/0000"
-                    [maxDate]="today" [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}" minMode="month">
+                        [maxDate]="today" [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}"
+                        minMode="month">
                 </div>
 
                 <div class="col-lg-8 algn-right">
@@ -31,7 +33,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                    <table class="table table-stripped">
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
@@ -42,27 +44,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let payment of projectPaymentlist">
+                            <tr *ngFor="let projectPayment of projectPaymentList">
                                 <td>
-                                    {{payment.name}}
+                                    {{projectPayment.projectName}}
                                 </td>
                                 <td>
-                                    {{payment.receivedAmount}}
+                                    {{projectPayment.receivedAmount || 'N/A'}}
                                 </td>
                                 <td>
-                                    {{ payment.month}}
+                                    {{projectPayment.month || 'N/A'}}
                                 </td>
                                 <td>
-                                    {{ payment.paymentDate}}
+                                    {{projectPayment.paymentDate}}
                                 </td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editProject(projectPayment)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete" (click)="deleteProject(projectPayment)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
                                 </td>
+                            </tr>
+                            <tr *ngIf="!projectPaymentList.length">
+                                <td colspan="5">
+                                        No Records Found
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -76,26 +84,27 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" [formGroup]="projectPaymentForm" (ngSubmit)="saveProjectPayment()">
 
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="project">Project</label>
-                        <select name="project" class="form-select col-lg-12" (change)="onProjectChange($event.target)">
-                            <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+                        <select name="project" class="form-select col-lg-12" formControlName="projectId">
+                            <option value="0">-- Select Project --</option>
+                            <option *ngFor="let project of projectsList" [value]="project.projectId">{{ project.name }}
+                            </option>
                         </select>
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="recievedAmount">Recieved Amount </label>
+                        <label for="receivedAmount">Received Amount</label>
                         <div class="my-1">
-                            <label class="sr-only" for="recievedAmount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
-                                <input type="text" class="form-control" id="recievedAmount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000">
+                                <input type="text" class="form-control" id="receivedAmount" placeholder="XXXXXXX"
+                                    autocomplete="off" mask="0000000" formControlName="receivedAmount">
                             </div>
                         </div>
                     </div>
@@ -103,13 +112,12 @@
                     <div class="form-group col-lg-4">
                         <label for="balancedAmount">Balanced Amount </label>
                         <div class="my-1">
-                            <label class="sr-only" for="balancedAmount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="balancedAmount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000">
+                                    autocomplete="off" mask="0000000" formControlName="balancedAmount" >
                             </div>
                         </div>
                     </div>
@@ -118,16 +126,22 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="year">Payment Month/Year</label>
-                        <input autocomplete="off" class="form-control" name="date" bsDatepicker
-                        [maxDate]="today" [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}" minMode="month" placeholder="MM/YYYY"
-                            mask="00/0000">
+                        <input autocomplete="off" class="form-control" name="date" bsDatepicker [maxDate]="today"
+                            [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}" minMode="month"
+                            placeholder="MM/YYYY" formControlName="paymentMonthYear">
                     </div>
 
                     <div class="form-group col-lg-4">
                         <label for="paymentDate">Payment Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                mask="00/00/0000"  [maxDate]="today"  [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                                [maxDate]="today" formControlName="paymentDate" #pd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="pd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

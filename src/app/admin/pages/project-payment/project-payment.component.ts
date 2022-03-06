@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
+import { HttpService } from 'src/app/core/services/https/http.service';
+import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
 interface ProjectPayment {
-  name: string;
+  projectName: string;
   receivedAmount: string;
-  month: any;
-  paymentDate: any;
+  month: string;
+  paymentDate: string;
+}
+
+interface Project {
+  projectId: number;
+  name: string;
 }
 
 @Component({
@@ -18,88 +27,120 @@ interface ProjectPayment {
 export class ProjectPaymentComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
+
   faEdit = faEdit;
   faDelete = faTrash;
+
   isShown: boolean = true;
   isAddNew: boolean = true;
-  
-  projectPaymentlist: ProjectPayment[] = [
-    {
-      name: 'Vikas Rawat',
-      month: 'May 2020',
-      receivedAmount: '₹ 5,000',
-      paymentDate: '10/05/2020',
-    }, {
-      name: 'Prakash Rawat',
-      month: 'May 2020',
-      receivedAmount: '₹ 2,000',
-      paymentDate: '10/05/2020',
-    }, {
-      name: 'Ganesh Rawat',
-      month: 'May 2020',
-      receivedAmount: '₹ 5,000',
-      paymentDate: '10/05/2020',
-    }, {
-      name: 'Vikky Rawat',
-      month: 'May 2020',
-      receivedAmount: '₹ 6,000',
-      paymentDate: '10/05/2020'
-    }, {
-      name: 'Rudra Rawat',
-      month: 'May 2020',
-      receivedAmount: '₹ 7,000',
-      paymentDate: '10/05/2020'
-    }];
 
+  controllerName = "Project-Payment";
   
-  projects = [
-    {
-      id: 0, name: '-- Select project--'
-    }, {
-      id: 1,
-      name: 'Project Breeze'
-    }, {
-      id: 2,
-      name: 'Dynamic Program'
-    }, {
-      id: 3,
-      name: 'Magnetic Program'
-    }, {
-      id: 4,
-      name: 'Project Signal'
-    }];
+  projectPaymentList: ProjectPayment[] = [];  
+  projectsList: Project[] = [];
+  projectPaymentForm: FormGroup;
+  submitted = false;
+  faCalendar = faCalendarAlt;
   today: Date;
 
-  constructor() { this.today = new Date();}
+  constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) {
+     this.today = new Date();
+
+     this.projectPaymentForm = this.formBuilder.group({
+      projectPaymentId: [0],
+      projectId: [0],
+      recievedAmount:[null],
+      balancedamount: [null],
+      paymentMonthYear: [null],
+      paymentDate: new FormControl(this.today),
+      managedBy: [-1]
+    });
+
+    }
 
   // Function to add new button
   addProjectPayment() {
+    this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
   }
 
 
-  onGridYearChange(item: any) {
-
+  resetForm(){
+    this.projectPaymentForm.reset();
+    this.projectPaymentForm.controls['paymentDate'].setValue(this.today); 
+    this.projectPaymentForm.controls['projectPaymentId'].setValue(0); 
+    this.projectPaymentForm.controls['projectId'].setValue(0);  
+    this.projectPaymentForm.controls['managedBy'].setValue(-1); 
   }
 
-  onGridMonthChange(item: any) {
 
+  getAllProjects() {
+    this.http.getAll('Project').subscribe(res => {
+      this.projectsList = res;
+    });
   }
 
-  onProjectChange(item: any) {
-
+  deleteProject(projectPayment: any) {
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this project payment?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.http.delete(this.controllerName, projectPayment.projectPaymentId)
+            .subscribe(res => {
+              this.toastr.success("Project payment deleted successfully", "Success");
+              this.getAllProjectPayment();
+            });
+        }
+      });
   }
 
-  onYearChange(item: any) {
-
+  editProject(projectPayment: any) {
+    this.http.get(this.controllerName, projectPayment.projectPaymentId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.projectPaymentForm.setValue(res);
+      });
   }
 
-  onMonthChange(item: any) {
+  saveProjectPayment() {
+    this.submitted = true;
 
+    // stop here if form is invalid
+    // if (this.projectPaymentForm.invalid) {
+    //   return;
+    // }
+    this.projectPaymentForm.controls['managedBy'].setValue(-1);
+
+    const projectPaymentData = this.projectPaymentForm.value;
+    const projectPaymentId = projectPaymentData.projectPaymentId;
+
+    if (projectPaymentId < 1) {
+      this.http.create(this.controllerName, projectPaymentData)
+        .subscribe(res => {
+          this.toastr.success("Project payment added successfully", "Success");
+          this.getAllProjectPayment();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, projectPaymentId, projectPaymentData)
+        .subscribe(res => {
+          this.toastr.success("Project payment updated successfully", "Success");
+          this.getAllProjectPayment();
+        });
+    }
   }
+
+  getAllProjectPayment() {
+    this.isShown = true;
+    this.http.getAll(this.controllerName).subscribe(res => {
+      this.projectPaymentList = res;
+    });
+  }
+
 
   ngOnInit(): void {
+    this.getAllProjects();
+    this.getAllProjectPayment();
   }
 
 }

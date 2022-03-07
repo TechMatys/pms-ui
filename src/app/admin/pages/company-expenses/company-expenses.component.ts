@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup,} from '@angular/forms';
 import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
-import { GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 

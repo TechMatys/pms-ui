@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
+import { GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
+import { HttpService } from 'src/app/core/services/https/http.service';
+import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
 interface Expenses {
-  expenseName: string,
+  title: string,
   amount: string;
   expenseDate: string;
 }
@@ -15,38 +19,20 @@ interface Expenses {
 })
 export class CompanyExpensesComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
 
   expenseForm: FormGroup;
   submitted = false;
 
   faEdit = faEdit;
   faDelete = faTrash;
+  faCalendar = faCalendarAlt;
   isShown: boolean = true;
   isAddNew: boolean = true;
+  controllerName = "Company-Expense";
 
-  expenseList: Expenses[] = [
-    {
-      expenseName: 'Expense 1',
-      amount: '₹ 4,000',
-      expenseDate: '28/02/2022'
-    }, {
-      expenseName: 'Expense 2',
-      amount: '₹ 4,000',
-      expenseDate: '28/02/2022'
-    }, {
-      expenseName: 'Expense 3',
-      amount: '₹ 4,000',
-      expenseDate: '28/02/2022'
-    }, {
-      expenseName: 'Expense 4',
-      amount: '₹ 4,000',
-      expenseDate: '28/02/2022'
-    }, {
-      expenseName: 'Expense 5',
-      amount: '₹ 4,000',
-      expenseDate: '28/02/2022'
-    }];
+
+  expenseList: Expenses[] = [];
 
 
   uploadedFiles = [{
@@ -58,33 +44,52 @@ export class CompanyExpensesComponent implements OnInit {
   date: string | undefined;
   today: Date;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
+   private http: HttpService) {
+
     this.today = new Date();
     this.expenseForm = this.formBuilder.group({
-      title: ['', Validators.required]
+      companyExpenseId: [0],
+      title: [null],
+      amount: [null],
+      expenseDate: new FormControl(this.today),
+      notes: [null],
+      managedBy: [-1]
     });
   }
 
   addExpenses() {
+    this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
   }
 
-  onGridYearChange(item: any) {
-
+  resetForm() {
+    this.expenseForm.reset();
+    this.expenseForm.controls['expenseDate'].setValue(this.today);
+    this.expenseForm.controls['companyExpenseId'].setValue(0);
+    this.expenseForm.controls['managedBy'].setValue(-1);
   }
 
-  onGridMonthChange(item: any) {
-
+  deleteExpense(expense: any) {
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this expense?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.http.delete(this.controllerName, expense.companyExpenseId)
+            .subscribe(res => {
+              this.toastr.success("Expense deleted successfully", "Success");
+              this.getAllExpenseList();
+            });
+        }
+      });
   }
 
-
-  onYearChange(item: any) {
-
-  }
-
-  onMonthChange(item: any) {
-
+  editExpense(expense: any) {
+    this.http.get(this.controllerName, expense.companyExpenseId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.expenseForm.setValue(res);
+      });
   }
   get f() { return this.expenseForm.controls; }
 
@@ -92,15 +97,43 @@ export class CompanyExpensesComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.expenseForm.invalid) {
-      return;
-    }
+    // if (this.expenseForm.invalid) {
+    // //   return;
+    // }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.expenseForm.value))
+
+
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.expenseForm.value))
+
+    this.expenseForm.controls['managedBy'].setValue(-1);
+
+    const expenseData = this.expenseForm.value;
+    const companyExpenseId = expenseData.companyExpenseId;
+    if (companyExpenseId < 1) {
+      this.http.create(this.controllerName, expenseData)
+        .subscribe(res => {
+          this.toastr.success("Expense created successfully", "Success");
+          this.getAllExpenseList();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, companyExpenseId, expenseData)
+        .subscribe(res => {
+          this.toastr.success("Expense updated successfully", "Success");
+          this.getAllExpenseList();
+        });
+    }
   }
 
+  getAllExpenseList() {
+    this.isShown = true;
+    this.http.getAll(this.controllerName).subscribe(res => {
+      this.expenseList = res;
+    });
 
+  }
   ngOnInit(): void {
+    this.getAllExpenseList();
     this.date = new Date().toISOString().slice(0, 10);
   }
 

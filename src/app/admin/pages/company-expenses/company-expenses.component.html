@@ -31,7 +31,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                    <table class="table table-stripped">
                         <thead>
                             <tr>
                                 <th scope="col">Expense Name</th>
@@ -42,16 +42,21 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let expense of expenseList">
-                                <td>{{expense.expenseName}}</td>
-                                <td>{{expense.amount}}</td>
-                                <td>{{expense.expenseDate}}</td>
+                                <td>{{expense.title || 'N/A'}}</td>
+                                <td>{{expense.amount || 'N/A'}}</td>
+                                <td>{{expense.expenseDate || 'N/A'}}</td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editExpense(expense)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteExpense(expense)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!expenseList.length">
+                                <td colspan="4">
+                                    No Records Found
                                 </td>
                             </tr>
                         </tbody>
@@ -89,16 +94,23 @@
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="amount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000">
+                                    autocomplete="off" mask="0000000" formControlName="amount">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="paymentdate">Expense Date</label>
+                        <label for="expenseDate">Expense Date</label>
                         <div class="input-group">
-                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker  mask="00/00/0000" [maxDate]="today"  [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                            formControlName="expenseDate" [maxDate]="today" #pd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="pd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,7 +119,7 @@
                     <div class="form-group col-lg-4">
                         <label for="notes">Note</label>
                         <textarea type="text" name="notes" placeholder="Enter notes here" class="form-control "
-                            autocomplete="off" maxlength="200" formControlName="notes"></textarea>
+                            autocomplete="off" maxlength="200" formControlName="notes" ></textarea>
                     </div>
                 </div>
 

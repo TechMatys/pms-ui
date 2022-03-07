@@ -24,13 +24,7 @@ export class GlobalCodesService {
 
   technologies: GlobalCodes[] = [];
 
-  roles = [{
-    id: 0, name: '-- Select Roles --'
-  }, {
-    id: 1, name: 'Admin'
-  }, {
-    id: 2, name: 'Staff'
-  }];
+  roleslist : GlobalCodes[]  = [];
    
   constructor( public http : HttpService) {  }
   

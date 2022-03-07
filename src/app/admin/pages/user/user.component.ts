@@ -1,12 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
+import { HttpService } from 'src/app/core/services/https/http.service';
+import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 interface User {
   employeeName: string,
   role: string,
   status: string,
   createdDate: string
+}
+interface Employee {
+  employeeId: number;
+  firstName: string;
+  lastName: string; 
 }
 
 @Component({
@@ -16,60 +26,19 @@ interface User {
 })
 export class UserComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  //dtOptions: DataTables.Settings = {};
+  usersForm: FormGroup;
+  submitted = false;
 
   faEdit = faEdit;
   faDelete = faTrash;
   isShown: boolean = true;
   isAddNew: boolean = true;
+  controllerName = "Users";
 
-  userlist: User[] = [
-    {
-      employeeName: 'Subhash Rawat',
-      role: 'Admin',
-      status: 'Active',
-      createdDate: '10/02/2022'
-    }, {
-      employeeName: 'Tajwar Rawat',
-      role: 'Staff',
-      status: 'InActive',
-      createdDate: '10/02/2022'
-    }, {
-      employeeName: 'Deapak Dhiman',
-      role: 'Admin',
-      status: 'Active',
-      createdDate: '10/02/2022'
-    }, {
-      employeeName: 'Vikash Rawat',
-      role: 'Staff',
-      status: 'InActive',
-      createdDate: '10/02/2022'
-    }, {
-      employeeName: 'Prakash Rawat',
-      role: 'Admin',
-      status: 'Active',
-      createdDate: '10/02/2022'
-    }];
+  userlist: User[] = [];
 
-  employeesName = [
-    {
-      id: 0, name: '-- Select Employee Name--'
-    }, {
-      id: 1,
-      name: 'Subhash Rawat'
-    }, {
-      id: 2,
-      name: 'Tajwar Rawat'
-    }, {
-      id: 3,
-      name: 'Deapak Dhiman'
-    }, {
-      id: 4,
-      name: 'Vikash Rawat'
-    }, {
-      id: 5,
-      name: 'Prakash Rawat'
-    }];
+  employeesList : Employee[]  = [];
 
     employeeScreens = [{
       id: 0, name: 'Employee Detail'
@@ -97,34 +66,120 @@ export class UserComponent implements OnInit {
 
 
 
-    status: GlobalCodes[];
-    roles: GlobalCodes[];
+    status: GlobalCodes[] = [];
+    rolesList: GlobalCodes[];
+    today: Date;
     
 
-  constructor(private globalCodesService: GlobalCodesService) {
-
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
+    private globalCodesService: GlobalCodesService, private http: HttpService) {
+      this.today = new Date();
     this.status = this.globalCodesService.status;
-    this.roles = this.globalCodesService.roles;
+    this.rolesList = this.globalCodesService.roleslist;
+
+
+    this.usersForm = this.formBuilder.group({
+      usersId: [0],
+      employeeId: [0],
+      roleId: [0],
+      ScreenPermissionId:[0],
+      statusId: [0],
+      managedBy: [-1]
+
+    });
+  
     
    }
+   getAllUserList() {
+    this.isShown = true;
+    this.http.getAll(this.controllerName).subscribe(res => {
+      this.userlist = res;
+    });
+
+  }
+   
 
   // Function to add new button
   addUser() {
+    this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
   }
 
-  onEmployeeChange(item: any) {
+  deleteUser(user: any) {
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this user?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.http.delete(this.controllerName, user.userId)
+            .subscribe(res => {
+              this.toastr.success("User deleted successfully", "Success");
+              this.getAllUserList();
+            });
+        }
+      });
   }
-  onRolesChange(item: any) {
+
+  editUser(user: any) {
+    this.http.get(this.controllerName, user.userId)
+      .subscribe(res => {
+        this.isShown = false;
+        this.usersForm.setValue(res);
+      });
+  }
+  saveUser() {
+    this.submitted = true;
+
+    this.usersForm.controls['managedBy'].setValue(-1); 
+
+    const usersData = this.usersForm.value;
+    const usersId = usersData.usersId;
+    if (usersId < 1) {
+      this.http.create(this.controllerName, usersData)
+        .subscribe(res => {
+          this.toastr.success("User created successfully", "Success");
+          this.getAllUserList();
+        });
+    }
+    else {
+      this.http.update(this.controllerName, usersId, usersData)
+        .subscribe(res => {
+          this.toastr.success("Users updated successfully", "Success");
+          this.getAllUserList();
+        });
+    }
   }
 
-  onStatusChange(item: any) {
-
+  getAllEmployees() {
+    this.http.getAll('Employee').subscribe(res => {
+      this.employeesList = res;
+    });
   }
 
+  getStatus() {
+    this.globalCodesService.getGlobalCodes("user-status").subscribe(res => {
+      this.status = res;
+    });
+  }
 
-  ngOnInit(): void { }
+  getRole() {
+    this.globalCodesService.getGlobalCodes("user-role").subscribe(res => {
+      this.rolesList = res;
+    });
+  }
+  resetForm(){
+    this.usersForm.reset();
+    this.usersForm.controls['statusId'].setValue(0); 
+    this.usersForm.controls['roleId'].setValue(0); 
+    this.usersForm.controls['employeeId'].setValue(0); 
+    this.usersForm.controls['managedBy'].setValue(-1); 
+  }
+
+  ngOnInit(): void { 
+    this.getAllEmployees();
+    this.getAllUserList();
+    this.getStatus();
+    this.getRole();
+  }
 
 
 

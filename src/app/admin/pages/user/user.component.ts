@@ -79,13 +79,12 @@ export class UserComponent implements OnInit {
 
 
     this.usersForm = this.formBuilder.group({
-      usersId: [0],
+      userId: [0],
       employeeId: [0],
       roleId: [0],
-      ScreenPermissionId:[0],
+      screenPermissionId:[0],
       statusId: [0],
       managedBy: [-1]
-
     });
   
     
@@ -132,8 +131,8 @@ export class UserComponent implements OnInit {
     this.usersForm.controls['managedBy'].setValue(-1); 
 
     const usersData = this.usersForm.value;
-    const usersId = usersData.usersId;
-    if (usersId < 1) {
+    const userId = usersData.userId;
+    if (userId < 1) {
       this.http.create(this.controllerName, usersData)
         .subscribe(res => {
           this.toastr.success("User created successfully", "Success");
@@ -141,7 +140,7 @@ export class UserComponent implements OnInit {
         });
     }
     else {
-      this.http.update(this.controllerName, usersId, usersData)
+      this.http.update(this.controllerName, userId, usersData)
         .subscribe(res => {
           this.toastr.success("Users updated successfully", "Success");
           this.getAllUserList();

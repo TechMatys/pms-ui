@@ -31,29 +31,32 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                    <table class="table table-stripped">
                         <thead>
                             <tr>
                                 <th scope="col">Expense Name</th>
                                 <th scope="col">Amount</th>
-                                <th scope="col">Month/Year</th>
                                 <th scope="col">Expense Date</th>
                                 <th class="action-button">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let expense of expenseList">
-                                <td>{{expense.expenseName}}</td>
-                                <td>{{expense.amount}}</td>
-                                <td>{{expense.month}}</td>
-                                <td>{{expense.expenseDate}}</td>
+                                <td>{{expense.title || 'N/A'}}</td>
+                                <td>{{expense.amount || 'N/A'}}</td>
+                                <td>{{expense.expenseDate || 'N/A'}}</td>
                                 <td class="action-button">
-                                    <a href="javascript:void(0)" ngbTooltip="Edit">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editExpense(expense)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
                                     </a>
-                                    <a href="javascript:void(0)" ngbTooltip="Delete">
+                                    <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteExpense(expense)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!expenseList.length">
+                                <td colspan="4">
+                                    No Records Found
                                 </td>
                             </tr>
                         </tbody>
@@ -75,21 +78,38 @@
             <form class="form-horizontal" [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="name">Name*</label>
-                        <input class="form-control" type="text" id="name" placeholder="Name" autocomplete="off"
-                            maxlength="100" formControlName="name"
-                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+                        <label for="title">Title*</label>
+                        <input class="form-control" type="text" id="title" placeholder="Title" autocomplete="off"
+                            maxlength="100" formControlName="title"
+                            [ngClass]="{ 'is-invalid': submitted && f['title'].errors }">
                     </div>
+                   
+                </div>
+                <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="amount">Amount</label>
                         <div class="my-1">
-                            <label class="sr-only" for="amount">Amount</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="amount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000">
+                                    autocomplete="off" mask="0000000" formControlName="amount">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="expenseDate">Expense Date</label>
+                        <div class="input-group">
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                            formControlName="expenseDate" [maxDate]="today" #pd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="pd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -97,21 +117,14 @@
 
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="year">Payment Month/Year</label>
-                        <input autocomplete="off" class="form-control" name="date" bsDatepicker
-                            [bsConfig]="{dateInputFormat: 'MM/YYYY',containerClass: 'theme-dark-blue'}" minMode="month" placeholder="MM/YYYY"
-                            mask="00/0000" [maxDate]="today" >
-                    </div>
-                    <div class="form-group col-lg-4">
-                        <label for="paymentdate">Expense Date</label>
-                        <div class="input-group">
-                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker  mask="00/00/0000" [maxDate]="today"  [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
-                        </div>
+                        <label for="notes">Note</label>
+                        <textarea type="text" name="notes" placeholder="Enter notes here" class="form-control "
+                            autocomplete="off" maxlength="200" formControlName="notes" ></textarea>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-lg-8">
+                <div class="row" *ngIf="false">
+                    <div class="form-group col-lg-4">
                         <label class="custom-file-upload">
                             <input type="file" />
                             Upload Files

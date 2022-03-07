@@ -31,9 +31,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor=" let employeeProject of employeeProjectList">
-                                <td>{{employeeProject.employeeName}} </td>
-                                <td>{{employeeProject.projectName}}</td>
-                                <td>{{ employeeProject.assignedDate}} </td>
+                                <td>{{employeeProject.employeeName || 'N/A'}} </td>
+                                <td>{{employeeProject.projectName || 'N/A'}}</td>
+                                <td>{{ employeeProject.assignedDate || 'N/A'}} </td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editEmployeeProject(employeeProject)">
                                         <fa-icon [icon]="faEdit"></fa-icon>

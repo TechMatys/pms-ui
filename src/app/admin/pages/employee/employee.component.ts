@@ -89,16 +89,16 @@ export class EmployeeComponent implements OnInit {
     this.isAddNew = true;
   }
 
-  resetForm(){
+  resetForm() {
     this.employeeForm.reset();
-    this.employeeForm.controls['dateOfBirth'].setValue(this.today); 
-    this.employeeForm.controls['startDate'].setValue(this.today); 
-    this.employeeForm.controls['gender'].setValue(0); 
-    this.employeeForm.controls['stateId'].setValue(0); 
-    this.employeeForm.controls['statusId'].setValue(0);  
-    this.employeeForm.controls['designationId'].setValue(0); 
-    this.employeeForm.controls['employeeId'].setValue(0); 
-    this.employeeForm.controls['managedBy'].setValue(-1); 
+    this.employeeForm.controls['dateOfBirth'].setValue(this.today);
+    this.employeeForm.controls['startDate'].setValue(this.today);
+    this.employeeForm.controls['gender'].setValue(0);
+    this.employeeForm.controls['stateId'].setValue(0);
+    this.employeeForm.controls['statusId'].setValue(0);
+    this.employeeForm.controls['designationId'].setValue(0);
+    this.employeeForm.controls['employeeId'].setValue(0);
+    this.employeeForm.controls['managedBy'].setValue(-1);
   }
 
   deleteEmployee(employee: any) {
@@ -127,27 +127,51 @@ export class EmployeeComponent implements OnInit {
   saveEmployee() {
     this.submitted = true;
 
-     //stop here if form is invalid
-   // if (this.employeeForm.invalid) {
-   //  return;
-   //}
+    //stop here if form is invalid
+    // if (this.employeeForm.invalid) {
+    //  return;
+    //}
 
     const employeeData = this.employeeForm.value;
     const employeeId = employeeData.employeeId;
     if (employeeId < 1) {
-      this.http.create(this.controllerName, this.employeeForm.value)
-        .subscribe(res => {
-          this.toastr.success("Employee created successfully", "Success");
-          this.getAllEmployeeList();
-        });
+      this.createEmployee();
     }
     else {
-      this.http.update(this.controllerName, employeeId, this.employeeForm.value)
-        .subscribe(res => {
+      this.updateEmployee(employeeId);
+    }
+  }
+
+  createEmployee() {
+    this.http.create(this.controllerName, this.employeeForm.value)
+      .subscribe(res => {
+        if (res > 0) {
+          this.toastr.success("Employee created successfully", "Success");
+          this.getAllEmployeeList();
+        }
+        else if (res < 0) {
+          this.toastr.warning("Employee email already in use.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in employee saving.", "Error");
+        }
+      });
+  }
+
+  updateEmployee(employeeId : number) {
+    this.http.update(this.controllerName, employeeId, this.employeeForm.value)
+      .subscribe(res => {
+        if (res > 0) {
           this.toastr.success("Employee updated successfully", "Success");
           this.getAllEmployeeList();
-        });
-    }
+        }
+        else if (res < 0) {
+          this.toastr.warning("Employee email already in use.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in employee saving.", "Error");
+        }
+      });
   }
 
   getAllEmployeeList() {

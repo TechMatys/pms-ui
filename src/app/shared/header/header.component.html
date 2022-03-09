@@ -4,16 +4,16 @@
   <ul class="navbar-nav ml-auto">
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
-      <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button"
-        (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSettings">
+      <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button">
         <span class="mr-2 d-none d-lg-inline text-gray-600 small">
           <h6>
             Welcome Admin
+            <fa-icon [icon]="faArrowRight" style="margin-left: 5px;"></fa-icon>
           </h6>
         </span>
       </a>
       <!-- Dropdown - User Information -->
-      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" [collapse]="isCollapsed" [isAnimated]="true">
+      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in dropdown-content">
 
         <a class="dropdown-item" href="javascript:void(0)" routerLink="Profile">
           <fa-icon [icon]="faProfile"></fa-icon> My Profile

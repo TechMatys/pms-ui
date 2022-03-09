@@ -11412,3 +11412,7 @@ input[type="file"] {
 .pop-up-btn {
   width: 100px !important;
 }
+       
+.dropdown:hover .dropdown-content {
+  display: block;
+}

@@ -146,7 +146,7 @@ export class EmployeeComponent implements OnInit {
     this.http.create(this.controllerName, this.employeeForm.value)
       .subscribe(res => {
         if (res > 0) {
-          this.toastr.success("Employee created successfully", "Success");
+          this.toastr.success("Employee created successfully.", "Success");
           this.getAllEmployeeList();
         }
         else if (res < 0) {
@@ -162,7 +162,7 @@ export class EmployeeComponent implements OnInit {
     this.http.update(this.controllerName, employeeId, this.employeeForm.value)
       .subscribe(res => {
         if (res > 0) {
-          this.toastr.success("Employee updated successfully", "Success");
+          this.toastr.success("Employee updated successfully.", "Success");
           this.getAllEmployeeList();
         }
         else if (res < 0) {

@@ -13,6 +13,7 @@ import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
 
 
+
 const routes: Routes = [
   {
     path: '', component: DashboardComponent
@@ -48,6 +49,7 @@ const routes: Routes = [
   },
   { path: 'Profile', component: ProfileComponent
 },
+
 
 ];
 

@@ -119,20 +119,46 @@ export class EmployeeProjectComponent implements OnInit {
     const employeeProjectId = employeeProjectData.employeeProjectId;
 
     if (employeeProjectId < 1) {
-      this.http.create(this.controllerName, employeeProjectData)
-        .subscribe(res => {
-          this.toastr.success("Employee project added successfully", "Success");
-          this.getAllEmployeeProject();
-        });
+      this.createEmployeeProject();
+      
     }
     else {
-      this.http.update(this.controllerName, employeeProjectId, employeeProjectData)
-        .subscribe(res => {
-          this.toastr.success("Employee project updated successfully", "Success");
-          this.getAllEmployeeProject();
-        });
+      this.updateEmployeeProject(employeeProjectId);
     }
   }
+
+  createEmployeeProject() {
+    this.http.create(this.controllerName, this.employeeProjectForm.value)
+      .subscribe(res => {
+        if (res > 0) {
+          this.toastr.success("Employee project list created successfully", "Success");
+          this.getAllEmployeeProject();
+        }
+        else if (res < 0) {
+          this.toastr.warning(" Employee project name already exist.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in project saving.", "Error");
+        }
+      });
+  }
+
+  updateEmployeeProject(employeeProjectId: number) {
+    this.http.update(this.controllerName, employeeProjectId, this.employeeProjectForm.value)
+      .subscribe(res => {
+        if (res > 0) {
+          this.toastr.success("Employee project list updated successfully", "Success");
+          this.getAllEmployeeProject();
+        }
+        else if (res < 0) {
+          this.toastr.warning(" Employee project name already exist.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in project saving.", "Error");
+        }
+      });
+  }
+
   getAllEmployeeProject() {
     this.isShown = true;
     this.http.getAll(this.controllerName).subscribe(res => {

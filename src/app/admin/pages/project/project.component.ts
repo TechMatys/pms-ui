@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
@@ -82,7 +82,7 @@ export class ProjectComponent implements OnInit {
     this.isShown = false;
     this.isAddNew = true;
   }
-  
+
   deleteProject(project: any) {
     this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this project?', 'Yes', 'No', 'md')
       .then((confirmed) => {
@@ -114,25 +114,48 @@ export class ProjectComponent implements OnInit {
     // if (this.projectForm.invalid) {
     //   return;
     // }
-    
-    this.projectForm.controls['managedBy'].setValue(-1); 
+
+    this.projectForm.controls['managedBy'].setValue(-1);
 
     const projectData = this.projectForm.value;
     const projectId = projectData.projectId;
     if (projectId < 1) {
-      this.http.create(this.controllerName, projectData)
-        .subscribe(res => {
-          this.toastr.success("Project created successfully", "Success");
-          this.getAllProjectList();
-        });
+      this.createProject();
     }
     else {
-      this.http.update(this.controllerName, projectId, projectData)
-        .subscribe(res => {
+      this.updateProject(projectId);
+    }
+  }
+  createProject() {
+    this.http.create(this.controllerName, this.projectForm.value)
+      .subscribe(res => {
+        if (res > 0) {
+          this.toastr.success("Employee created successfully", "Success");
+          this.getAllProjectList();
+        }
+        else if (res < 0) {
+          this.toastr.warning(" Project name already exist.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in project saving.", "Error");
+        }
+      });
+  }
+
+  updateProject(projectId: number) {
+    this.http.update(this.controllerName, projectId, this.projectForm.value)
+      .subscribe(res => {
+        if (res > 0) {
           this.toastr.success("Project updated successfully", "Success");
           this.getAllProjectList();
-        });
-    }
+        }
+        else if (res < 0) {
+          this.toastr.warning(" Project name already exist.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in project saving.", "Error");
+        }
+      });
   }
 
   getAllProjectList() {
@@ -142,14 +165,14 @@ export class ProjectComponent implements OnInit {
     });
 
   }
-  
-  resetForm(){
+
+  resetForm() {
     this.projectForm.reset();
-    this.projectForm.controls['startDate'].setValue(this.today); 
-    this.projectForm.controls['statusId'].setValue(0); 
-    this.projectForm.controls['durationId'].setValue(0); 
-    this.projectForm.controls['projectId'].setValue(0); 
-    this.projectForm.controls['managedBy'].setValue(-1); 
+    this.projectForm.controls['startDate'].setValue(this.today);
+    this.projectForm.controls['statusId'].setValue(0);
+    this.projectForm.controls['durationId'].setValue(0);
+    this.projectForm.controls['projectId'].setValue(0);
+    this.projectForm.controls['managedBy'].setValue(-1);
   }
 
   ngOnInit(): void {
@@ -158,7 +181,7 @@ export class ProjectComponent implements OnInit {
     this.getStatus();
     this.getDurations();
     this.getTechnologies();
-    
+
   }
 
 

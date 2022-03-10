@@ -131,14 +131,14 @@ export class EmployeeProjectComponent implements OnInit {
     this.http.create(this.controllerName, this.employeeProjectForm.value)
       .subscribe(res => {
         if (res > 0) {
-          this.toastr.success("Employee project list created successfully", "Success");
+          this.toastr.success("Project assigned to employee successfully", "Success");
           this.getAllEmployeeProject();
         }
         else if (res < 0) {
-          this.toastr.warning(" Employee project name already exist.", "Warning");
+          this.toastr.warning("Project already assigned to other employee.", "Warning");
         }
         else {
-          this.toastr.error("Error in project saving.", "Error");
+          this.toastr.error("Error in assign project.", "Error");
         }
       });
   }
@@ -147,14 +147,14 @@ export class EmployeeProjectComponent implements OnInit {
     this.http.update(this.controllerName, employeeProjectId, this.employeeProjectForm.value)
       .subscribe(res => {
         if (res > 0) {
-          this.toastr.success("Employee project list updated successfully", "Success");
+          this.toastr.success("Employee project updated successfully", "Success");
           this.getAllEmployeeProject();
         }
         else if (res < 0) {
-          this.toastr.warning(" Employee project name already exist.", "Warning");
+          this.toastr.warning("Project already assigned to other employee.", "Warning");
         }
         else {
-          this.toastr.error("Error in project saving.", "Error");
+          this.toastr.error("Error in assign project.", "Error");
         }
       });
   }

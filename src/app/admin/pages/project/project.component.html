@@ -130,7 +130,6 @@
                             <option *ngFor="let status of status" [value]="status.id">{{status.name}}
                             </option>
                         </select>
-                        <div class="invalid-feedback" *ngIf="submitted && statusId.errors?.['required']"></div>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 <!--Page Title-->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        Invoice
+        Company Invoice
     </h1>
 </div>
 
@@ -10,7 +10,7 @@
 <div class="card shadow mb-4">
     <div *ngIf="isShown">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Invoice List</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Company Invoice List</h5>
         </div>
         <div class="card-body">
             <div class="row mrgn-btm-15">
@@ -67,7 +67,7 @@
 <div class="card shadow mb-4">
     <div *ngIf="!isShown">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Invoice Detail</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Generate Invoice</h5>
         </div>
         <div class="card-body">
             <form class="form-horizontal" [formGroup]="invoiceForm" (ngSubmit)="saveCompanyInvoice()">

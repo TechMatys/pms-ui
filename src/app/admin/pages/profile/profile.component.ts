@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalCodesService, GlobalCodes } from 'src/app/core/services/global-codes/global-codes.service';
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   submitted = false;
   faCalendar = faCalendarAlt;
   controllerName = "Account";
+ 
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
@@ -26,18 +27,19 @@ export class ProfileComponent implements OnInit {
     this.genders = this.globalCodesService.genders;
 
     this.userForm = this.formBuilder.group({
-      firstName: [null],
-      lastName: [null],
-      emailAddress: [null],
-      gender: [0],
+      firstName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      emailAddress: [null, [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      gender: [0, [Validators.required, Validators.min(1)]],
       dateOfBirth: new FormControl(this.today),
-      mobile: [null],
+      mobile: [null,[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       password: [null],
       confirmPassword: [null],
       userId: [0]
     });
   }
-
+  
+  
   getGenders() {
     this.globalCodesService.getGlobalCodes("genders").subscribe(res => {
       this.genders = res;
@@ -60,6 +62,9 @@ export class ProfileComponent implements OnInit {
         this.toastr.success("Profile updated successfully", "Success");
         this.getUserById();
       });
+       if (this.userForm.invalid) {
+      return;
+     }
   }
 
   ngOnInit(): void {

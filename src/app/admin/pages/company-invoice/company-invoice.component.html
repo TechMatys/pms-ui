@@ -57,14 +57,18 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr *ngIf="!companyInvoiceList.length">
+                                <td colspan="4">
+                                    No Records Found
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="card shadow mb-4">
+
     <div *ngIf="!isShown">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Generate Invoice</h5>

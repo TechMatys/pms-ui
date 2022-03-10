@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-codes/global-codes.service';
@@ -20,6 +20,8 @@ interface Project {
 })
 export class ProjectComponent implements OnInit {
 
+  isSubmitted = false;
+
   // dtOptions: DataTables.Settings = {};
 
   projectForm: FormGroup;
@@ -39,24 +41,29 @@ export class ProjectComponent implements OnInit {
   technologies: GlobalCodes[] = [];
   today: Date;
 
+
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
     this.today = new Date();
 
     this.projectForm = this.formBuilder.group({
       projectId: [0],
-      name: [null],
+      name: [null, Validators.required],
       ownerName: [null],
       description: [null],
       startDate: new FormControl(this.today),
-      durationId: [0],
-      statusId: [0],
+      durationId: [0, [Validators.required, Validators.min(1)]],
+      statusId: [0, [Validators.required, Validators.min(1)]],
       technologies: [null],
       completionDate: [null],
       budgetAmount: [null],
       managedBy: [-1]
 
     });
+  }
+
+  get statusId() {
+    return this.projectForm.get('statusId');
   }
 
   getStatus() {
@@ -81,8 +88,9 @@ export class ProjectComponent implements OnInit {
     this.resetForm();
     this.isShown = false;
     this.isAddNew = true;
+    
   }
-
+ 
   deleteProject(project: any) {
     this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this project?', 'Yes', 'No', 'md')
       .then((confirmed) => {
@@ -108,12 +116,13 @@ export class ProjectComponent implements OnInit {
 
   saveProject() {
     this.submitted = true;
+    
 
     // stop here if form is invalid
 
-    // if (this.projectForm.invalid) {
-    //   return;
-    // }
+     if (this.projectForm.invalid) {
+     return;
+     }
 
     this.projectForm.controls['managedBy'].setValue(-1);
 
@@ -165,14 +174,17 @@ export class ProjectComponent implements OnInit {
     });
 
   }
+ 
 
-  resetForm() {
+  resetForm() { 
+    this.submitted= false;
     this.projectForm.reset();
     this.projectForm.controls['startDate'].setValue(this.today);
     this.projectForm.controls['statusId'].setValue(0);
     this.projectForm.controls['durationId'].setValue(0);
     this.projectForm.controls['projectId'].setValue(0);
     this.projectForm.controls['managedBy'].setValue(-1);
+   
   }
 
   ngOnInit(): void {
@@ -184,6 +196,5 @@ export class ProjectComponent implements OnInit {
 
   }
 
-
-
+ 
 }

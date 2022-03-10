@@ -78,7 +78,8 @@
             <form class="form-horizontal" [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="title">Title*</label>
+                        <label for="title">Title</label>
+                        <span class="red">*</span>
                         <input class="form-control" type="text" id="title" placeholder="Title" autocomplete="off"
                             maxlength="100" formControlName="title"
                             [ngClass]="{ 'is-invalid': submitted && f['title'].errors }">
@@ -88,13 +89,15 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="amount">Amount</label>
+                        <span class="red">*</span>
                         <div class="my-1">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="amount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000" formControlName="amount">
+                                    autocomplete="off" mask="0000000" formControlName="amount" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['amount'].errors }">
                             </div>
                         </div>
                     </div>

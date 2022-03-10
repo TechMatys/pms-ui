@@ -57,6 +57,11 @@ export class ProfileComponent implements OnInit {
 
   saveProfile() {
     this.submitted = true;
+    // stop here if form is invalid
+
+    if (this.userForm.invalid) {
+      return;
+      }
     this.http.update(this.controllerName, this.userId, this.userForm.value)
       .subscribe(res => {
         this.toastr.success("Profile updated successfully", "Success");
@@ -65,7 +70,9 @@ export class ProfileComponent implements OnInit {
        if (this.userForm.invalid) {
       return;
      }
+  
   }
+
 
   ngOnInit(): void {
     this.getGenders();

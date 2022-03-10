@@ -26,20 +26,28 @@ export class SideNavComponent implements OnInit {
 
   showSubMenu(menuName: string) {
     this.activeMenu = menuName;
-    this.isCollapsedEmployee = true;
-    this.isCollapsedProject = true;
-    this.isCollapsedCompany = true;
     if (menuName === "Project") {
-      this.isCollapsedProject = false;
+      this.isCollapsedProject = !this.isCollapsedProject;
+      this.isCollapsedEmployee = true;
+      this.isCollapsedCompany = true;
       return;
     }
-    if (menuName === "Employee") {
-      this.isCollapsedEmployee = false;
+    else if (menuName === "Employee") {
+      this.isCollapsedEmployee = !this.isCollapsedEmployee;
+      this.isCollapsedProject = true;
+      this.isCollapsedCompany = true;
       return;
     }
-    if (menuName === "Company") {
-      this.isCollapsedCompany = false;
+    else if (menuName === "Company") {
+      this.isCollapsedCompany = !this.isCollapsedCompany;
+      this.isCollapsedEmployee = true;
+      this.isCollapsedProject = true;
       return;
+    }
+    else{
+      this.isCollapsedEmployee = true;
+      this.isCollapsedProject = true;
+      this.isCollapsedCompany = true;
     }
   }
 

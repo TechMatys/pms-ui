@@ -78,8 +78,10 @@
             <form class="form-horizontal"[formGroup]="usersForm" (ngSubmit)="saveUser()">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="employeeName">Employee Name</label>
-                        <select name="employeeName" class="form-select col-lg-12" formControlName="employeeId">
+                        <label for="employeeName">Employee </label>
+                        <span class="red">*</span>
+                        <select name="employeeName" class="form-select col-lg-12" formControlName="employeeId"
+                        [ngClass]="{ 'is-invalid': submitted && f['employeeId'].errors }">
                             <option value="0">-- Select Employee --</option>
                             <option *ngFor="let employee of employeesList" [value]="employee.employeeId">
                                 {{ employee.firstName }} {{ employee.lastName }}
@@ -88,8 +90,10 @@
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <label for="role">Role</label>
-                        <select name="role" class="form-select col-lg-12" formControlName="roleId">
+                        <label for="role">Role </label>
+                        <span class="red">*</span>
+                        <select name="role" class="form-select col-lg-12" formControlName="roleId"
+                        [ngClass]="{ 'is-invalid': submitted && f['roleId'].errors }">
                             <option value="0">-- Select Role --</option>
                             <option *ngFor="let roles of rolesList" [value]="roles.id">{{roles.name}}
                             </option>
@@ -98,7 +102,9 @@
 
                     <div class="form-group col-lg-4">
                         <label for="status">Status </label>
-                        <select name="status" class="form-select col-lg-12" formControlName="statusId">
+                        <span class="red">*</span>
+                        <select name="status" class="form-select col-lg-12" formControlName="statusId"
+                        [ngClass]="{ 'is-invalid': submitted && f['statusId'].errors }">
                             <option value="0">-- Select Status --</option>
                             <option *ngFor="let status of status" [value]="status.id">{{status.name}}
                             </option>

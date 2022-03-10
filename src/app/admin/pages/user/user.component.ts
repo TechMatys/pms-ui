@@ -80,10 +80,10 @@ export class UserComponent implements OnInit {
 
     this.usersForm = this.formBuilder.group({
       userId: [0],
-      employeeId: [0],
-      roleId: [0],
+      employeeId: [0,[Validators.required, Validators.min(1)]],
+      roleId: [0,[Validators.required, Validators.min(1)]],
       screenPermissionId:[0],
-      statusId: [0],
+      statusId: [0,[Validators.required, Validators.min(1)]],
       managedBy: [-1]
     });
   
@@ -125,9 +125,14 @@ export class UserComponent implements OnInit {
         this.usersForm.setValue(res);
       });
   }
+  get f() { return this.usersForm.controls; }
+
   saveUser() {
     this.submitted = true;
-
+  // stop here if form is invalid
+     if (this.usersForm.invalid) {
+     return;
+    }
     this.usersForm.controls['managedBy'].setValue(-1); 
 
     const usersData = this.usersForm.value;
@@ -166,6 +171,7 @@ export class UserComponent implements OnInit {
     });
   }
   resetForm(){
+    this.submitted = false;
     this.usersForm.reset();
     this.usersForm.controls['statusId'].setValue(0); 
     this.usersForm.controls['roleId'].setValue(0); 

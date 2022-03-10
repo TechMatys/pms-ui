@@ -17,8 +17,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="javascript:void(0)" routerLink="">
+    <li class="nav-item" [ngClass]="{'active': activeMenu === 'Dashboard'}">
+        <a class="nav-link" href="javascript:void(0)" routerLink="" (click)="showSubMenu('Dashboard')" >
             <fa-icon [icon]="faDashboard"></fa-icon>
             <span>
                 Dashboard
@@ -32,14 +32,14 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="isCollapsedPoject = !isCollapsedPoject" 
-        [attr.aria-expanded]="!isCollapsedPoject" aria-controls="collapseProject">
+        <a class="nav-link" href="javascript:void(0)" (click)="showSubMenu('Project')" 
+        [attr.aria-expanded]="!isCollapsedProject" aria-controls="collapseProject">
             <fa-icon [icon]="faProject"></fa-icon>
             <span>Project</span>
-            <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedPoject"></fa-icon>
-            <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedPoject"></fa-icon>
+            <fa-icon [icon]="faAngleRight" class="menu-icon" *ngIf="isCollapsedProject"></fa-icon>
+            <fa-icon [icon]="faAngleDown" class="menu-icon" *ngIf="!isCollapsedProject"></fa-icon>
         </a>
-        <div [collapse]="isCollapsedPoject" [isAnimated]="true">
+        <div [collapse]="isCollapsedProject" [isAnimated]="true">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="javascript:void(0)" routerLink="Project">
                     Project Details
@@ -56,7 +56,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="isCollapsedEmployee = !isCollapsedEmployee" 
+        <a class="nav-link" href="javascript:void(0)" (click)="showSubMenu('Employee')" 
         [attr.aria-expanded]="!isCollapsedEmployee" aria-controls="isCollapsedEmployee">
             <fa-icon [icon]="faUsers"></fa-icon>
             <span>Employee</span>
@@ -82,7 +82,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="isCollapsedCompany = !isCollapsedCompany" 
+        <a class="nav-link" href="javascript:void(0)" (click)="showSubMenu('Company')" 
         [attr.aria-expanded]="!isCollapsedCompany" aria-controls="collapseEmployee">
             <fa-icon [icon]="faCompany"></fa-icon>
             <span>Company</span>
@@ -109,8 +109,8 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" routerLink="User">
+    <li class="nav-item" [ngClass]="{'active': activeMenu === 'User'}">
+        <a class="nav-link" href="javascript:void(0)" routerLink="User" (click)="showSubMenu('User')">
             <fa-icon [icon]="faUser"></fa-icon>
             <span>Users</span>
         </a>
@@ -120,8 +120,8 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" routerLink="Report">
+    <li class="nav-item" [ngClass]="{'active': activeMenu === 'Report'}">
+        <a class="nav-link" href="javascript:void(0)" routerLink="Report" (click)="showSubMenu('Report')">
             <fa-icon [icon]="faFile"></fa-icon>
             <span>Report</span>
         </a>

@@ -131,7 +131,7 @@ export class EmployeeProjectComponent implements OnInit {
     this.http.create(this.controllerName, this.employeeProjectForm.value)
       .subscribe(res => {
         if (res > 0) {
-          this.toastr.success("Project assigned to employee successfully", "Success");
+          this.toastr.success("Project assigned to employee successfully.", "Success");
           this.getAllEmployeeProject();
         }
         else if (res < 0) {
@@ -147,7 +147,7 @@ export class EmployeeProjectComponent implements OnInit {
     this.http.update(this.controllerName, employeeProjectId, this.employeeProjectForm.value)
       .subscribe(res => {
         if (res > 0) {
-          this.toastr.success("Employee project updated successfully", "Success");
+          this.toastr.success("Employee project updated successfully.", "Success");
           this.getAllEmployeeProject();
         }
         else if (res < 0) {

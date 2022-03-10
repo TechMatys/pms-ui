@@ -4,67 +4,83 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" [formGroup]="userForm" (ngSubmit)="saveProfile()">
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="firstName"> First Name* </label>
-                    <input type="text" class="form-control" placeholder="First Name" autocomplete="off" maxlength="20">
+                    <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+                        autocomplete="off" maxlength="20" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+                      
                 </div>
 
                 <div class="form-group col-lg-6">
                     <label for="lastName">Last Name* </label>
-                    <input type="text" class="form-control" placeholder="Last Name" autocomplete="off" maxlength="20">
+                    <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+                        autocomplete="off" maxlength="20" [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="emailAddress">Email Address* </label>
-                    <input type="text" class="form-control" placeholder="Email Address" maxlength="20" autocomplete="off" >
+                    <input type="text" class="form-control" formControlName="emailAddress" placeholder="Email Address"
+                        maxlength="20" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f['emailAddress'].errors }">
                 </div>
 
                 <div class="form-group col-lg-6">
                     <label for="mobileNumber">Mobile Number </label>
-                    <input type="text" class="form-control"  placeholder="(XXX) XXX XXXX" autocomplete="off" mask="0000000000">
+                    <input type="text" class="form-control" formControlName="mobile" placeholder="(XXX) XXX XXXX"
+                        autocomplete="off" mask="(000) 000 0000" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }">
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="gender">Gender</label>
-                    <select name="gender" class="form-select col-lg-12" (change)="onGenderChange($event.target)">
+                    <select name="gender" class="form-select col-lg-12" formControlName="gender" 
+                    [ngClass]="{'is-invalid': submitted && f['gender'].errors }" >
+                        <option value="0">--Select Gender--</option>
                         <option *ngFor="let gender of genders" [value]="gender.id">{{gender.name}}</option>
                     </select>
+                   
                 </div>
 
                 <div class="form-group col-lg-6">
                     <label for="dob">Date of Birth</label>
                     <div class="input-group">
-                        <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                mask="00/00/0000" [maxDate]="today"
-                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
+                        <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker [maxDate]="today"
+                            formControlName="dateOfBirth" #dob="bsDatepicker" readonly
+                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" (click)="dob.toggle()">
+                                <fa-icon [icon]="faCalendar"></fa-icon>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group col-lg-6">
-                    <label for="Password">Password* </label>
-                    <input type="password" class="form-control" placeholder="XXXXXXXX" autocomplete="off" maxlength="15">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="Password">Password* </label>
+                        <input type="password" class="form-control" formControlName="password" placeholder="XXXXXXXX"
+                            autocomplete="off" maxlength="15">
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="confirmPassword"> Confirm Password* </label>
+                        <input type="password" class="form-control" formControlName="confirmPassword"
+                            placeholder="XXXXXXXX" autocomplete="off" maxlength="15">
+                    </div>
                 </div>
 
-                <div class="form-group col-lg-6">
-                    <label for="confirmPassword"> Confirm Password* </label>
-                    <input type="password" class="form-control" placeholder="XXXXXXXX" autocomplete="off" maxlength="15">
+                <div class="row submit-buttons">
+                    <div class="form-group col-lg-12">
+                        <input type="submit" class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Reset" />
+                    </div>
                 </div>
-            </div>
-
-            <div class="row submit-buttons">
-                <div class="form-group col-lg-12">
-                    <input type="submit" class="btn btn-success" value="Save" />
-                    <input type="button" class="btn btn-outline-primary" value="Reset"  />
-                </div>
-            </div>
+            
         </form>
     </div>
 </div>

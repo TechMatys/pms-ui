@@ -63,7 +63,7 @@ export class CompanyInvoiceComponent implements OnInit {
     }
   
     deleteCompanyInvoice(companyInvoice: any) {
-      this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this Company invoice?', 'Yes', 'No', 'md')
+      this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this company invoice?', 'Yes', 'No', 'md')
         .then((confirmed) => {
           if (confirmed) {
             this.http.delete(this.controllerName, companyInvoice.companyInvoiceId)

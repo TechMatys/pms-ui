@@ -63,12 +63,12 @@ export class CompanyInvoiceComponent implements OnInit {
     }
   
     deleteCompanyInvoice(companyInvoice: any) {
-      this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this CompanyInvoice?', 'Yes', 'No', 'md')
+      this.popUpService.confirm('Confirmation', 'Are you sure you want to delete this Company invoice?', 'Yes', 'No', 'md')
         .then((confirmed) => {
           if (confirmed) {
             this.http.delete(this.controllerName, companyInvoice.companyInvoiceId)
               .subscribe(res => {
-                this.toastr.success("CompanyInvoice deleted successfully", "Success");
+                this.toastr.success("Company invoice deleted successfully", "Success");
                 this.getAllCompanyInvoiceList();
               });
           }
@@ -86,10 +86,6 @@ export class CompanyInvoiceComponent implements OnInit {
         return;
       }
   
-  
-  
-      // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.invoiceForm.value))
-  
       this.invoiceForm.controls['managedBy'].setValue(-1);
   
       const companyInvoiceData = this.invoiceForm.value;
@@ -97,14 +93,14 @@ export class CompanyInvoiceComponent implements OnInit {
       if (companyInvoiceId < 1) {
         this.http.create(this.controllerName, companyInvoiceData)
           .subscribe(res => {
-            this.toastr.success("CompanyInvoice created successfully", "Success");
+            this.toastr.success("Company invoice created successfully", "Success");
             this.getAllCompanyInvoiceList();
           });
       }
       else {
         this.http.update(this.controllerName, companyInvoiceId, companyInvoiceData)
           .subscribe(res => {
-            this.toastr.success("CompanyInvoice updated successfully", "Success");
+            this.toastr.success("Company invoice updated successfully", "Success");
             this.getAllCompanyInvoiceList();
           });
       }

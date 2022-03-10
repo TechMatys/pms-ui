@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup,Validators} from '@angular/forms';
 import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/core/services/https/http.service';
@@ -49,8 +49,8 @@ export class CompanyExpensesComponent implements OnInit {
     this.today = new Date();
     this.expenseForm = this.formBuilder.group({
       companyExpenseId: [0],
-      title: [null],
-      amount: [null],
+      title: [null,Validators.required],
+      amount: [null,Validators.required],
       expenseDate: new FormControl(this.today),
       notes: [null],
       managedBy: [-1]
@@ -64,6 +64,7 @@ export class CompanyExpensesComponent implements OnInit {
   }
 
   resetForm() {
+    this.submitted = false;
     this.expenseForm.reset();
     this.expenseForm.controls['expenseDate'].setValue(this.today);
     this.expenseForm.controls['companyExpenseId'].setValue(0);
@@ -96,13 +97,13 @@ export class CompanyExpensesComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    // if (this.expenseForm.invalid) {
-    // //   return;
-    // }
+     if (this.expenseForm.invalid) {
+       return;
+     }
 
 
 
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.expenseForm.value))
+    
 
     this.expenseForm.controls['managedBy'].setValue(-1);
 

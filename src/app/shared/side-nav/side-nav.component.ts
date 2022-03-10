@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faDashboard, faUsers, faUser, faProjectDiagram, faAngleDown, faAngleRight, faMoneyBill, faFile, faBuilding} from '@fortawesome/free-solid-svg-icons';
+import { faDashboard, faUsers, faUser, faProjectDiagram, faAngleDown, faAngleRight, faMoneyBill, faFile, faBuilding } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-nav',
@@ -18,10 +18,38 @@ export class SideNavComponent implements OnInit {
   faFile = faFile;
   faCompany = faBuilding;
   isCollapsedEmployee = true;
-  isCollapsedPoject = true;
+  isCollapsedProject = true;
   isCollapsedCompany = true;
+  activeMenu = "Dashboard";
 
   constructor() { }
+
+  showSubMenu(menuName: string) {
+    this.activeMenu = menuName;
+    if (menuName === "Project") {
+      this.isCollapsedProject = !this.isCollapsedProject;
+      this.isCollapsedEmployee = true;
+      this.isCollapsedCompany = true;
+      return;
+    }
+    else if (menuName === "Employee") {
+      this.isCollapsedEmployee = !this.isCollapsedEmployee;
+      this.isCollapsedProject = true;
+      this.isCollapsedCompany = true;
+      return;
+    }
+    else if (menuName === "Company") {
+      this.isCollapsedCompany = !this.isCollapsedCompany;
+      this.isCollapsedEmployee = true;
+      this.isCollapsedProject = true;
+      return;
+    }
+    else{
+      this.isCollapsedEmployee = true;
+      this.isCollapsedProject = true;
+      this.isCollapsedCompany = true;
+    }
+  }
 
   ngOnInit(): void {
   }

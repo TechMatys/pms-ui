@@ -53,15 +53,15 @@ export class EmployeeComponent implements OnInit {
       firstName: [null, Validators.required],
       middleName: [null],
       lastName: [null, Validators.required],
-      gender: [0],
+      gender: [0,[Validators.required, Validators.min(1)]],
       emailAddress: [null],
       mobile: [null],
       dateOfBirth: new FormControl(this.today),
       address: [null],
       city: [null],
       stateId: [0],
-      statusId: [0],
-      designationId: [0],
+      statusId: [0,[Validators.required, Validators.min(1)]],
+      designationId: [0,[Validators.required, Validators.min(1)]],
       postalCode: [null],
       startDate: new FormControl(this.today),
       endDate: [null],
@@ -90,6 +90,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   resetForm() {
+    this.submitted = false;
     this.employeeForm.reset();
     this.employeeForm.controls['dateOfBirth'].setValue(this.today);
     this.employeeForm.controls['startDate'].setValue(this.today);
@@ -122,15 +123,15 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  //get f() { return this.employeeForm.controls; }
+  get f() { return this.employeeForm.controls; }
 
   saveEmployee() {
     this.submitted = true;
 
     //stop here if form is invalid
-    // if (this.employeeForm.invalid) {
-    //  return;
-    //}
+     if (this.employeeForm.invalid) {
+      return;
+    }
 
     const employeeData = this.employeeForm.value;
     const employeeId = employeeData.employeeId;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from 'src/app/core/services/https/http.service';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
@@ -53,8 +53,8 @@ export class EmployeeProjectComponent implements OnInit {
    
     this.employeeProjectForm = this.formBuilder.group({
       employeeProjectId: [0],
-      employeeId: [0],
-      projectId: [0],
+      employeeId: [0,[Validators.required, Validators.min(1)]],
+      projectId: [0,[Validators.required, Validators.min(1)]],
       assignedDate: new FormControl(this.today),
       notes: [null],
       managedBy: [-1]
@@ -68,6 +68,7 @@ export class EmployeeProjectComponent implements OnInit {
   }
 
   resetForm(){
+    this.submitted = false;
     this.employeeProjectForm.reset();
     this.employeeProjectForm.controls['assignedDate'].setValue(this.today); 
     this.employeeProjectForm.controls['employeeProjectId'].setValue(0); 
@@ -109,30 +110,61 @@ export class EmployeeProjectComponent implements OnInit {
         this.employeeProjectForm.setValue(res);
       });
   }
+
+  get f() { return this.employeeProjectForm.controls; }
+
   saveEmployeeProject() {
     this.submitted = true;
-
-    
+     // stop here if form is invalid
+     if (this.employeeProjectForm.invalid) {
+      return;
+    }
     this.employeeProjectForm.controls['managedBy'].setValue(-1);
 
     const employeeProjectData = this.employeeProjectForm.value;
     const employeeProjectId = employeeProjectData.employeeProjectId;
 
     if (employeeProjectId < 1) {
-      this.http.create(this.controllerName, employeeProjectData)
-        .subscribe(res => {
-          this.toastr.success("Employee project added successfully", "Success");
-          this.getAllEmployeeProject();
-        });
+      this.createEmployeeProject();
+      
     }
     else {
-      this.http.update(this.controllerName, employeeProjectId, employeeProjectData)
-        .subscribe(res => {
-          this.toastr.success("Employee project updated successfully", "Success");
-          this.getAllEmployeeProject();
-        });
+      this.updateEmployeeProject(employeeProjectId);
     }
   }
+
+  createEmployeeProject() {
+    this.http.create(this.controllerName, this.employeeProjectForm.value)
+      .subscribe(res => {
+        if (res > 0) {
+          this.toastr.success("Project assigned to employee successfully.", "Success");
+          this.getAllEmployeeProject();
+        }
+        else if (res < 0) {
+          this.toastr.warning("Project already assigned to other employee.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in assign project.", "Error");
+        }
+      });
+  }
+
+  updateEmployeeProject(employeeProjectId: number) {
+    this.http.update(this.controllerName, employeeProjectId, this.employeeProjectForm.value)
+      .subscribe(res => {
+        if (res > 0) {
+          this.toastr.success("Employee project updated successfully.", "Success");
+          this.getAllEmployeeProject();
+        }
+        else if (res < 0) {
+          this.toastr.warning("Project already assigned to other employee.", "Warning");
+        }
+        else {
+          this.toastr.error("Error in assign project.", "Error");
+        }
+      });
+  }
+
   getAllEmployeeProject() {
     this.isShown = true;
     this.http.getAll(this.controllerName).subscribe(res => {

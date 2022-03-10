@@ -71,7 +71,7 @@
 
     <div *ngIf="!isShown">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Add Project </h5>
+            <h5 class="m-0 font-weight-bold text-primary">Project Detail</h5>
         </div>
         <!-- Card Body -->
         <div class="card-body">
@@ -79,6 +79,7 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="name">Name </label>
+                        <span class="red">*</span>
                         <input type="text" class="form-control" id="name" placeholder="Name" maxlength="20"
                             autocomplete="off" formControlName="name"
                             [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
@@ -116,20 +117,24 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="duration">Duration </label>
-                        <select name="duration" class="form-select col-lg-12" formControlName="durationId">
+                        <span class="red">*</span>
+                        <select name="duration" class="form-select col-lg-12" formControlName="durationId"   
+                         [ngClass]="{ 'is-invalid': submitted && f['durationId'].errors }">
                             <option value="0">-- Select Duration --</option>
                             <option *ngFor="let duration of durations" [value]="duration.id"> {{duration.name}}
                             </option>
                         </select>
                     </div>
 
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-4" >
                         <label for="status">Status </label>
-                        <select name="status" class="form-select col-lg-12" formControlName="statusId">
+                        <span class="red">*</span>
+                        <select name="status" class="form-select col-lg-12" formControlName="statusId" 
+                        [ngClass]="{ 'is-invalid': submitted && f['statusId'].errors }">
                             <option value="0">-- Select Status --</option>
                             <option *ngFor="let status of status" [value]="status.id">{{status.name}}
                             </option>
-                        </select>
+                        </select> 
                     </div>
                 </div>
 
@@ -182,7 +187,7 @@
                 <div class="row submit-buttons">
                     <div class="form-group col-lg-12">
                         <input type="submit" class="btn btn-success" value="Save" />
-                        <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel"  (click)="isShown = true"  />
                     </div>
                 </div>
 

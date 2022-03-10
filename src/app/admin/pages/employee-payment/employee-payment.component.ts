@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrash, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from 'src/app/core/services/https/http.service';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
@@ -46,9 +46,9 @@ export class EmployeePaymentComponent implements OnInit {
 
     this.employeePaymentForm = this.formBuilder.group({
       employeePaymentId: [0],
-      employeeId: [0],
-      amount: [null],
-      paymentMonthYear: [null],
+      employeeId: [0,[Validators.required, Validators.min(1)]],
+      amount: [null,Validators.required],
+      paymentMonthYear: [null,Validators.required],
       paymentDate: new FormControl(this.today),
       notes: [null],
       managedBy: [-1]
@@ -62,6 +62,7 @@ export class EmployeePaymentComponent implements OnInit {
   }
 
   resetForm(){
+    this.submitted = false;
     this.employeePaymentForm.reset();
     this.employeePaymentForm.controls['paymentDate'].setValue(this.today); 
     this.employeePaymentForm.controls['employeePaymentId'].setValue(0); 
@@ -96,14 +97,15 @@ export class EmployeePaymentComponent implements OnInit {
         this.employeePaymentForm.setValue(res);
       });
   }
-
+  get f() { return this.employeePaymentForm.controls; }
+  
   saveEmployeePayment() {
     this.submitted = true;
 
     // stop here if form is invalid
-    // if (this.employeePaymentForm.invalid) {
-    //   return;
-    // }
+     if (this.employeePaymentForm.invalid) {
+      return;
+     }
     this.employeePaymentForm.controls['managedBy'].setValue(-1);
 
     const employeePaymentData = this.employeePaymentForm.value;

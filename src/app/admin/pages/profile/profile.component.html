@@ -7,14 +7,16 @@
         <form class="form-horizontal" [formGroup]="userForm" (ngSubmit)="saveProfile()">
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <label for="firstName"> First Name* </label>
+                    <label for="firstName"> First Name </label>
+                    <span class="red">*</span>
                     <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
                         autocomplete="off" maxlength="20" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
                       
                 </div>
 
                 <div class="form-group col-lg-6">
-                    <label for="lastName">Last Name* </label>
+                    <label for="lastName">Last Name </label>
+                    <span class="red">*</span>
                     <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
                         autocomplete="off" maxlength="20" [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
                 </div>
@@ -22,13 +24,15 @@
 
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <label for="emailAddress">Email Address* </label>
+                    <label for="emailAddress">Email Address </label>
+                    <span class="red">*</span>
                     <input type="text" class="form-control" formControlName="emailAddress" placeholder="Email Address"
                         maxlength="20" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f['emailAddress'].errors }">
                 </div>
 
                 <div class="form-group col-lg-6">
                     <label for="mobileNumber">Mobile Number </label>
+                    <span class="red">*</span>
                     <input type="text" class="form-control" formControlName="mobile" placeholder="(XXX) XXX XXXX"
                         autocomplete="off" mask="(000) 000 0000" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }">
                 </div>
@@ -37,6 +41,7 @@
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="gender">Gender</label>
+                    <span class="red">*</span>
                     <select name="gender" class="form-select col-lg-12" formControlName="gender" 
                     [ngClass]="{'is-invalid': submitted && f['gender'].errors }" >
                         <option value="0">--Select Gender--</option>

@@ -89,7 +89,9 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="project">Project</label>
-                        <select name="project" class="form-select col-lg-12" formControlName="projectId">
+                        <span class="red">*</span>
+                        <select name="project" class="form-select col-lg-12" formControlName="projectId"
+                         [ngClass]="{ 'is-invalid': submitted && f['projectId'].errors }">
                             <option value="0">-- Select Project --</option>
                             <option *ngFor="let project of projectsList" [value]="project.projectId">{{ project.name }}
                             </option>
@@ -98,13 +100,15 @@
 
                     <div class="form-group col-lg-4">
                         <label for="receivedAmount">Received Amount</label>
+                        <span class="red">*</span>
                         <div class="my-1">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="receivedAmount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000" formControlName="receivedAmount">
+                                    autocomplete="off" mask="0000000" formControlName="receivedAmount"  
+                                     [ngClass]="{ 'is-invalid': submitted && f['receivedAmount'].errors }">
                             </div>
                         </div>
                     </div>
@@ -126,9 +130,11 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="year">Payment Month/Year</label>
+                        <span class="red">*</span>
                         <input autocomplete="off" class="form-control" name="date" bsDatepicker [maxDate]="today"
                             [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}" minMode="month"
-                            placeholder="MM/YYYY" formControlName="paymentMonthYear">
+                            placeholder="MM/YYYY" formControlName="paymentMonthYear"
+                             [ngClass]="{ 'is-invalid': submitted && f['paymentMonthYear'].errors }">
                     </div>
 
                     <div class="form-group col-lg-4">

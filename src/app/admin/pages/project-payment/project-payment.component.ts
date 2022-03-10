@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/core/services/https/http.service';
@@ -48,10 +48,10 @@ export class ProjectPaymentComponent implements OnInit {
 
      this.projectPaymentForm = this.formBuilder.group({
       projectPaymentId: [0],
-      projectId: [0],
-      receivedAmount:[null],
+      projectId: [0, [Validators.required, Validators.min(1)]],
+      receivedAmount:[null,Validators.required],
       balancedAmount: [null],
-      paymentMonthYear: [null],
+      paymentMonthYear: [null,Validators.required],
       paymentDate: new FormControl(this.today),
       notes: [null],
       managedBy: [-1]
@@ -67,7 +67,8 @@ export class ProjectPaymentComponent implements OnInit {
   }
 
 
-  resetForm(){
+  resetForm(){ 
+    this.submitted = false; 
     this.projectPaymentForm.reset();
     this.projectPaymentForm.controls['paymentDate'].setValue(this.today); 
     this.projectPaymentForm.controls['projectPaymentId'].setValue(0); 
@@ -102,14 +103,16 @@ export class ProjectPaymentComponent implements OnInit {
         this.projectPaymentForm.setValue(res);
       });
   }
+  
+  get f() { return this.projectPaymentForm.controls; }
 
   saveProjectPayment() {
     this.submitted = true;
 
     // stop here if form is invalid
-    // if (this.projectPaymentForm.invalid) {
-    //   return;
-    // }
+     if (this.projectPaymentForm.invalid) {
+       return;
+    }
     this.projectPaymentForm.controls['managedBy'].setValue(-1);
 
     const projectPaymentData = this.projectPaymentForm.value;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faCalendarAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from 'src/app/core/services/https/http.service';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
@@ -53,8 +53,8 @@ export class EmployeeProjectComponent implements OnInit {
    
     this.employeeProjectForm = this.formBuilder.group({
       employeeProjectId: [0],
-      employeeId: [0],
-      projectId: [0],
+      employeeId: [0,[Validators.required, Validators.min(1)]],
+      projectId: [0,[Validators.required, Validators.min(1)]],
       assignedDate: new FormControl(this.today),
       notes: [null],
       managedBy: [-1]
@@ -68,6 +68,7 @@ export class EmployeeProjectComponent implements OnInit {
   }
 
   resetForm(){
+    this.submitted = false;
     this.employeeProjectForm.reset();
     this.employeeProjectForm.controls['assignedDate'].setValue(this.today); 
     this.employeeProjectForm.controls['employeeProjectId'].setValue(0); 
@@ -109,10 +110,15 @@ export class EmployeeProjectComponent implements OnInit {
         this.employeeProjectForm.setValue(res);
       });
   }
+
+  get f() { return this.employeeProjectForm.controls; }
+
   saveEmployeeProject() {
     this.submitted = true;
-
-    
+     // stop here if form is invalid
+     if (this.employeeProjectForm.invalid) {
+      return;
+    }
     this.employeeProjectForm.controls['managedBy'].setValue(-1);
 
     const employeeProjectData = this.employeeProjectForm.value;

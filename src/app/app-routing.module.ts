@@ -8,9 +8,9 @@ import { UserComponent } from './admin/pages/user/user.component';
 import { EmployeePaymentComponent } from './admin/pages/employee-payment/employee-payment.component';
 import { ProjectPaymentComponent } from './admin/pages/project-payment/project-payment.component';
 import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
-import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
 import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
+import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 
 
 
@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
 
-    path: 'GenerateInvoice', component:GenerateInvoiceComponent
+    path: 'CompanyInvoice', component:CompanyInvoiceComponent
   },
 
   {

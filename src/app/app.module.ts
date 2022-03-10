@@ -12,13 +12,11 @@ import { EmployeePaymentComponent } from './admin/pages/employee-payment/employe
 import { CompanyExpensesComponent } from './admin/pages/company-expenses/company-expenses.component';
 import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
-import { GenerateInvoiceComponent } from './admin/pages/generate-invoice/generate-invoice.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 import { UserComponent } from './admin/pages/user/user.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
-import { LoginComponent } from './home/login/login.component';
 import { PopUpComponent } from './core/pop-up/pop-up.component';
 import { AdminComponent } from './admin/admin.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -31,6 +29,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { LoginComponent } from './home/login/login.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,6 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     PopUpComponent,
     ReportComponent,
     ProfileComponent,
-    GenerateInvoiceComponent,
     CompanyInvoiceComponent,  
   ],
   imports: [

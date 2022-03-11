@@ -8,7 +8,7 @@ import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 interface ProjectPayment {
   projectName: string;
   receivedAmount: string;
-  month: string;
+  paymentMonthYear: string;
   paymentDate: string;
 }
 
@@ -140,7 +140,6 @@ export class ProjectPaymentComponent implements OnInit {
       this.projectPaymentList = res;
     });
   }
-
 
   ngOnInit(): void {
     this.getAllProjects();

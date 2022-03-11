@@ -50,7 +50,7 @@
                             <tr *ngFor="let employeePayment of employeePaymentList">
                                 <td>{{employeePayment.employeeName}}</td>
                                 <td>{{employeePayment.amount || 'N/A' }}</td>
-                                <td>{{employeePayment.month || 'N/A' }}</td>
+                                <td>{{employeePayment.paymentMonthYear || 'N/A' }}</td>
                                 <td>{{employeePayment.paymentDate || 'N/A' }}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit"(click)="editEmployee(employeePayment)">

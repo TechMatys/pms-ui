@@ -8,7 +8,7 @@ import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 interface EmployeePayment {
   employeeName: string,
   amount: string;
-  month: string;
+  paymentMonthYear: string;
   paymentDate: string;
 
 }

@@ -54,7 +54,7 @@ export class EmployeeComponent implements OnInit {
       middleName: [null],
       lastName: [null, Validators.required],
       gender: [0,[Validators.required, Validators.min(1)]],
-      emailAddress: [null],
+      emailAddress: [null, Validators.required],
       mobile: [null],
       dateOfBirth: new FormControl(this.today),
       address: [null],

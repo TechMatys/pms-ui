@@ -3,8 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pop-up',
-  templateUrl: './pop-up.component.html',
-  styleUrls: ['./pop-up.component.scss']
+  templateUrl: './pop-up.component.html'
 })
 export class PopUpComponent implements OnInit {
   @Input() title: any;

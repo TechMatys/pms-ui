@@ -13,7 +13,6 @@ import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 
 
-
 const routes: Routes = [
   {
     path: '', component: DashboardComponent

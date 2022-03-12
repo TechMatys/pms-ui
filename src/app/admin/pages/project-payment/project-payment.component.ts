@@ -19,8 +19,7 @@ interface Project {
 
 @Component({
   selector: 'app-project-payment',
-  templateUrl: './project-payment.component.html',
-  styleUrls: ['./project-payment.component.scss']
+  templateUrl: './project-payment.component.html'
 })
 
 

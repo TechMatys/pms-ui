@@ -13,8 +13,7 @@ interface Expenses {
 
 @Component({
   selector: 'app-company-expenses',
-  templateUrl: './company-expenses.component.html',
-  styleUrls: ['./company-expenses.component.scss']
+  templateUrl: './company-expenses.component.html'
 })
 export class CompanyExpensesComponent implements OnInit {
 

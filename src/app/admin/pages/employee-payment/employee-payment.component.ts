@@ -20,8 +20,7 @@ interface Employee {
 
 @Component({
   selector: 'app-employee-payment',
-  templateUrl: './employee-payment.component.html',
-  styleUrls: ['./employee-payment.component.scss']
+  templateUrl: './employee-payment.component.html'
 })
 export class EmployeePaymentComponent implements OnInit {
 

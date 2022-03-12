@@ -27,8 +27,7 @@ interface Project {
 
 @Component({
   selector: 'app-employee-project',
-  templateUrl: './employee-project.component.html',
-  styleUrls: ['./employee-project.component.scss']
+  templateUrl: './employee-project.component.html'
 })
 export class EmployeeProjectComponent implements OnInit {
   

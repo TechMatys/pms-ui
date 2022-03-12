@@ -52,10 +52,10 @@
                                     {{projectPayment.receivedAmount || 'N/A'}}
                                 </td>
                                 <td>
-                                    {{projectPayment.paymentMonthYear || 'N/A'}}
+                                    {{projectPayment.paymentMonthYear|| 'N/A'}}
                                 </td>
                                 <td>
-                                    {{projectPayment.paymentDate}}
+                                    {{projectPayment.paymentDate| date: 'dd/MM/yyyy'}}
                                 </td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editProject(projectPayment)">

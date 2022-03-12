@@ -34,7 +34,7 @@
                             <tr *ngFor="let employee of employeeList">
                                 <td>{{employee.firstName}} {{employee.lastName}}</td>
                                 <td>{{employee.emailAddress || 'N/A'}}</td>
-                                <td>{{employee.startDate || 'N/A'}}</td>
+                                <td>{{employee.startDate| date: 'dd/MM/yyyy' || 'N/A'}}</td>
                                 <td>{{employee.designation || 'N/A'}}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editEmployee(employee)">

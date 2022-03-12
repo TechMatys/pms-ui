@@ -51,7 +51,7 @@
                                 <td>{{employeePayment.employeeName}}</td>
                                 <td>{{employeePayment.amount || 'N/A' }}</td>
                                 <td>{{employeePayment.paymentMonthYear || 'N/A' }}</td>
-                                <td>{{employeePayment.paymentDate || 'N/A' }}</td>
+                                <td>{{employeePayment.paymentDate | date: 'dd/MM/yyyy' || 'N/A' }}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit"(click)="editEmployee(employeePayment)">
                                         <fa-icon [icon]="faEdit"></fa-icon>

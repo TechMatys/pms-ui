@@ -6,6 +6,7 @@ import { GlobalCodes, GlobalCodesService } from 'src/app/core/services/global-co
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
+
 interface Project {
   name: string,
   startDate: string,
@@ -18,7 +19,7 @@ interface Project {
   templateUrl: './project.component.html'
 })
 export class ProjectComponent implements OnInit {
-
+  dateToday: number = Date.now();
   isSubmitted = false;
 
   // dtOptions: DataTables.Settings = {};
@@ -44,6 +45,7 @@ export class ProjectComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
     this.today = new Date();
+    
 
     this.projectForm = this.formBuilder.group({
       projectId: [0],
@@ -186,6 +188,7 @@ export class ProjectComponent implements OnInit {
    
   }
 
+  
   ngOnInit(): void {
 
     this.getAllProjectList();

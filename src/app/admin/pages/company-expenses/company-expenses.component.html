@@ -44,7 +44,7 @@
                             <tr *ngFor="let expense of expenseList">
                                 <td>{{expense.title || 'N/A'}}</td>
                                 <td>{{expense.amount || 'N/A'}}</td>
-                                <td>{{expense.expenseDate || 'N/A'}}</td>
+                                <td>{{expense.expenseDate| date: 'dd/MM/yyyy' || 'N/A'}}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editExpense(expense)">
                                         <fa-icon [icon]="faEdit"></fa-icon>

@@ -45,7 +45,7 @@
                                     {{ user.status|| 'N/A'}}
                                 </td>
                                 <td>
-                                    {{ user.createdDate|| 'N/A'}}
+                                    {{ user.createdDate| date: 'dd/MM/yyyy'|| 'N/A'}}
                                 </td>
 
                                 <td class="action-button">

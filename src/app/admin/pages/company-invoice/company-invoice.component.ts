@@ -13,8 +13,7 @@ interface CompanyInvoice {
 
 @Component({
   selector: 'app-company-invoice',
-  templateUrl: './company-invoice.component.html',
-  styleUrls: ['./company-invoice.component.scss']
+  templateUrl: './company-invoice.component.html'
 })
 export class CompanyInvoiceComponent implements OnInit {
 

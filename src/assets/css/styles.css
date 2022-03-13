@@ -11419,3 +11419,6 @@ input[type="file"] {
 .red{
   color: red;
 }
+.nav-link span{
+  margin-left: 10px;
+}

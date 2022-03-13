@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
-                                <th scope="col">Start Date</th>
+                                <th  scope="col" >Start Date</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Technology </th>
                                 <th class="action-button">Action</th>
@@ -39,7 +39,7 @@
                                     {{project.name}}
                                 </td>
                                 <td>
-                                    {{project.startDate  || 'N/A' }}
+                                    {{project.startDate | date: 'dd/MM/yyyy'  || 'N/A' }}
                                 </td>
                                 <td>
                                     {{ project.status || 'N/A' }}
@@ -140,13 +140,13 @@
 
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="startDate">Start Date </label>
-                        <div class="input-group">
-                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                formControlName="startDate" [maxDate]="today" #sd="bsDatepicker" readonly
+                        <label for="startDate" >Start Date </label>
+                        <div class="input-group" >
+                            <input  type="text"  placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                                formControlName="startDate" [maxDate]="today" #sd="bsDatepicker" 
                                 [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" (click)="sd.toggle()">
+                                <button class="btn btn-primary" type="button" (click)="sd.toggle()" >
                                     <fa-icon [icon]="faCalendar"></fa-icon>
                                 </button>
                             </div>
@@ -156,8 +156,9 @@
                     <div class="form-group col-lg-4">
                         <label for="completionDate">Completion Date </label>
                         <div class="input-group">
+                          
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                formControlName="completionDate" [maxDate]="today" #cd="bsDatepicker" readonly
+                                formControlName="completionDate"  #cd="bsDatepicker"   
                                 [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" (click)="cd.toggle()">
@@ -176,7 +177,7 @@
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="budgetAmount" placeholder="XXXXXXX"
-                                    mask="000000" autocomplete="off" formControlName="budgetAmount">
+                                    mask="9999999" autocomplete="off" formControlName="budgetAmount">
                             </div>
                         </div>
                     </div>

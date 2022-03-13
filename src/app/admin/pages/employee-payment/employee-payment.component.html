@@ -34,7 +34,6 @@
                     </button>
                 </div>
             </div>
-            <hr>
             <div class="row">
                 <div class="col-lg-12">
                     <table class="table table-stripped">
@@ -51,8 +50,8 @@
                             <tr *ngFor="let employeePayment of employeePaymentList">
                                 <td>{{employeePayment.employeeName}}</td>
                                 <td>{{employeePayment.amount || 'N/A' }}</td>
-                                <td>{{employeePayment.month || 'N/A' }}</td>
-                                <td>{{employeePayment.paymentDate || 'N/A' }}</td>
+                                <td>{{employeePayment.paymentMonthYear || 'N/A' }}</td>
+                                <td>{{employeePayment.paymentDate | date: 'dd/MM/yyyy' || 'N/A' }}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit"(click)="editEmployee(employeePayment)">
                                         <fa-icon [icon]="faEdit"></fa-icon>
@@ -106,7 +105,7 @@
                                     <div class="input-group-text">₹</div>
                                 </div>
                                 <input type="text" class="form-control" id="amount" placeholder="XXXXXXX"
-                                    autocomplete="off" mask="0000000" formControlName="amount" 
+                                    autocomplete="off" mask="9999999" formControlName="amount" 
                                     [ngClass]="{ 'is-invalid': submitted && f['amount'].errors }" >
                             </div>
                         </div>

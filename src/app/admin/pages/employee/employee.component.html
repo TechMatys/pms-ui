@@ -34,7 +34,7 @@
                             <tr *ngFor="let employee of employeeList">
                                 <td>{{employee.firstName}} {{employee.lastName}}</td>
                                 <td>{{employee.emailAddress || 'N/A'}}</td>
-                                <td>{{employee.startDate || 'N/A'}}</td>
+                                <td>{{employee.startDate| date: 'dd/MM/yyyy' || 'N/A'}}</td>
                                 <td>{{employee.designation || 'N/A'}}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editEmployee(employee)">
@@ -131,13 +131,15 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="emailAddress">Email Address</label>
+                        <span class="red">*</span>
                         <input class="form-control" type="text" id="emailAddress" placeholder="Email Address"
-                            autocomplete="off" maxlength="100" formControlName="emailAddress">
+                            autocomplete="off" maxlength="100" formControlName="emailAddress"
+                            [ngClass]="{ 'is-invalid': submitted && f['emailAddress'].errors }">
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="mobile">Mobile</label>
                         <input class="form-control" type="text" id="mobile" placeholder="(XXX) XXX XXXX"
-                            mask="(000) 000 0000" autocomplete="off" formControlName="mobile">
+                            mask="(999) 999 9999" autocomplete="off" formControlName="mobile">
                     </div>
                 </div>
                 <div class="row">
@@ -163,7 +165,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="pincode">Pin Code</label>
-                        <input class="form-control" type="text" id="pincode" placeholder="XXXXXX" mask="000000"
+                        <input class="form-control" type="text" id="pincode" placeholder="XXXXXX" mask="999999"
                             autocomplete="off" formControlName="postalCode">
                     </div>
                 </div>

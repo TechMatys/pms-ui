@@ -16,8 +16,7 @@ interface Employee {
 
 @Component({
   selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss']
+  templateUrl: './employee.component.html'
 })
 export class EmployeeComponent implements OnInit {
 
@@ -53,15 +52,15 @@ export class EmployeeComponent implements OnInit {
       firstName: [null, Validators.required],
       middleName: [null],
       lastName: [null, Validators.required],
-      gender: [0,[Validators.required, Validators.min(1)]],
-      emailAddress: [null],
+      gender: [0, [Validators.required, Validators.min(1)]],
+      emailAddress: [null, Validators.required],
       mobile: [null],
       dateOfBirth: new FormControl(this.today),
       address: [null],
       city: [null],
       stateId: [0],
-      statusId: [0,[Validators.required, Validators.min(1)]],
-      designationId: [0,[Validators.required, Validators.min(1)]],
+      statusId: [0, [Validators.required, Validators.min(1)]],
+      designationId: [0, [Validators.required, Validators.min(1)]],
       postalCode: [null],
       startDate: new FormControl(this.today),
       endDate: [null],
@@ -129,17 +128,19 @@ export class EmployeeComponent implements OnInit {
     this.submitted = true;
 
     //stop here if form is invalid
-     if (this.employeeForm.invalid) {
+    if (this.employeeForm.invalid) {
       return;
     }
 
-    const employeeData = this.employeeForm.value;
-    const employeeId = employeeData.employeeId;
-    if (employeeId < 1) {
-      this.createEmployee();
-    }
-    else {
-      this.updateEmployee(employeeId);
+    if (this.validateForm()) {
+      const employeeData = this.employeeForm.value;
+      const employeeId = employeeData.employeeId;
+      if (employeeId < 1) {
+        this.createEmployee();
+      }
+      else {
+        this.updateEmployee(employeeId);
+      }
     }
   }
 
@@ -159,7 +160,7 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  updateEmployee(employeeId : number) {
+  updateEmployee(employeeId: number) {
     this.http.update(this.controllerName, employeeId, this.employeeForm.value)
       .subscribe(res => {
         if (res > 0) {
@@ -191,6 +192,19 @@ export class EmployeeComponent implements OnInit {
     this.globalCodesService.getGlobalCodes("genders").subscribe(res => {
       this.genders = res;
     });
+  }
+
+  validateForm() {
+    //If Start Date less than End Date 
+    // if()
+    // {
+       return true;
+    // }
+    // else
+    // {
+    //   this.toastr.warning("Start date should be greater then end date.", "Warning");
+    //   return false;
+    // }
   }
 
   ngOnInit(): void {

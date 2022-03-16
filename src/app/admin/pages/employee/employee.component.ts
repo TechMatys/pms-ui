@@ -25,6 +25,7 @@ export class EmployeeComponent implements OnInit {
   employeeForm: FormGroup;
   submitted = false;
   today: Date;
+  maxDate: Date;
 
   faEdit = faEdit;
   faDelete = faTrash;
@@ -46,6 +47,7 @@ export class EmployeeComponent implements OnInit {
     this.status = this.globalCodesService.status;
     this.designations = this.globalCodesService.designations;
     this.today = new Date();
+    this.maxDate = new Date();
 
     this.employeeForm = this.formBuilder.group({
       employeeId: [0],
@@ -90,8 +92,9 @@ export class EmployeeComponent implements OnInit {
 
   resetForm() {
     this.submitted = false;
-    this.employeeForm.reset();
-    this.employeeForm.controls['dateOfBirth'].setValue(this.today);
+    this.employeeForm.reset();      
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.employeeForm.controls['dateOfBirth'].setValue(this.maxDate);
     this.employeeForm.controls['startDate'].setValue(this.today);
     this.employeeForm.controls['gender'].setValue(0);
     this.employeeForm.controls['stateId'].setValue(0);

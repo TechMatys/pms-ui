@@ -18,11 +18,15 @@ export class ProfileComponent implements OnInit {
   submitted = false;
   faCalendar = faCalendarAlt;
   controllerName = "Account";
+  maxDate: Date;
  
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
     this.today = new Date();
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    
     this.genders = this.globalCodesService.genders;
 
     this.userForm = this.formBuilder.group({

@@ -11416,9 +11416,27 @@ input[type="file"] {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 .red{
   color: red;
 }
+
 .nav-link span{
   margin-left: 10px;
+}
+
+.danger{
+  color: #e74a3b;
+}
+
+.success{
+  color: #1cc88a;
+}
+
+.info{
+  color: #36b9cc;
+}
+
+.warning{
+  color: #f6c23e;
 }

@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
-                                <th  scope="col" >Start Date</th>
+                                <th scope="col">Start Date</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Technology </th>
                                 <th class="action-button">Action</th>
@@ -39,10 +39,14 @@
                                     {{project.name}}
                                 </td>
                                 <td>
-                                    {{project.startDate | date: 'dd/MM/yyyy'  || 'N/A' }}
+                                    {{project.startDate | date: 'dd/MM/yyyy' || 'N/A' }}
                                 </td>
                                 <td>
-                                    {{ project.status || 'N/A' }}
+                                    <span [ngClass]="{'success': project.status == 'Completed', 
+                                    'warning': project.status == 'InProgress', 'info': project.status == 'OnHold', 
+                                    'danger': project.status == 'Terminated'}">
+                                        {{ project.status || 'N/A' }}
+                                    </span>
                                 </td>
                                 <td>
                                     {{ project.technology || 'N/A' }}
@@ -80,7 +84,7 @@
                     <div class="form-group col-lg-6">
                         <label for="name">Name </label>
                         <span class="red">*</span>
-                        <input type="text" class="form-control" id="name" placeholder="Name" maxlength="20"
+                        <input type="text" class="form-control" id="name" placeholder="Name" maxlength="50"
                             autocomplete="off" formControlName="name"
                             [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
                     </div>
@@ -118,35 +122,35 @@
                     <div class="form-group col-lg-4">
                         <label for="duration">Duration </label>
                         <span class="red">*</span>
-                        <select name="duration" class="form-select col-lg-12" formControlName="durationId"   
-                         [ngClass]="{ 'is-invalid': submitted && f['durationId'].errors }">
+                        <select name="duration" class="form-select col-lg-12" formControlName="durationId"
+                            [ngClass]="{ 'is-invalid': submitted && f['durationId'].errors }">
                             <option value="0">-- Select Duration --</option>
                             <option *ngFor="let duration of durations" [value]="duration.id"> {{duration.name}}
                             </option>
                         </select>
                     </div>
 
-                    <div class="form-group col-lg-4" >
+                    <div class="form-group col-lg-4">
                         <label for="status">Status </label>
                         <span class="red">*</span>
-                        <select name="status" class="form-select col-lg-12" formControlName="statusId" 
-                        [ngClass]="{ 'is-invalid': submitted && f['statusId'].errors }">
+                        <select name="status" class="form-select col-lg-12" formControlName="statusId"
+                            [ngClass]="{ 'is-invalid': submitted && f['statusId'].errors }">
                             <option value="0">-- Select Status --</option>
                             <option *ngFor="let status of status" [value]="status.id">{{status.name}}
                             </option>
-                        </select> 
+                        </select>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="startDate" >Start Date </label>
-                        <div class="input-group" >
-                            <input  type="text"  placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                formControlName="startDate" [maxDate]="today" #sd="bsDatepicker" 
+                        <label for="startDate">Start Date </label>
+                        <div class="input-group">
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                                formControlName="startDate" [maxDate]="today" #sd="bsDatepicker"
                                 [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" (click)="sd.toggle()" >
+                                <button class="btn btn-primary" type="button" (click)="sd.toggle()">
                                     <fa-icon [icon]="faCalendar"></fa-icon>
                                 </button>
                             </div>
@@ -156,9 +160,9 @@
                     <div class="form-group col-lg-4">
                         <label for="completionDate">Completion Date </label>
                         <div class="input-group">
-                          
+
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
-                                formControlName="completionDate"  #cd="bsDatepicker"   
+                                formControlName="completionDate" #cd="bsDatepicker"
                                 [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false, containerClass: 'theme-dark-blue'}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" (click)="cd.toggle()">
@@ -188,7 +192,7 @@
                 <div class="row submit-buttons">
                     <div class="form-group col-lg-12">
                         <input type="submit" class="btn btn-success" value="Save" />
-                        <input type="button" class="btn btn-outline-primary" value="Cancel"  (click)="isShown = true"  />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel" (click)="isShown = true" />
                     </div>
                 </div>
 

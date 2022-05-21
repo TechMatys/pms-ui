@@ -49,7 +49,7 @@
                         <tbody>
                             <tr *ngFor="let employeePayment of employeePaymentList">
                                 <td>{{employeePayment.employeeName}}</td>
-                                <td>{{employeePayment.amount || 'N/A' }}</td>
+                                <td>{{employeePayment.amount | currency:'INR' }}</td>
                                 <td>{{employeePayment.paymentMonthYear || 'N/A' }}</td>
                                 <td>{{employeePayment.paymentDate | date: 'dd/MM/yyyy' || 'N/A' }}</td>
                                 <td class="action-button">

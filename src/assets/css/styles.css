@@ -11440,3 +11440,14 @@ input[type="file"] {
 .warning{
   color: #f6c23e;
 }
+
+.total-amount {
+  border-top: 2px solid #ad933d;
+  border-bottom: 1px solid white;
+}
+
+.total-amount td {
+  text-align: right;
+  font-style: italic;
+  color: #443dad;
+}

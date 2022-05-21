@@ -25,8 +25,14 @@
                         [maxDate]="today" [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}"
                         minMode="month">
                 </div>
-
-                <div class="col-lg-8 algn-right">
+                <div class="col-lg-3">
+                    <strong>Project</strong>
+                    <select name="project"  class="form-control">
+                        <option value="0">-- All --</option>
+                        <option *ngFor="let project of projectsList" [value]="project.projectId">{{ project.name }}</option>
+                    </select>
+                </div>
+                <div class="col-lg-5 algn-right">
                     <button class="btn btn-primary btn-sm" (click)="addProjectPayment()">
                         Add Project Payment</button>
                 </div>
@@ -49,7 +55,7 @@
                                     {{projectPayment.projectName}}
                                 </td>
                                 <td>
-                                    {{projectPayment.receivedAmount || 'N/A'}}
+                                    {{projectPayment.receivedAmount | currency:'INR'}}
                                 </td>
                                 <td>
                                     {{projectPayment.paymentMonthYear|| 'N/A'}}
@@ -64,6 +70,11 @@
                                     <a href="javascript:void(0)" style="margin-right: 10px;" ngbTooltip="Delete" (click)="deleteProject(projectPayment)">
                                         <fa-icon [icon]="faDelete"></fa-icon>
                                     </a>
+                                </td>
+                            </tr>
+                            <tr class="total-amount">
+                                <td colspan="5">
+                                    <h5>Total - {{totalAmount | currency:'INR'}} </h5>
                                 </td>
                             </tr>
                             <tr *ngIf="!projectPaymentList.length">

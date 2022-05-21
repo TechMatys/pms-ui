@@ -7,7 +7,7 @@ import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
 interface ProjectPayment {
   projectName: string;
-  receivedAmount: string;
+  receivedAmount: number;
   paymentMonthYear: string;
   paymentDate: string;
 }
@@ -32,6 +32,7 @@ export class ProjectPaymentComponent implements OnInit {
 
   isShown: boolean = true;
   isAddNew: boolean = true;
+  totalAmount: number = 0;
 
   controllerName = "Project-Payment";
   
@@ -136,7 +137,12 @@ export class ProjectPaymentComponent implements OnInit {
   getAllProjectPayment() {
     this.isShown = true;
     this.http.getAll(this.controllerName).subscribe(res => {
-      this.projectPaymentList = res;
+      this.projectPaymentList = res; 
+      if(this.projectPaymentList.length){
+        this.projectPaymentList.forEach(item => {
+          this.totalAmount = this.totalAmount + item.receivedAmount;
+        });
+      }     
     });
   }
 

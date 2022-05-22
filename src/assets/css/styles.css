@@ -3552,8 +3552,6 @@ input[type="button"].btn-block {
   display: block;
   min-height: 1.5rem;
   padding-left: 1.5rem;
-  -webkit-print-color-adjust: exact;
-  color-adjust: exact;
 }
 
 .custom-control-inline {
@@ -11450,4 +11448,9 @@ input[type="file"] {
   text-align: right;
   font-style: italic;
   color: #443dad;
+}
+
+.amount-column{
+  text-align: right;
+  padding-right: 100px !important;
 }

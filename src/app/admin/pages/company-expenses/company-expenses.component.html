@@ -36,7 +36,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Expense Name</th>
-                                <th scope="col">Amount</th>
+                                <th scope="col" class="amount-column">Amount</th>
                                 <th scope="col">Expense Date</th>
                                 <th class="action-button">Action</th>
                             </tr>
@@ -45,7 +45,7 @@
                             <tr *ngFor="let expense of expenseList; let i = index">
                                 <td>{{i+1}}</td>
                                 <td>{{expense.title || 'N/A'}}</td>
-                                <td>{{expense.amount | currency:'INR'}}</td>
+                                <td class="amount-column">{{expense.amount | currency:'INR':'symbol':'0.0'}}</td>
                                 <td>{{expense.expenseDate| date: 'dd/MM/yyyy' || 'N/A'}}</td>
                                 <td class="action-button">
                                     <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editExpense(expense)">
@@ -56,11 +56,11 @@
                                     </a>
                                 </td>
                             </tr>
-                            <!-- <tr>
+                            <tr class="total-amount">
                                 <td colspan="5">
-                                    <span>Total - </span>
+                                    <h5>Total - {{totalAmount | currency:'INR':'symbol':'0.0'}} </h5>
                                 </td>
-                            </tr> -->
+                            </tr>
                             <tr *ngIf="!expenseList.length">
                                 <td colspan="5">
                                     No Records Found

@@ -7,8 +7,8 @@ import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
 interface Expenses {
   title: string,
-  amount: string;
-  expenseDate: string;
+  amount: number;
+  expenseDate: Date;
 }
 
 @Component({
@@ -28,7 +28,7 @@ export class CompanyExpensesComponent implements OnInit {
   isShown: boolean = true;
   isAddNew: boolean = true;
   controllerName = "Company-Expense";
-
+  totalAmount: number = 0;
 
   expenseList: Expenses[] = [];
 
@@ -128,6 +128,11 @@ export class CompanyExpensesComponent implements OnInit {
     this.isShown = true;
     this.http.getAll(this.controllerName).subscribe(res => {
       this.expenseList = res;
+      if(this.expenseList.length){
+        this.expenseList.forEach(item => {
+          this.totalAmount = this.totalAmount + item.amount;
+        });
+      }     
     });
 
   }

@@ -43,7 +43,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Project Name</th>
-                                <th scope="col">Received Amount</th>
+                                <th scope="col" class="amount-column">Received Amount</th>
                                 <th scope="col">Payment Month</th>
                                 <th scope="col">Payment Date</th>
                                 <th class="action-button">Action</th>
@@ -54,8 +54,8 @@
                                 <td>
                                     {{projectPayment.projectName}}
                                 </td>
-                                <td>
-                                    {{projectPayment.receivedAmount | currency:'INR'}}
+                                <td class="amount-column">
+                                    {{projectPayment.receivedAmount | currency:'INR':'symbol':'0.0'}}
                                 </td>
                                 <td>
                                     {{projectPayment.paymentMonthYear|| 'N/A'}}
@@ -74,7 +74,7 @@
                             </tr>
                             <tr class="total-amount">
                                 <td colspan="5">
-                                    <h5>Total - {{totalAmount | currency:'INR'}} </h5>
+                                    <h5>Total - {{totalAmount | currency:'INR':'symbol':'0.0'}} </h5>
                                 </td>
                             </tr>
                             <tr *ngIf="!projectPaymentList.length">

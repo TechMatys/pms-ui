@@ -7,9 +7,9 @@ import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 
 interface EmployeePayment {
   employeeName: string,
-  amount: string;
+  amount: number;
   paymentMonthYear: string;
-  paymentDate: string;
+  paymentDate: Date;
 
 }
 interface Employee {
@@ -39,6 +39,7 @@ export class EmployeePaymentComponent implements OnInit {
   submitted = false;
   today: Date;
   faCalendar = faCalendarAlt;
+  totalAmount: number = 0;
 
   constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) {
     this.today = new Date();
@@ -130,6 +131,11 @@ export class EmployeePaymentComponent implements OnInit {
     this.isShown = true;
     this.http.getAll(this.controllerName).subscribe(res => {
       this.employeePaymentList = res;
+      if(this.employeePaymentList.length){
+        this.employeePaymentList.forEach(item => {
+          this.totalAmount = this.totalAmount + item.amount;
+        });
+      }     
     });
   }
 

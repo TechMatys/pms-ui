@@ -72,7 +72,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr class="total-amount">
+                            <tr class="total-amount" *ngIf="projectPaymentList.length">
                                 <td colspan="5">
                                     <h5>Total - {{totalAmount | currency:'INR':'symbol':'0.0'}} </h5>
                                 </td>

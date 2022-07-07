@@ -6,6 +6,7 @@ import { HttpService } from 'src/app/core/services/https/http.service';
 interface Dashboard {
   totalEmployees: number,
   totalProjects: number,
+  remaningEarnings: number,
   monthlyEarning: number;
   annualEarning: number;
   projectRevenue: ProjectRevenue[];
@@ -122,6 +123,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardItems = {
       totalEmployees: 0,
       totalProjects: 0,
+      remaningEarnings: 0,
       monthlyEarning: 0,
       annualEarning: 0,
       projectRevenue: [],

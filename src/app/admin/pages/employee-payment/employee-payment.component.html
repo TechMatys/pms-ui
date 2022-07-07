@@ -28,7 +28,15 @@
                         [maxDate]="today" [bsConfig]="{dateInputFormat: 'MM/YYYY', containerClass: 'theme-dark-blue'}"
                         minMode="month">
                 </div>
-                <div class="col-lg-8 algn-right">
+                <div class="col-lg-3">
+                    <strong>Employee</strong>
+                    <select name="employee" class="form-select">
+                        <option value="0">-- All --</option>
+                        <option *ngFor="let employee of employeesList" [value]="employee.employeeId">{{employee.firstName}} {{employee.lastName}}</option>
+                    </select>
+                </div>              
+
+                <div class="col-lg-5 algn-right">
                     <button class="btn btn-primary btn-sm header-btn" (click)="addEmployeePayment()">
                         Add Employee Payment
                     </button>
@@ -61,7 +69,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr class="total-amount">
+                            <tr class="total-amount" *ngIf="employeePaymentList.length">
                                 <td colspan="5">
                                     <h5>Total - {{totalAmount | currency:'INR':'symbol':'0.0'}} </h5>
                                 </td>

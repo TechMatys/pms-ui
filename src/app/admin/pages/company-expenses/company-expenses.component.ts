@@ -111,7 +111,7 @@ export class CompanyExpensesComponent implements OnInit {
     if (companyExpenseId < 1) {
       this.http.create(this.controllerName, expenseData)
         .subscribe(res => {
-          this.toastr.success("Expense created successfully", "Success");
+          this.toastr.success("Expense saved successfully", "Success");
           this.getAllExpenseList();
         });
     }

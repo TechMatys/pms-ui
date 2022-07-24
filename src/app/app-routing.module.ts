@@ -11,6 +11,7 @@ import { CompanyExpensesComponent } from './admin/pages/company-expenses/company
 import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
+import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
 
 
 const routes: Routes = [
@@ -36,10 +37,11 @@ const routes: Routes = [
     path: 'CompanyExpenses', component: CompanyExpensesComponent
   },
   {
-
     path: 'CompanyInvoice', component:CompanyInvoiceComponent
   },
-
+  {
+    path: 'CompanyDocuments', component:CompanyDocumentsComponent
+  },
   {
     path: 'User', component: UserComponent
   },

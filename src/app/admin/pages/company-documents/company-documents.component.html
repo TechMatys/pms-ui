@@ -1,0 +1,62 @@
+<!--Page Title-->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        Company Documents
+    </h1>
+</div>
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary">Company Documents List</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Created By</th>
+                                <th scope="col">Generated Date</th>
+                                <th class="action-button">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr *ngFor="let companyInvoice of companyDocumentList">
+                                <td>
+                                    {{companyInvoice.title}}
+                                </td>
+                                <td>
+                                    {{companyInvoice.createdBy}}
+
+                                </td>
+                                <td>
+                                    {{companyInvoice.generatedDate| date: 'dd/MM/yyyy'}}
+                                </td>
+
+                                <td class="action-button">
+                                    <a href="javascript:void(0)" ngbTooltip="Download">
+                                        <fa-icon [icon]="faDownload"></fa-icon>
+                                    </a>
+                                    <a href="javascript:void(0)" ngbTooltip="Delete"
+                                        (click)="deleteCompanyInvoice(companyInvoice)">
+                                        <fa-icon [icon]="faDelete"></fa-icon>
+                                    </a>
+                                    <a href="javascript:void(0)" ngbTooltip="View">
+                                        <fa-icon [icon]="faEye"></fa-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!companyDocumentList.length">
+                                <td colspan="4">
+                                    No Records Found
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>

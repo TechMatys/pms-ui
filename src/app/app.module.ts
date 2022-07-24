@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { LoginComponent } from './home/login/login.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
+import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-i
     PopUpComponent,
     ReportComponent,
     ProfileComponent,
-    CompanyInvoiceComponent,  
+    CompanyInvoiceComponent,
+    CompanyDocumentsComponent,  
   ],
   imports: [
     BrowserModule,

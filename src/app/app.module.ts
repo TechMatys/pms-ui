@@ -31,6 +31,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { LoginComponent } from './home/login/login.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
+import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { CompanyDocumentsComponent } from './admin/pages/company-documents/compa
     ReportComponent,
     ProfileComponent,
     CompanyInvoiceComponent,
-    CompanyDocumentsComponent,  
+    CompanyDocumentsComponent,
+    EmployeeTaskDetailsComponent,  
   ],
   imports: [
     BrowserModule,

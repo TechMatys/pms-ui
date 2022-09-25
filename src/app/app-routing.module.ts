@@ -12,7 +12,7 @@ import { ReportComponent } from './admin/pages/report/report.component';
 import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
-
+import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
 
 const routes: Routes = [
   {
@@ -48,10 +48,12 @@ const routes: Routes = [
   {
     path: 'Report', component: ReportComponent
   },
-  { path: 'Profile', component: ProfileComponent
-},
-
-
+  { 
+    path: 'Profile', component: ProfileComponent
+  },
+  { 
+    path: 'Employee Task Details', component: EmployeeTaskDetailsComponent
+  }
 ];
 
 @NgModule({

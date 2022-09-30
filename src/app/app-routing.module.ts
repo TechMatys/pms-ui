@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './home/login/login.component';
 import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 import { ProjectComponent } from './admin/pages/project/project.component';
 import { EmployeeComponent } from './admin/pages/employee/employee.component';
@@ -15,6 +16,12 @@ import { CompanyDocumentsComponent } from './admin/pages/company-documents/compa
 import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
 
 const routes: Routes = [
+  {
+    path: 'Login', component: LoginComponent
+  },
+  {
+    path: 'Dashboard', component: DashboardComponent
+  },
   {
     path: '', component: DashboardComponent
   },
@@ -52,7 +59,7 @@ const routes: Routes = [
     path: 'Profile', component: ProfileComponent
   },
   { 
-    path: 'Employee Task Details', component: EmployeeTaskDetailsComponent
+    path: 'EmployeeTaskDetails', component: EmployeeTaskDetailsComponent
   }
 ];
 

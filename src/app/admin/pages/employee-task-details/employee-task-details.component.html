@@ -1,1 +1,177 @@
+<!--Page Title-->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        Employee Task Detail
+    </h1>
+</div>
 
+<!-- Content Row -->
+<div class="card shadow mb-4">
+    <div *ngIf="isShown">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary"> Employee Task Detail List </h5>
+        </div>
+        <div class="card-body">
+            <div class="row mrgn-btm-15">
+                <div class="col-lg-12 algn-right">
+                    <button class="btn btn-primary btn-sm" (click)="addTaskDetail()"> Add Employee Task Detail</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <!-- <th scope="col">Employee Id</th> -->
+                                <th scope="col">Employee Name</th>
+                                <th scope="col">Task Date</th>
+                                <th scope="col">Status</th>
+                                <th class="action-button">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor=" let taskDetail of employeeTaskDetailList">
+                                <td>{{taskDetail.employeeName || 'N/A'}} </td>
+                                <td>{{taskDetail.taskDate || 'N/A'}}</td>
+                                <td>{{taskDetail.status | date: 'dd/MM/yyyy'|| 'N/A'}} </td>
+                                <td class="action-button">
+                                    <a href="javascript:void(0)" ngbTooltip="Edit" (click)="editTask(taskDetail)">
+                                        <fa-icon [icon]="faEdit"></fa-icon>
+                                    </a>
+                                    <a href="javascript:void(0)" ngbTooltip="Delete"  (click)="deleteTask(taskDetail)">
+                                        <fa-icon [icon]="faDelete"></fa-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!employeeTaskDetailList.length">
+                                <td colspan="4">
+                                    No Records Records
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isShown">
+        <!-- Card Body -->
+        <div class="card-body">
+            <form class="form-horizontal" [formGroup]="taskDetailForm" (ngSubmit)="saveTaskDetail()">
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="employee">Employee</label>
+                        <span class="red">*</span>
+                        <select name="employee" class="form-select col-lg-12"formControlName="employeeId"
+                        [ngClass]="{ 'is-invalid': submitted && f['employeeId'].errors }" >
+                            <option value="0">-- Select Employee --</option>
+                            <option *ngFor="let employee of employeesList" [value]="employee.employeeId">{{ employee.firstName }} {{ employee.lastName }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="assignedDate">Task Date </label>
+                        <div class="input-group">
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker n 
+                                [maxDate]="today" formControlName="taskDate" #pd="bsDatepicker" readonly
+                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="pd.toggle()">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="status">Status</label>
+                        <span class="red">*</span>
+                        <select name="status" class="form-select col-lg-12"formControlName="statusId"
+                        [ngClass]="{ 'is-invalid': submitted && f['statusId'].errors }" >
+                            <option value="0">-- Select Status --</option>
+                            <option *ngFor="let status of taskStatusList" [value]="status.id">
+                                {{ status.title }} 
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    
+                    <div class="col-lg-12 ">
+                    <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h5 class="m-0 font-weight-bold text-primary"> Sub Task Detail
+
+                                </h5>                                
+                        <input type="button" style="float: right;" class="btn btn-sm btn-primary" value="Add New Subtask" />
+                            </div>
+                            <div class="card-body">
+                            </div>
+
+                    <div class="form-group col-lg-12 ">
+                        <table class="table table-sm">
+                         <thead>
+                             <tr>
+                                 <th style="width: 80%">
+                                    <span> 
+                                     Title
+                                    </span>
+                                 </th>
+                                 <th style="width: 20%">
+                                     <span> 
+                                         Status
+                                        </span>
+                                 </th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     <div class="form-group">
+                                         <textarea type="text" name="notes" placeholder="Enter detail here" class="form-control" autocomplete="off" 
+                                         maxlength="200" formControlName="notes"></textarea>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="form-group">
+                                         <select name="employee" class="form-select col-lg-12">
+                                             <option value="0">-- Select Staus --</option>
+                                             <option *ngFor="let status of taskStatusList" [value]="status.id">
+                                                 {{ status.title }}
+                                             </option>
+                                         </select>
+                                     </div>
+                                 </td>
+                             </tr> 
+                         </tbody>
+                        </table>
+                 </div>
+                 
+
+                </div>
+                    </div>
+                </div>
+
+                
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <label for="notes">Note</label>
+                        <textarea type="text" name="notes" placeholder="Enter notes here" class="form-control "
+                            autocomplete="off" maxlength="200" formControlName="notes"></textarea>
+                    </div>
+                </div>
+
+                <div class="row submit-buttons">
+                    <div class="form-group col-lg-12">
+                        <input type="submit" class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel"
+                            (click)="isShown = true" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

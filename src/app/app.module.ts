@@ -32,6 +32,10 @@ import { LoginComponent } from './home/login/login.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
 import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
+import { AuthService } from './core/services/auth/auth.service';
+import { AuthGuard } from './auth.guard';
+import { MyTaskComponent } from './my-task/my-task.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,9 @@ import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-detail
     ProfileComponent,
     CompanyInvoiceComponent,
     CompanyDocumentsComponent,
-    EmployeeTaskDetailsComponent,  
+    EmployeeTaskDetailsComponent,
+    MyTaskComponent,
+    MyProfileComponent,  
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,7 @@ import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-detail
     CollapseModule,
     BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

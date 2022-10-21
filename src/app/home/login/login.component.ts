@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { HttpService } from 'src/app/core/services/https/http.service';
-import {Router} from 'angular2/router'
+// import {Router} from 'angular2/router'
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     }
 
     submitLogin() {
-      this.router.navigateByUrl('<pathDefinedInRouteConfig>');
+      //this.router.navigateByUrl('<pathDefinedInRouteConfig>');
       alert('Login')
     }
 

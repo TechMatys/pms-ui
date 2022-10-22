@@ -99,7 +99,7 @@ export class EmployeeTaskDetailsComponent implements OnInit {
       });
   }
 
-  editTask(employeProject: any) {
+  viewTask(employeProject: any) {
     this.http.get(this.controllerName, employeProject.employeeProjectId)
       .subscribe(res => {
         this.isShown = false;

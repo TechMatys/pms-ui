@@ -34,8 +34,8 @@ import { CompanyDocumentsComponent } from './admin/pages/company-documents/compa
 import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
 import { AuthService } from './core/services/auth/auth.service';
 import { AuthGuard } from './auth.guard';
-import { MyTaskComponent } from './my-task/my-task.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MyProfileComponent } from './shared/my-profile/my-profile.component';
+import { AddTaskComponent } from './employee/add-task/add-task.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     CompanyInvoiceComponent,
     CompanyDocumentsComponent,
     EmployeeTaskDetailsComponent,
-    MyTaskComponent,
+    AddTaskComponent,
     MyProfileComponent,  
   ],
   imports: [

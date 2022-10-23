@@ -15,9 +15,10 @@
                     <label for="employee">Employee</label>
                     <span class="red">*</span>
                     <select name="employee" class="form-select col-lg-12" formControlName="employeeId"
-                    [ngClass]="{ 'is-invalid': submitted && f['employeeId'].errors }">
+                        [ngClass]="{ 'is-invalid': submitted && f['employeeId'].errors }">
                         <option value="0">-- Select Employee --</option>
-                        <option *ngFor="let employee of employeeList" [value]="employee.employeeId">{{employee.firstName}} {{employee.lastName}}</option>
+                        <option *ngFor="let employee of employeeList" [value]="employee.employeeId">
+                            {{employee.firstName}} {{employee.lastName}}</option>
                     </select>
                 </div>
                 <div class="form-group col-lg-4">
@@ -48,12 +49,41 @@
                 <div class="form-group col-lg-12">
                     <label for="subject">Subject</label>
                     <span class="red">*</span>
-                    <input class="form-control" type="text" id="emailAddress" placeholder="Subject"
-                        autocomplete="off" maxlength="100" formControlName="subject"
+                    <input class="form-control" type="text" id="emailAddress" placeholder="Subject" autocomplete="off"
+                        maxlength="100" formControlName="subject"
                         [ngClass]="{ 'is-invalid': submitted && f['subject'].errors }">
                 </div>
             </div>
-
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <strong>
+                        Subtask Detail
+                    </strong>
+                    <input style="float: right" type="button" class="btn btn-primary btn-sm" value="Add New Subtask" />
+                    <table class="table table-bordered" style="margin-top: 10px">
+                        <tr>
+                            <td style="width: 85%;">
+                                Title
+                            </td>
+                            <td style="width: 15%;">
+                                Status
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" id="title" placeholder="Title" autocomplete="off" maxlength="200">
+                            </td>
+                            <td>
+                                <select name="status">
+                                <option value="0">-- Select Status --</option>
+                                <option *ngFor="let status of statusList" [value]="status.id">{{status.name}}
+                                </option>
+                            </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <div class="row submit-buttons">
                 <div class="form-group col-lg-12">
                     <input type="submit" class="btn btn-success" value="Save" />

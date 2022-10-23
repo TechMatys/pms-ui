@@ -7,40 +7,40 @@
 
 <!-- Content Row -->
 <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-12">
-                    <table class="table table-stripped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Employee Name</th>
-                                <th scope="col">Task Date</th>
-                                <th scope="col">Status</th>
-                                <th class="action-button">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor=" let taskDetail of employeeTaskDetailList">
-                                <td>{{taskDetail.employeeName || 'N/A'}} </td>
-                                <td>{{taskDetail.taskDate || 'N/A'}}</td>
-                                <td>{{taskDetail.status | date: 'dd/MM/yyyy'|| 'N/A'}} </td>
-                                <td class="action-button">
-                                    <!-- <a href="javascript:void(0)" ngbTooltip="Edit" (click)="viewTask(taskDetail)">
-                                        <fa-icon [icon]="faEdit"></fa-icon>
-                                    </a> -->
-                                    <a href="javascript:void(0)" ngbTooltip="Delete"  (click)="deleteTask(taskDetail)">
-                                        <fa-icon [icon]="faDelete"></fa-icon>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-stripped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Employee Name</th>
+                            <th scope="col">Task Date</th>
+                            <th scope="col">Status</th>
+                            <th class="action-button">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor=" let taskDetail of employeeTaskDetailList">
+                            <td>{{taskDetail.employeeName || 'N/A'}} </td>
+                            <td>{{taskDetail.taskDate | date: 'dd/MM/yyyy' || 'N/A'}}</td>
+                            <td>{{taskDetail.status || 'N/A'}} </td>
+                            <td class="action-button">
+                                <a href="javascript:void(0)" ngbTooltip="View" (click)="viewTask(taskDetail)">
+                                        <fa-icon [icon]="faView"></fa-icon>
                                     </a>
-                                </td>
-                            </tr>
-                            <tr *ngIf="!employeeTaskDetailList.length">
-                                <td colspan="4">
-                                    No Records Records
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                <a href="javascript:void(0)" ngbTooltip="Delete" (click)="deleteTask(taskDetail)">
+                                    <fa-icon [icon]="faDelete"></fa-icon>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!employeeTaskDetailList.length">
+                            <td colspan="4">
+                                No Records Records
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
 </div>

@@ -95,7 +95,7 @@ export class AddTaskComponent implements OnInit {
           this.resetForm();
         }
         else if (res < 0) {
-          this.toastr.warning("Employee task already added.", "Warning");
+          this.toastr.warning("Employee task already added for selected date.", "Warning");
         }
         else {
           this.toastr.error("Error in employee task saving.", "Error");

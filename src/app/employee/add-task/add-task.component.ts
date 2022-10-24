@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faAdd, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { PopUpService } from 'src/app/core/services/pop-up/pop-up.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -10,6 +10,13 @@ interface Employee {
   employeeId: number;
   firstName: string;
   lastName: string;
+}
+
+interface SubTaskModel {
+  title: string;
+  statusId: number;
+  isValidTitle: boolean;
+  isValidStatus: boolean;
 }
 
 @Component({
@@ -27,10 +34,13 @@ export class AddTaskComponent implements OnInit {
   maxDate: Date;
 
   faCalendar = faCalendarAlt;
+  faAdd = faAdd;
+  faDelete = faTrash;
   controllerName = "employee";
 
   employeeList: Employee[] = [];
   statusList: GlobalCodes[] = [];
+  subTaskDetailList: SubTaskModel[] = [];
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,
     private globalCodesService: GlobalCodesService, private http: HttpService) {
@@ -44,6 +54,7 @@ export class AddTaskComponent implements OnInit {
       subject: [null, Validators.required],
       taskDate: new FormControl(this.today),
       statusId: [0, [Validators.required, Validators.min(1)]],
+      subtaskDetails: [],
       managedBy: [-1],
     });
 
@@ -69,6 +80,7 @@ export class AddTaskComponent implements OnInit {
     this.employeeTaskForm.controls['taskDate'].setValue(this.maxDate);
     this.employeeTaskForm.controls['statusId'].setValue(0);
     this.employeeTaskForm.controls['managedBy'].setValue(-1);
+    this.subTaskDetailList = [];
   }
 
   get f() { return this.employeeTaskForm.controls; }
@@ -85,22 +97,60 @@ export class AddTaskComponent implements OnInit {
   }
 
   createEmployeeTask() {
-    const employeeTaskData = this.employeeTaskForm.value;
-    const employeeId = employeeTaskData.employeeId;
+      let employeeTaskData = this.employeeTaskForm.value;
+      const employeeId = employeeTaskData.employeeId;
+      employeeTaskData.subtaskDetails = this.subTaskDetailList;
 
-    this.http.create(this.controllerName + '/' + employeeId + '/task', employeeTaskData)
-      .subscribe(res => {
-        if (res > 0) {
-          this.toastr.success("Employee task saved successfully.", "Success");
-          this.resetForm();
+      this.http.create(this.controllerName + '/' + employeeId + '/task', employeeTaskData)
+        .subscribe(res => {
+          if (res > 0) {
+            this.toastr.success("Employee task saved successfully.", "Success");
+            this.resetForm();
+          }
+          else if (res < 0) {
+            this.toastr.warning("Employee task already added for selected date.", "Warning");
+          }
+          else {
+            this.toastr.error("Error in employee task saving.", "Error");
+          }
+        });
+  }
+
+  validateSubtask() {
+    var isValidForm = true;
+    if(this.subTaskDetailList.length){
+      this.subTaskDetailList.forEach(item =>{
+        item.isValidTitle = true;
+        item.isValidStatus = true;
+        if(item.title === ""){
+          item.isValidTitle = false;
+          isValidForm = false;
         }
-        else if (res < 0) {
-          this.toastr.warning("Employee task already added for selected date.", "Warning");
-        }
-        else {
-          this.toastr.error("Error in employee task saving.", "Error");
+        if(item.statusId === 0){
+          item.isValidStatus = false;
+          isValidForm = false;          
         }
       });
+    }
+    return isValidForm;
+  }
+
+  addNewSubtask() {
+    if (this.subTaskDetailList.length < 5) {
+      this.subTaskDetailList.push({
+        title: '',
+        statusId: 0,
+        isValidTitle: true,
+        isValidStatus: true
+      })
+    }
+    else {
+      this.toastr.warning("Can't add more than 5 subtask.", "Warning");
+    }
+  }
+
+  removeTask(index: number) {
+    this.subTaskDetailList.splice(index, 1)
   }
 
   ngOnInit(): void {

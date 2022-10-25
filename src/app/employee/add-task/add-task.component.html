@@ -54,7 +54,7 @@
                         maxlength="100" formControlName="subject"
                         [ngClass]="{ 'is-invalid': submitted && f['subject'].errors }">
                 </div>
-            </div>            
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -66,59 +66,55 @@
                         <fa-icon [icon]="faAdd"></fa-icon>
                         Add New Subtask
                     </a>
-
-                    <table class="table table-bordered" style="margin-top: 10px">
-                        <tr>
-                            <td style="width: 2%;">
-                                #
-                            </td>
-                            <td style="width: 73%;">
-                                Title
-                            </td>
-                            <td style="width: 20%;">
-                                Status
-                            </td>
-                            <td style="width: 5%; text-align: center;">
-                                Action
-                            </td>
-                        </tr>
-                        <tr *ngFor=" let subTask of subTaskDetailList; let i = index">
-                            <td>
-                                {{i + 1}}
-                            </td>
-                            <td>
-                                <div class="form-group col-lg-12">
-                                    <input class="form-control" type="text" id="title" placeholder="Title"
-                                        autocomplete="off" maxlength="200"
-                                        [ngClass]="{ 'is-invalid': !subTask.isValidTitle }"
-                                        formControlName="subTaskTitle">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group col-lg-12">
-                                    <select class="form-select" name="status"
-                                        [ngClass]="{ 'is-invalid': !subTask.isValidStatus }"
-                                        formControlName="subTasStatusId">
-                                        <option value="0">-- Select Status --</option>
-                                        <option *ngFor="let status of statusList" [value]="status.id">{{status.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td style="text-align: center">
-                                <a href="javascript:void(0)" ngbTooltip="Remove" (click)="removeTask(i)">
-                                    <fa-icon [icon]="faDelete"></fa-icon>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr *ngIf="!subTaskDetailList.length">
-                            <td colspan="4">
-                                No subtask added
-                            </td>
-                        </tr>
-                    </table>
                 </div>
             </div>
+
+            <div class="row sub-task-table sub-task-table-header">
+                <div class="col-lg-1">
+                    #
+                </div>
+                <div class="col-lg-8">
+                    Title
+                </div>
+                <div class="col-lg-2">
+                    Status
+                </div>
+                <div class="col-lg-1">
+                    Action
+                </div>
+            </div>
+
+            <div class="row sub-task-table" formArrayName="subtaskDetails"
+                *ngFor="let subTask of employeeTaskForm.get('subtaskDetails')?.value let i = index">
+                <ng-container [formGroupName]="i">
+                    <div class="col-lg-1">
+                        {{i + 1}}
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" id="title" placeholder="Title" autocomplete="off"
+                            maxlength="200" formControlName="title">
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-select" name="status" formControlName="statusId">
+                            <option value="0">-- Select Status --</option>
+                            <option *ngFor="let status of statusList" [value]="status.id">{{status.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1">
+                        <a href="javascript:void(0)" ngbTooltip="Remove" (click)="removeTask(i)">
+                            <fa-icon [icon]="faDelete"></fa-icon>
+                        </a>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="row sub-task-table">
+                <div class="col-lg-12">
+                    No subtask added
+                </div>
+            </div>
+
             <div class="row submit-buttons">
                 <div class="form-group col-lg-12">
                     <input type="submit" class="btn btn-success" value="Save" />

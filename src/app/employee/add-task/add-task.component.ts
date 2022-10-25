@@ -87,45 +87,53 @@ export class AddTaskComponent implements OnInit {
     this.createEmployeeTask();
   }
 
-  createEmployeeTask() {    
-    const subtaskList = this.employeeTaskForm.get("subtaskDetails") as FormArray;
-    let employeeTaskData = this.employeeTaskForm.value;
-    const employeeId = employeeTaskData.employeeId;
-    employeeTaskData.subtaskDetails = subtaskList.value;
+  createEmployeeTask() {
+    if (this.validateSubtask()) {
+      const subtaskList = this.employeeTaskForm.get("subtaskDetails") as FormArray;
+      let employeeTaskData = this.employeeTaskForm.value;
+      const employeeId = employeeTaskData.employeeId;
+      employeeTaskData.subtaskDetails = subtaskList.value;
 
-    this.http.create(this.controllerName + '/' + employeeId + '/task', employeeTaskData)
-      .subscribe(res => {
-        if (res > 0) {
-          this.toastr.success("Employee task saved successfully.", "Success");
-          this.resetForm();
-        }
-        else if (res < 0) {
-          this.toastr.warning("Employee task already added for selected date.", "Warning");
-        }
-        else {
-          this.toastr.error("Error in employee task saving.", "Error");
-        }
-      });
+      this.http.create(this.controllerName + '/' + employeeId + '/task', employeeTaskData)
+        .subscribe(res => {
+          if (res > 0) {
+            this.toastr.success("Employee task saved successfully.", "Success");
+            this.resetForm();
+          }
+          else if (res < 0) {
+            this.toastr.warning("Employee task already added for selected date.", "Warning");
+          }
+          else {
+            this.toastr.error("Error in employee task saving.", "Error");
+          }
+        });
+    }
   }
 
   validateSubtask() {
-    //const subtask = this.employeeTaskForm.get("subtaskDetails") as FormArray;
-    var isValidForm = true;
-    // if (this.subTaskDetailList.length) {
-    //   this.subTaskDetailList.forEach(item => {
-    //     item.isValidTitle = true;
-    //     item.isValidStatus = true;
-    //     if (item.title === "") {
-    //       item.isValidTitle = false;
-    //       isValidForm = false;
-    //     }
-    //     if (item.statusId === 0) {
-    //       item.isValidStatus = false;
-    //       isValidForm = false;
-    //     }
-    //   });
-    // }
-    return isValidForm;
+    const subtask = this.employeeTaskForm.get("subtaskDetails") as FormArray;
+    var isValidTitle = true, isValidStatus = true;
+    if (subtask.length) {
+      subtask.value.forEach((item: any) => {
+        if (item.title === "") {
+          isValidTitle = false;
+        }
+        if (item.statusId === 0 || item.statusId === '0') {
+          isValidStatus = false;
+        }
+      });
+    }
+    if (!isValidTitle) {
+      this.toastr.warning("Title can't be blank.", "Warning");
+      return false;
+    }
+    else if (!isValidStatus) {
+      this.toastr.warning("Please select status.", "Warning");
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   addNewSubtask() {

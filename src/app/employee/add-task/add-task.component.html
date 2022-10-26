@@ -70,16 +70,13 @@
             </div>
 
             <div class="row sub-task-table sub-task-table-header">
-                <div class="col-lg-1">
-                    #
-                </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     Title
                 </div>
                 <div class="col-lg-2">
                     Status
                 </div>
-                <div class="col-lg-1">
+                <div class="col-lg-1" style="text-align: center;">
                     Action
                 </div>
             </div>
@@ -87,10 +84,7 @@
             <div class="row sub-task-table" formArrayName="subtaskDetails"
                 *ngFor="let subTask of employeeTaskForm.get('subtaskDetails')?.value let i = index">
                 <ng-container [formGroupName]="i">
-                    <div class="col-lg-1">
-                        {{i + 1}}
-                    </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <input class="form-control" type="text" id="title" placeholder="Title" autocomplete="off"
                             maxlength="200" formControlName="title">
                     </div>
@@ -101,8 +95,8 @@
                             </option>
                         </select>
                     </div>
-                    <div class="col-lg-1">
-                        <a href="javascript:void(0)" ngbTooltip="Remove" (click)="removeTask(i)">
+                    <div class="col-lg-1" style="text-align: center; padding-top: 5px;">
+                        <a href="javascript:void(0)" title="Remove" ngbTooltip="Remove" (click)="removeTask(i)">
                             <fa-icon [icon]="faDelete"></fa-icon>
                         </a>
                     </div>

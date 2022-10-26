@@ -35,7 +35,8 @@ import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-detail
 import { AuthService } from './core/services/auth/auth.service';
 import { AuthGuard } from './auth.guard';
 import { MyProfileComponent } from './shared/my-profile/my-profile.component';
-import { AddTaskComponent } from './employee/add-task/add-task.component';
+import { AddTaskComponent } from './employee-board/add-task/add-task.component';
+import { EmployeeBoardComponent } from './employee-board/employee-board.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AddTaskComponent } from './employee/add-task/add-task.component';
     CompanyDocumentsComponent,
     EmployeeTaskDetailsComponent,
     AddTaskComponent,
-    MyProfileComponent,  
+    MyProfileComponent,
+    EmployeeBoardComponent,
   ],
   imports: [
     BrowserModule,

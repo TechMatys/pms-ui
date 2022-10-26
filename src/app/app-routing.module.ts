@@ -14,17 +14,21 @@ import { ProfileComponent } from './admin/pages/profile/profile.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
 import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
-import { AddTaskComponent } from './employee/add-task/add-task.component';
+import { AddTaskComponent } from './employee-board/add-task/add-task.component';
+
+let role = '1';
+
+localStorage.setItem('roleId', role);
 
 const routes: Routes = [
+  {
+    path: '', component: role == '1' ? DashboardComponent : AddTaskComponent
+  },
   {
     path: 'Login', component: LoginComponent
   },
   {
     path: 'Dashboard', component: DashboardComponent
-  },
-  {
-    path: '', component: DashboardComponent
   },
   {
     path: 'Project', component: ProjectComponent
@@ -45,10 +49,10 @@ const routes: Routes = [
     path: 'CompanyExpenses', component: CompanyExpensesComponent
   },
   {
-    path: 'CompanyInvoice', component:CompanyInvoiceComponent
+    path: 'CompanyInvoice', component: CompanyInvoiceComponent
   },
   {
-    path: 'CompanyDocuments', component:CompanyDocumentsComponent
+    path: 'CompanyDocuments', component: CompanyDocumentsComponent
   },
   {
     path: 'User', component: UserComponent
@@ -56,13 +60,13 @@ const routes: Routes = [
   {
     path: 'Report', component: ReportComponent
   },
-  { 
+  {
     path: 'Profile', component: ProfileComponent
   },
-  { 
+  {
     path: 'EmployeeTaskDetails', component: EmployeeTaskDetailsComponent
   },
-  { 
+  {
     path: 'AddEmployeeTask', component: AddTaskComponent
   }
 ];

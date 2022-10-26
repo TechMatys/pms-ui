@@ -62,7 +62,7 @@
                         Subtask Detail
                     </strong>
                     <a style="float: right" href="javascript:void(0)" ngbTooltip="Add new subtask"
-                        (click)="addNewSubtask()">
+                        (click)="addNewSubtask()" *ngIf="employeeTaskForm.get('subtaskDetails')?.value.length < 5">
                         <fa-icon [icon]="faAdd"></fa-icon>
                         Add New Subtask
                     </a>

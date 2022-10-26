@@ -48,7 +48,9 @@ export class EmployeeProjectComponent implements OnInit {
   submitted = false;
   today: Date;
 
-  constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) { this.today = new Date();
+  constructor(private http: HttpService, private formBuilder: FormBuilder, private toastr: ToastrService, private popUpService: PopUpService,) { 
+    
+    this.today = new Date();
    
     this.employeeProjectForm = this.formBuilder.group({
       employeeProjectId: [0],

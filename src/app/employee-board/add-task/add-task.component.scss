@@ -1,0 +1,10 @@
+.sub-task-table {              
+    border: 1px solid #666666; 
+    padding: 5px;   
+    margin-left: 5px;  
+    margin-right: 5px;   
+    border-spacing: 5px; /* cellspacing:poor IE support for  this */
+  }
+  .sub-task-table-header {     
+    background-color: lightgray;
+  }

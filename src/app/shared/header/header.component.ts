@@ -11,6 +11,10 @@ export class HeaderComponent implements OnInit {
   faProfile = faUser;
   faArrowRight = faGear;
  
+  roleId = localStorage.getItem('roleId');
+
+  username = this.roleId === '1' ? 'Admin' : "Employee";
+  
   constructor() { }
 
   ngOnInit(): void {

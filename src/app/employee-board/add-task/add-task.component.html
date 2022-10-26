@@ -1,0 +1,127 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        Add Employee Task
+    </h1>
+</div>
+
+<!-- Content Row -->
+
+<div class="card shadow mb-4">
+    <!-- Card Body -->
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="employeeTaskForm"
+            (ngSubmit)="saveEmployeeTask()">
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    <label for="employee">Employee</label>
+                    <span class="red">*</span>
+                    <select name="employee" class="form-select col-lg-12" formControlName="employeeId"
+                        [ngClass]="{ 'is-invalid': submitted && f['employeeId'].errors }">
+                        <option value="0">-- Select Employee --</option>
+                        <option *ngFor="let employee of employeeList" [value]="employee.employeeId">
+                            {{employee.firstName}} {{employee.lastName}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-4">
+                    <label for="taskDate">Task Date</label>
+                    <div class="input-group">
+                        <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                            [maxDate]="maxDate" formControlName="taskDate" #taskDate="bsDatepicker" readonly
+                            [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', showWeekNumbers:false,  containerClass: 'theme-dark-blue'}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" (click)="taskDate.toggle()">
+                                <fa-icon [icon]="faCalendar"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-4">
+                    <label for="status">Status </label>
+                    <span class="red">*</span>
+                    <select name="status" class="form-select col-lg-12" formControlName="statusId"
+                        [ngClass]="{ 'is-invalid': submitted && f['statusId'].errors }">
+                        <option value="0">-- Select Status --</option>
+                        <option *ngFor="let status of statusList" [value]="status.id">{{status.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <label for="subject">Subject</label>
+                    <span class="red">*</span>
+                    <input class="form-control" type="text" id="emailAddress" placeholder="Subject" autocomplete="off"
+                        maxlength="100" formControlName="subject"
+                        [ngClass]="{ 'is-invalid': submitted && f['subject'].errors }">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <label>
+                        Subtask Detail
+                    </label>
+                    <a style="float: right" href="javascript:void(0)" ngbTooltip="Add new subtask"
+                        (click)="addNewSubtask()" *ngIf="employeeTaskForm.get('subtaskDetails')?.value.length < 5">
+                        <fa-icon [icon]="faAdd"></fa-icon>
+                        Add New Subtask
+                    </a>
+                </div>
+            </div>
+
+            <div class="row sub-task-table sub-task-table-header">
+                <div class="col-lg-9">
+                    Title
+                </div>
+                <div class="col-lg-2">
+                    Status
+                </div>
+                <div class="col-lg-1" style="text-align: center;">
+                    Action
+                </div>
+            </div>
+
+            <div class="row sub-task-table" formArrayName="subtaskDetails"
+                *ngFor="let subTask of employeeTaskForm.get('subtaskDetails')?.value let i = index">
+                <ng-container [formGroupName]="i">
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" id="title" placeholder="Title" autocomplete="off"
+                            maxlength="200" formControlName="title">
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-select" name="status" formControlName="statusId">
+                            <option value="0">-- Select Status --</option>
+                            <option *ngFor="let status of statusList" [value]="status.id">{{status.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1" style="text-align: center; padding-top: 5px;">
+                        <a href="javascript:void(0)" title="Remove" ngbTooltip="Remove" (click)="removeTask(i)">
+                            <fa-icon [icon]="faDelete"></fa-icon>
+                        </a>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="row sub-task-table" *ngIf="!employeeTaskForm.get('subtaskDetails')?.value.length">
+                <div class="col-lg-12">
+                    No subtask added
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+                <div class="form-group col-lg-12">
+                    <label for="note">Note</label>
+                    <textarea type="text" name="note" placeholder="Enter note here" class="form-control "
+                        autocomplete="off" maxlength="200" formControlName="note"></textarea>
+                </div>
+            </div>
+
+            <div class="row submit-buttons">
+                <div class="form-group col-lg-12">
+                    <input type="submit" class="btn btn-success" value="Save" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

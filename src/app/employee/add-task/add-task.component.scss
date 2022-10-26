@@ -1,18 +1,10 @@
 .sub-task-table {              
     border: 1px solid #666666; 
-    padding: 5px;        
+    padding: 5px;   
+    margin-left: 5px;  
+    margin-right: 5px;   
     border-spacing: 5px; /* cellspacing:poor IE support for  this */
   }
-  .sub-task-table-header {              
+  .sub-task-table-header {     
     background-color: lightgray;
-  }
-  .sub-task-table-row {
-    display: table-row;
-    width: auto;
-    clear: both;
-  }
-  .sub-task-table-col {
-    float: left; /* fix for  buggy browsers */
-    display: table-column;         
-    width: 200px;          
   }

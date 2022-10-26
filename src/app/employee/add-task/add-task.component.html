@@ -58,9 +58,9 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <strong>
+                    <label>
                         Subtask Detail
-                    </strong>
+                    </label>
                     <a style="float: right" href="javascript:void(0)" ngbTooltip="Add new subtask"
                         (click)="addNewSubtask()" *ngIf="employeeTaskForm.get('subtaskDetails')?.value.length < 5">
                         <fa-icon [icon]="faAdd"></fa-icon>
@@ -106,6 +106,14 @@
             <div class="row sub-task-table" *ngIf="!employeeTaskForm.get('subtaskDetails')?.value.length">
                 <div class="col-lg-12">
                     No subtask added
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+                <div class="form-group col-lg-12">
+                    <label for="note">Note</label>
+                    <textarea type="text" name="note" placeholder="Enter note here" class="form-control "
+                        autocomplete="off" maxlength="200" formControlName="note"></textarea>
                 </div>
             </div>
 

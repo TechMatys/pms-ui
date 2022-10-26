@@ -46,6 +46,7 @@ export class AddTaskComponent implements OnInit {
       subject: [null, Validators.required],
       taskDate: new FormControl(this.today),
       statusId: [0, [Validators.required, Validators.min(1)]],
+      note: '',
       subtaskDetails: this.fb.array([]),
       managedBy: [-1],
     });
@@ -71,7 +72,13 @@ export class AddTaskComponent implements OnInit {
     this.employeeTaskForm.controls['taskDate'].setValue(this.maxDate);
     this.employeeTaskForm.controls['statusId'].setValue(0);
     this.employeeTaskForm.controls['managedBy'].setValue(-1);
-    // this.employeeTaskForm.controls['subtaskList'].setValue([]); 
+    const subtask = this.employeeTaskForm.get("subtaskDetails") as FormArray;
+    if (subtask.length) {
+      subtask.value.forEach((item: any, index: number) => {
+        subtask.removeAt(index)
+      });
+      subtask.removeAt(0);
+    }
   }
 
   get f() { return this.employeeTaskForm.controls; }

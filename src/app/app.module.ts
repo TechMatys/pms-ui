@@ -26,17 +26,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from "angular-datatables";
 import { NgChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { LoginComponent } from './home/login/login.component';
 import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-invoice.component';
 import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
 import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
-import { AuthService } from './core/services/auth/auth.service';
-import { AuthGuard } from './auth.guard';
 import { MyProfileComponent } from './shared/my-profile/my-profile.component';
 import { AddTaskComponent } from './employee-board/add-task/add-task.component';
 import { EmployeeBoardComponent } from './employee-board/employee-board.component';
+import { BasicAuthInterceptor } from '../app/core/helpers/basic-auth.interceptor';
+import { ErrorInterceptor } from '../app/core/helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -78,7 +78,10 @@ import { EmployeeBoardComponent } from './employee-board/employee-board.componen
     CollapseModule,
     BsDatepickerModule.forRoot()
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

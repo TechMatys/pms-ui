@@ -15,6 +15,7 @@ import { CompanyInvoiceComponent } from './admin/pages/company-invoice/company-i
 import { CompanyDocumentsComponent } from './admin/pages/company-documents/company-documents.component';
 import { EmployeeTaskDetailsComponent } from './admin/pages/employee-task-details/employee-task-details.component';
 import { AddTaskComponent } from './employee-board/add-task/add-task.component';
+import { AuthGuard } from './core/helpers/auth-guard';
 
 let role = '1';
 
@@ -22,7 +23,7 @@ localStorage.setItem('roleId', role);
 
 const routes: Routes = [
   {
-    path: '', component: role == '1' ? DashboardComponent : AddTaskComponent
+    path: '', component: role == '1' ? DashboardComponent : AddTaskComponent, canActivate: [AuthGuard]
   },
   {
     path: 'Login', component: LoginComponent
@@ -68,7 +69,9 @@ const routes: Routes = [
   },
   {
     path: 'AddEmployeeTask', component: AddTaskComponent
-  }
+  },
+   // otherwise redirect to home
+   { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

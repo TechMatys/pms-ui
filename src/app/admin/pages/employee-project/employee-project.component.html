@@ -63,7 +63,7 @@
         <div class="card-body">
             <form class="form-horizontal" [formGroup]="employeeProjectForm" (ngSubmit)="saveEmployeeProject()">
                 <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="employee">Employee</label>
                         <span class="red">*</span>
                         <select name="employee" class="form-select col-lg-12"formControlName="employeeId"
@@ -73,10 +73,7 @@
                             </option>
                         </select>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="project">Project</label>
                         <span class="red">*</span>
                         <select name="project" class="form-select col-lg-12" formControlName="projectId"
@@ -86,10 +83,7 @@
                             </option>
                         </select>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="assignedDate">Assigned Date </label>
                         <div class="input-group">
                             <input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
@@ -102,20 +96,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-lg-6">
-                            <label for="notes">Note</label>
-                            <textarea type="text" name="notes" placeholder="Enter notes here" class="form-control "
-                                autocomplete="off" maxlength="200" formControlName="notes"></textarea>
-                        </div>
-                    </div>
+                </div>
 
-                    <div class="row submit-buttons">
-                        <div class="form-group col-lg-12">
-                            <input type="submit" class="btn btn-success" value="Save" />
-                            <input type="button" class="btn btn-outline-primary" value="Cancel"
-                                (click)="isShown = true" />
-                        </div>
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <label for="notes">Note</label>
+                        <textarea type="text" name="notes" placeholder="Enter notes here" class="form-control "
+                            autocomplete="off" rows="4" maxlength="200" formControlName="notes"></textarea>
+                    </div>
+                </div>
+
+                <div class="row submit-buttons">
+                    <div class="form-group col-lg-12">
+                        <input type="submit" class="btn btn-success" value="Save" />
+                        <input type="button" class="btn btn-outline-primary" value="Cancel"
+                            (click)="isShown = true" />
                     </div>
                 </div>
             </form>

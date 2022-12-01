@@ -22,7 +22,7 @@ export class ProjectComponent implements OnInit {
   dateToday: number = Date.now();
   isSubmitted = false;
 
-  // dtOptions: DataTables.Settings = {};
+  dtOptions: DataTables.Settings = {};
 
   projectForm: FormGroup;
   submitted = false;

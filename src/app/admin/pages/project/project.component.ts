@@ -140,14 +140,14 @@ export class ProjectComponent implements OnInit {
     this.http.create(this.controllerName, this.projectForm.value)
       .subscribe(res => {
         if (res > 0) {
-          this.toastr.success("Employee created successfully", "Success");
+          this.toastr.success("Project added successfully", "Success");
           this.getAllProjectList();
         }
         else if (res < 0) {
-          this.toastr.warning(" Project name already exist.", "Warning");
+          this.toastr.warning("Project name already exist.", "Warning");
         }
         else {
-          this.toastr.error("Error in project saving.", "Error");
+          this.toastr.error("Error in project adding.", "Error");
         }
       });
   }
@@ -163,7 +163,7 @@ export class ProjectComponent implements OnInit {
           this.toastr.warning(" Project name already exist.", "Warning");
         }
         else {
-          this.toastr.error("Error in project saving.", "Error");
+          this.toastr.error("Error in project updating.", "Error");
         }
       });
   }

@@ -11,13 +11,13 @@ export class ReportComponent implements OnInit {
       id: 0, name: '-- Select Report Type--'
     }, {
       id: 1,
-      name: 'Porject Payment'
+      name: 'Project Payment'
     }, {
       id: 2,
       name: 'Employee Payment'
     }, {
       id: 3,
-      name: 'Invoice'
+      name: 'Invoices'
     }, {
       id: 4,
       name: 'Others'

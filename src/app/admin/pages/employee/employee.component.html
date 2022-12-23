@@ -72,7 +72,19 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
+            
             <form class="form-horizontal" [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5><i>
+                            <strong>
+                                Personal Infomation
+                            </strong> 
+                            </i> 
+                        </h5>
+                            <hr>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="firstName">First Name</label>
@@ -130,46 +142,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="emailAddress">Email Address</label>
                         <span class="red">*</span>
                         <input class="form-control" type="text" id="emailAddress" placeholder="Email Address"
                             autocomplete="off" maxlength="100" formControlName="emailAddress"
                             [ngClass]="{ 'is-invalid': submitted && f['emailAddress'].errors }">
                     </div>
-                    <div class="form-group col-lg-6">
-                        <label for="mobile">Mobile</label>
-                        <input class="form-control" type="text" id="mobile" placeholder="(XXX) XXX XXXX"
-                            mask="(999) 999 9999" autocomplete="off" formControlName="mobile">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-lg-12">
-                        <label for="address">Address</label>
-                        <textarea type="text" name="address" placeholder="Address" class="form-control "
-                            autocomplete="off" maxlength="200" formControlName="address"></textarea>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="city">City</label>
-                        <input class="form-control" type="text" id="city" placeholder="City" autocomplete="off"
-                            maxlength="50" formControlName="city">
+                        <label for="mobile">Mobile #</label>
+                        <input class="form-control" type="text" id="mobile" placeholder="XXXXXXXXXX"
+                            mask="999999999" autocomplete="off" formControlName="mobile">
                     </div>
                     <div class="form-group col-lg-4">
-                        <label for="state">State</label>
-                        <select name="state" class="form-select col-lg-12" formControlName="stateId">
-                            <option value="0">--Select State--</option>
-                            <option *ngFor="let state of states" [value]="state.id">
-                                {{state.name}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-4">
-                        <label for="pincode">Pin Code</label>
-                        <input class="form-control" type="text" id="pincode" placeholder="XXXXXX" mask="999999"
-                            autocomplete="off" formControlName="postalCode">
+                        <label for="mobile">Registration #</label>
+                        <input class="form-control" type="text" id="mobile" placeholder="Registration Number"
+                            maxlength="10" autocomplete="off" formControlName="mobile">
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="startDate">Start Date </label>
@@ -208,20 +199,275 @@
                         </select>
                     </div>
                 </div>
+                
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <strong>Permanent Address</strong>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="form-group col-lg-12">
-                        <label for="status">Upload Documents </label>
-                        <ul>
-                            <!-- <li *ngFor="let doc of employeeDocuments">
-                                
-                            </li> -->
-                            <li>
-                                <span>No documents found</span>
-                            </li>
-                        </ul>
+                        <label for="address">Address</label>
+                        <textarea type="text" rows="2" name="address" placeholder="Address" class="form-control "
+                            autocomplete="off" maxlength="200" formControlName="address"></textarea>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="city">City</label>
+                        <input class="form-control" type="text" id="city" placeholder="City" autocomplete="off"
+                            maxlength="50" formControlName="city">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="state">State</label>
+                        <select name="state" class="form-select col-lg-12" formControlName="stateId">
+                            <option value="0">--Select State--</option>
+                            <option *ngFor="let state of states" [value]="state.id">
+                                {{state.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="pincode">Pin Code</label>
+                        <input class="form-control" type="text" id="pincode" placeholder="XXXXXX" mask="999999"
+                            autocomplete="off" formControlName="postalCode">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <strong>Current Address</strong>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <label for="address">Address</label>
+                        <textarea type="text" rows="2" name="address" placeholder="Address" class="form-control "
+                            autocomplete="off" maxlength="200" formControlName="address"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="city">City</label>
+                        <input class="form-control" type="text" id="city" placeholder="City" autocomplete="off"
+                            maxlength="50" formControlName="city">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="state">State</label>
+                        <select name="state" class="form-select col-lg-12" formControlName="stateId">
+                            <option value="0">--Select State--</option>
+                            <option *ngFor="let state of states" [value]="state.id">
+                                {{state.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="pincode">Pin Code</label>
+                        <input class="form-control" type="text" id="pincode" placeholder="XXXXXX" mask="999999"
+                            autocomplete="off" formControlName="postalCode">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5><i>
+                            <strong>
+                                Educational Qualification
+                            </strong> 
+                            </i> 
+                        </h5>
+                            <hr>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="form-group col-lg-2">
+                            <label for="state">Level of Education</label>
+                            <select name="state" class="form-select col-lg-12" formControlName="stateId">
+                                <option value="0">--Select Level of Education--</option>
+                                <option *ngFor="let state of states" [value]="state.id">
+                                    {{state.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <label for="state">Gradution/Degree</label>
+                            <select name="state" class="form-select col-lg-12" formControlName="stateId">
+                                <option value="0">--Select Gradution/Degree--</option>
+                                <option *ngFor="let state of states" [value]="state.id">
+                                    {{state.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <label for="state">Board/Institute Name</label>
+                            <input class="form-control" type="text" id="pincode" placeholder="Board/Institute Name"
+                            autocomplete="off" formControlName="postalCode">
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <label for="pincode">Discipline/Specialization</label>
+                            <input class="form-control" type="text" id="pincode" placeholder="Discipline/Specialization"
+                                autocomplete="off" formControlName="postalCode">
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <label for="pincode">Year of Complition</label>
+                            <input class="form-control" type="text" id="pincode" placeholder="YYYY" mask="9999"
+                                autocomplete="off" formControlName="postalCode">
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <label for="pincode">Percentage(%)</label>
+                            <input class="form-control" type="text" id="pincode" placeholder="XXXXXX" mask="999999"
+                                autocomplete="off" formControlName="postalCode">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 mrgn-btm-15 ">
+                            <input type="button" class="btn btn-primary float-right" value="Add Education">
+                        </div>
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>   
+                                        Level of Education 
+                                    </th> 
+                                    <th>   
+                                        Gradution/Degree 
+                                    </th>
+                                    <th>    
+                                        Board/Institute Name
+                                    </th>
+                                    <th>    
+                                        Discipline/Specialization
+                                    </th>
+                                    <th>    
+                                        Year of Complition
+                                    </th>
+                                    <th>    
+                                        Percentage(%)
+                                    </th>
+                                </tr>
+                                <!-- <tr>
+                                    <td>
+
+                                    </td> 
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                </tr> -->
+                                <tr>
+                                    <td colspan="6">
+                                        No records found
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5><i>
+                                <strong>
+                                    Emergency Contact
+                                </strong> 
+                                </i> 
+                            </h5>
+                                <hr>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="city">Full Name</label>
+                            <input class="form-control" type="text" id="city" placeholder="Full Name" autocomplete="off"
+                                maxlength="50" formControlName="fullName">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="state">Relation</label>
+                            <select name="state" class="form-select col-lg-12" formControlName="stateId">
+                                <option value="0">--Select Relation--</option>
+                                <option *ngFor="let state of states" [value]="state.id">
+                                    {{state.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="pincode">Mobile #</label>
+                            <input class="form-control" type="text" id="pincode" placeholder="XXXXXX" mask="999999"
+                                autocomplete="off" formControlName="postalCode">
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5><i>
+                                    <strong>
+                                        Upload Documents
+                                    </strong> 
+                                    </i> 
+                                </h5>
+                                    <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <label for="state">Document Type</label>
+                                <select name="state" class="form-select col-lg-12" formControlName="stateId">
+                                    <option value="0">--Select Document--</option>
+                                    <option *ngFor="let state of states" [value]="state.id">
+                                        {{state.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="pincode">Document Name</label>
+                                <input class="form-control" type="text" id="pincode" placeholder="Document Name" maxlength="20" autocomplete="off" formControlName="postalCode">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="pincode">Upload</label>
+                                <!-- <input class="form-control" type="file" id="pincode" placeholder="Document Name" maxlength="20" autocomplete="off" formControlName="postalCode"> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>   
+                                            Document Type
+                                        </th> 
+                                        <th>   
+                                           Document Name
+                                        </th>
+                                        <th>    
+                                            Action
+                                        </th>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td>
+    
+                                        </td> 
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td colspan="3">
+                                            No document uploaded
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                 <div class="row submit-buttons">
                     <div class="form-group col-lg-12">
                         <input type="submit" class="btn btn-success" value="Save" />

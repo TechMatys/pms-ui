@@ -72,15 +72,24 @@ export class EmployeeComponent implements OnInit {
   }
 
   getDesignation() {
-    this.globalCodesService.getGlobalCodes("designations").subscribe(res => {
-      // this.designations.spl({id: 0, name: '-- Select Desination --'})
-      this.designations = res;
+    this.globalCodesService.getGlobalCodes("designations").subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.designations = _res.response;
+      }
+      else{
+        this.toastr.error("Error in getting designation.", "Error");
+      }
     });
   }
 
   getStatus() {
-    this.globalCodesService.getGlobalCodes("employee-status").subscribe(res => {
-      this.status = res;
+    this.globalCodesService.getGlobalCodes("employee-status").subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.status = _res.response;
+      }
+      else{
+        this.toastr.error("Error in getting employee status.", "Error");
+      }
     });
   }
 
@@ -109,9 +118,14 @@ export class EmployeeComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.http.delete(this.controllerName, employee.employeeId)
-            .subscribe(res => {
-              this.toastr.success("Employee deleted successfully", "Success");
-              this.getAllEmployeeList();
+            .subscribe(_res => {
+              if (_res.statusCode === 200) {
+                this.toastr.success("Employee deleted successfully.", "Success");
+                this.getAllEmployeeList();
+              }
+              else {
+                this.toastr.error("Employee doesn't exists.", "Warning");
+              }
             });
         }
       });
@@ -119,9 +133,14 @@ export class EmployeeComponent implements OnInit {
 
   editEmployee(employee: any) {
     this.http.get(this.controllerName, employee.employeeId)
-      .subscribe(res => {
-        this.isShown = false;
-        this.employeeForm.setValue(res);
+      .subscribe(_res => {
+        if (_res.statusCode === 200) {
+          this.isShown = false;
+          this.employeeForm.setValue(_res.data);
+        }
+        else {
+          this.toastr.error("Error in getting employee data.", "Warning");
+        }
       });
   }
 
@@ -149,15 +168,15 @@ export class EmployeeComponent implements OnInit {
 
   createEmployee() {
     this.http.create(this.controllerName, this.employeeForm.value)
-      .subscribe(res => {
-        if (res > 0) {
+      .subscribe(_res => {
+        if (_res.statusCode === 200) {
           this.toastr.success("Employee created successfully.", "Success");
           this.getAllEmployeeList();
         }
-        else if (res < 0) {
+        else if (_res.statusCode===409) {
           this.toastr.warning("Employee email already in use.", "Warning");
         }
-        else {
+        else if(_res.statusCode===500){
           this.toastr.error("Error in employee saving.", "Error");
         }
       });
@@ -165,15 +184,15 @@ export class EmployeeComponent implements OnInit {
 
   updateEmployee(employeeId: number) {
     this.http.update(this.controllerName, employeeId, this.employeeForm.value)
-      .subscribe(res => {
-        if (res > 0) {
+      .subscribe(_res => {
+        if (_res.statusCode === 200) {
           this.toastr.success("Employee updated successfully.", "Success");
           this.getAllEmployeeList();
         }
-        else if (res < 0) {
+        else if (_res.statusCode===409) {
           this.toastr.warning("Employee email already in use.", "Warning");
         }
-        else {
+        else if(_res.statusCode===500){
           this.toastr.error("Error in employee saving.", "Error");
         }
       });
@@ -181,19 +200,35 @@ export class EmployeeComponent implements OnInit {
 
   getAllEmployeeList() {
     this.isShown = true;
-    this.http.getAll(this.controllerName).subscribe(res => {
-      this.employeeList = res;
+    this.http.getAll(this.controllerName).subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.employeeList= _res.response;
+      }
+      else{
+        this.toastr.error("Error in get employee list.", "Error");
+      }
     });
+  }
 
-  }
   getStates() {
-    this.globalCodesService.getGlobalCodes("states").subscribe(res => {
-      this.states = res;
+    this.globalCodesService.getGlobalCodes("states").subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.states = _res.response;
+      }
+      else{
+        this.toastr.error("Error in getting states.", "Error");
+      }
     });
   }
+
   getGenders() {
-    this.globalCodesService.getGlobalCodes("genders").subscribe(res => {
-      this.genders = res;
+    this.globalCodesService.getGlobalCodes("genders").subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.genders = _res.response;
+      }
+      else{
+        this.toastr.error("Error in getting gender.", "Error");
+      }
     });
   }
 

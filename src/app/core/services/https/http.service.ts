@@ -11,7 +11,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(contrl: any): Observable<any[]> {
+  getAll(contrl: any): Observable<any> {
     return this.http.get<any>(this.apiUrl + contrl);
   }
 
@@ -27,7 +27,7 @@ export class HttpService {
     return this.http.patch(`${this.apiUrl + contrl}/${id}`, data);
   }
 
-  delete(contrl: any, val: any) {
+  delete(contrl: any, val: any): Observable<any> {
     return this.http.delete(this.apiUrl + contrl + '/' + val);
   }
 

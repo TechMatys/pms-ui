@@ -28,7 +28,7 @@ export class GlobalCodesService {
    
   constructor( public http : HttpService) {  }
   
-  getGlobalCodes(url : string): Observable<any[]>{
+  getGlobalCodes(url : string): Observable<any>{
     return this.http.getAll(this.controllerName + "/" +url);
   }  
 }

@@ -68,20 +68,35 @@ export class ProjectComponent implements OnInit {
   }
 
   getStatus() {
-    this.globalCodesService.getGlobalCodes("project-status").subscribe(res => {
-      this.status = res;
-    });
+    this.globalCodesService.getGlobalCodes("project-status").subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.status = _res.response;
+      }
+      else{
+        this.toastr.error("Error in getting status.", "Error");
+      }
+      });
   }
 
   getDurations() {
-    this.globalCodesService.getGlobalCodes("project-durations").subscribe(res => {
-      this.durations = res;
+    this.globalCodesService.getGlobalCodes("project-durations").subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.durations = _res.response;
+      }
+      else{
+        this.toastr.error("Error in getting durations.", "Error");
+      }
     });
   }
 
   getTechnologies() {
-    this.globalCodesService.getGlobalCodes("technologies").subscribe(res => {
-      this.technologies = res;
+    this.globalCodesService.getGlobalCodes("technologies").subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.technologies = _res.response;
+      }
+      else{
+        this.toastr.error("Error in getting technologies.", "Error");
+      }
     });
   }
   // Function to add new button
@@ -97,9 +112,14 @@ export class ProjectComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.http.delete(this.controllerName, project.projectId)
-            .subscribe(res => {
-              this.toastr.success("Project deleted successfully", "Success");
-              this.getAllProjectList();
+            .subscribe(_res => {
+              if (_res.statusCode === 200) {
+                this.toastr.success("Project deleted successfully.", "Success");
+                this.getAllProjectList();
+              }
+              else {
+                this.toastr.error("Project doesn't exists.", "Warning");
+              }
             });
         }
       });
@@ -107,9 +127,14 @@ export class ProjectComponent implements OnInit {
 
   editProject(project: any) {
     this.http.get(this.controllerName, project.projectId)
-      .subscribe(res => {
-        this.isShown = false;
-        this.projectForm.setValue(res);
+      .subscribe(_res => {
+        if (_res.statusCode === 200) {
+          this.isShown = false;
+          this.projectForm.setValue(_res.data);
+        }
+        else {
+          this.toastr.error("Error in getting project data.", "Warning");
+        }
       });
   }
 
@@ -138,31 +163,31 @@ export class ProjectComponent implements OnInit {
   }
   createProject() {
     this.http.create(this.controllerName, this.projectForm.value)
-      .subscribe(res => {
-        if (res > 0) {
-          this.toastr.success("Project added successfully", "Success");
+      .subscribe(_res => {
+        if (_res.statusCode === 200) {
+          this.toastr.success("Project created successfully.", "Success");
           this.getAllProjectList();
         }
-        else if (res < 0) {
-          this.toastr.warning("Project name already exist.", "Warning");
+        else if (_res.statusCode===409) {
+          this.toastr.warning("Project name already in use.", "Warning");
         }
-        else {
-          this.toastr.error("Error in project adding.", "Error");
+        else if(_res.statusCode===500){
+          this.toastr.error("Error in employee saving.", "Error");
         }
       });
   }
 
   updateProject(projectId: number) {
     this.http.update(this.controllerName, projectId, this.projectForm.value)
-      .subscribe(res => {
-        if (res > 0) {
+      .subscribe(_res => {
+        if (_res.statusCode === 200) {
           this.toastr.success("Project updated successfully", "Success");
           this.getAllProjectList();
         }
-        else if (res < 0) {
+        else if (_res.statusCode === 200) {
           this.toastr.warning(" Project name already exist.", "Warning");
         }
-        else {
+        else if(_res.statusCode===500){
           this.toastr.error("Error in project updating.", "Error");
         }
       });
@@ -170,8 +195,14 @@ export class ProjectComponent implements OnInit {
 
   getAllProjectList() {
     this.isShown = true;
-    this.http.getAll(this.controllerName).subscribe(res => {
-      this.projectlist = res;
+    this.http.getAll(this.controllerName).subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.projectlist= _res.response;
+      }
+      else{
+        this.toastr.error("Error in get employee list.", "Error");
+      }
+      
     });
 
   }

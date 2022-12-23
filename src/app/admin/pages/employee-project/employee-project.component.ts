@@ -80,14 +80,22 @@ export class EmployeeProjectComponent implements OnInit {
 
 
   getAllEmployees() {
-    this.http.getAll('Employee').subscribe(res => {
-      this.employeesList = res;
+    this.http.getAll('Employee').subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.employeesList = _res.response;
+      }else{
+        this.toastr.error("Error in getting employee ", "Error");
+      }
     });
   }
 
   getAllProjects() {
-    this.http.getAll('Project').subscribe(res => {
-      this.projectsList = res;
+    this.http.getAll('Project').subscribe(_res => {
+     if(_res.statusCode === 200){
+      this.projectsList = _res.response;
+     }else{
+      this.toastr.error("Error in getting project.", "Error");
+     }
     });
   }
 
@@ -108,7 +116,7 @@ export class EmployeeProjectComponent implements OnInit {
     this.http.get(this.controllerName, employeProject.employeeProjectId)
       .subscribe(res => {
         this.isShown = false;
-        this.employeeProjectForm.setValue(res);
+        this.employeeProjectForm.setValue(res.response);
       });
   }
 
@@ -137,14 +145,14 @@ export class EmployeeProjectComponent implements OnInit {
   createEmployeeProject() {
     this.http.create(this.controllerName, this.employeeProjectForm.value)
       .subscribe(res => {
-        if (res > 0) {
+        if (res.statusCode  === 200) {
           this.toastr.success("Project assigned to employee successfully.", "Success");
           this.getAllEmployeeProject();
         }
-        else if (res < 0) {
+        else if (res.statusCode === 409) {
           this.toastr.warning("Project already assigned to other employee.", "Warning");
         }
-        else {
+        else if(res.statuscode === 500){
           this.toastr.error("Error in assign project.", "Error");
         }
       });
@@ -153,24 +161,30 @@ export class EmployeeProjectComponent implements OnInit {
   updateEmployeeProject(employeeProjectId: number) {
     this.http.update(this.controllerName, employeeProjectId, this.employeeProjectForm.value)
       .subscribe(res => {
-        if (res > 0) {
+        if (res.statusCode  === 200) {
           this.toastr.success("Employee project updated successfully.", "Success");
           this.getAllEmployeeProject();
-        }
+        } 
         else if (res < 0) {
           this.toastr.warning("Project already assigned to other employee.", "Warning");
         }
         else {
           this.toastr.error("Error in assign project.", "Error");
+          this.getAllEmployeeProject();
+
         }
       });
   }
 
   getAllEmployeeProject() {
     this.isShown = true;
-    this.http.getAll(this.controllerName).subscribe(res => {
-      this.employeeProjectList = res;
-    });
+    this.http.getAll(this.controllerName).subscribe(_res => {
+      if(_res.statusCode === 200){
+        this.employeeProjectList = _res.response;
+      }else{
+        this.toastr.error("Error in getting employee project.", "Error");
+      }
+      });
   }
 
   ngOnInit(): void {
